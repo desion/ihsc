@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="WEB-INF/src"/>
+	<classpathentry kind="src" output="work" path="work"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/el-api.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/erp.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/freemarker-2.3.15.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/jasper.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/javassist.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/jxl.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/ognl-2.7.3.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/ojdbc14.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/struts2-core-2.0.11.2.jar"/>
+	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/xwork-2.0.5.jar"/>
+	<classpathentry kind="output" path="WEB-INF/classes"/>
+</classpath>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC 
+		"-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+	<field name="company.code">
+		<field-validator type="requiredstring" short-circuit="true">
+			<param name="trim">true</param>
+			<message key="BSE00002"></message>
+		</field-validator>
+
+       <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\w|-)*]]></param>
+             <message key="BSE00028"></message>
+        </field-validator>
+        
+		<field-validator type="stringlength">
+			<param name="minLength">1</param>
+			<param name="maxLength">60</param>
+			<param name="trim">true</param>
+			<message key="BSE00003"></message>
+		</field-validator>
+	</field>	
+     
+	<field name="company.shortName">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+	<field name="company.address1">
+		<field-validator type="requiredstring" short-circuit="true">
+			<param name="trim">true</param>
+			<message key="BSE00002"></message>
+		</field-validator>
+
+		<field-validator type="stringlength">
+			<param name="minLength">1</param>
+			<param name="maxLength">40</param>
+			<param name="trim">true</param>
+			<message key="BSE00003"></message>
+		</field-validator>
+	</field>
+	
+	<field name="company.address2">
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">40</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+	
+	<field name="company.cityId">
+		<field-validator type="required" short-circuit="true">
+			<param name="trim">true</param>
+			<message key="BSE00002"></message>
+		</field-validator>
+	</field>
+	
+   <field name="company.provinceId">
+        <field-validator type="required" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+    </field>
+	
+	<field name="company.zipCode">
+        <field-validator type="regex">
+            <param name="expression" ><![CDATA[(\d|-)*]]></param>
+            <message key="BSE00004"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+	<field name="company.tel1">
+	    <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+        
+		<field-validator type="regex">
+			 <param name="expression" ><![CDATA[(\d|-|\/)*]]></param>
+			 <message key="BSE00004"></message>
+		</field-validator>
+		
+		<field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">60</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+	</field>
+	
+	 <field name="company.tel2">
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d|-|\/)*]]></param>
+             <message key="BSE00004"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">60</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+     </field>
+	
+    <field name="company.fax">
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d|-|\/)*]]></param>
+             <message key="BSE00004"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">60</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>	
+	
+	<field name="company.homePage">
+		<field-validator type="url">
+			<message key="BSE01523"></message>
+		</field-validator>
+		
+		<field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">240</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+	</field>
+	
+	
+	<field name="company.email">
+		<field-validator type="email">
+			<message key="BSE00004"></message>
+		</field-validator>
+		<field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+	</field>
+</validators>

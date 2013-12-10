@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC 
+		"-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+    <!-- 故障类别 -->
+    <field name="fault.faultType">
+        <field-validator type="required" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00007"></message>
+        </field-validator>
+    </field>
+
+    <!-- 发生日期 -->
+    <field name="fault.occurDate">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">10</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 发生时间 -->
+    <field name="fault.occurTime">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">5</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 作业者 -->
+    <field name="fault.operatorName">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">40</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+
+    <!-- I.S状况 -->
+    <field name="fault.isState">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 版本/日立版本 -->
+    <field name="fault.applicationVersionDetail1">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 母体/SP版本 -->
+    <field name="fault.applicationVersionDetail2">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 结束日期 -->
+    <field name="fault.finishDate">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">10</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 结束时间 -->
+    <field name="fault.finishTime">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">5</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+
+    <!-- 错误代码 -->
+    <field name="fault.errorCode">
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[[^\u4E00-\u9FA5]*]]></param>
+            <message key="BSE00004"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">10</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- RX278P/K表示 -->
+    <field name="fault.rx278">
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[\d*]]></param>
+            <message key="BSE00004"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">4</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 运行计数器 -->
+    <field name="fault.counter">
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[\d*]]></param>
+            <message key="BSE00004"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">4</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 现象 -->
+    <field name="fault.appearance">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">40</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 原因 -->
+    <field name="fault.reason">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">40</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 对策 -->
+    <field name="fault.strategy">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">40</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 结果 -->
+    <field name="fault.resultId">
+        <field-validator type="required" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00007"></message>
+        </field-validator>
+    </field>
+
+
+    <!-- 发生故障前操作1 -->
+    <field name="fault.operation1">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">30</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 发生故障前操作2 -->
+    <field name="fault.operation2">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">30</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 发生故障前操作3 -->
+    <field name="fault.operation3">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">30</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 发生故障前操作4 -->
+    <field name="fault.operation4">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">30</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 发生故障前操作5 -->
+    <field name="fault.operation5">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">30</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 发生故障前操作6 -->
+    <field name="fault.operation6">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">30</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 发生故障前操作7 -->
+    <field name="fault.operation7">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">30</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 发生故障前操作8 -->
+    <field name="fault.operation8">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">30</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 显示内容 -->
+    <field name="fault.displayContent">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">15</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 运行计数器 -->
+    <field name="fault.motionCounter">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">4</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 错误码 -->
+    <field name="fault.errorNo">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">10</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 无应答时画面显示 -->
+    <field name="fault.noRepon">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">40</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 其它显示 -->
+    <field name="fault.otherDisplay">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">40</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+
+    <!-- 其它 -->
+    <field name="fault.others">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">0</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+
+    <!-- 客户收到日 -->
+    <field name="fault.receiveDate">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">10</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <!-- 备件返还日 -->
+    <field name="fault.returnDate">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">10</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+   
+   <!-- 2010/01/11 add  -->    
+    <field name="fault.mainEpver">
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+    <field name="fault.bidEpver">
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+    <field name="fault.epVer">
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+    <field name="fault.brmEpVer">
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+    <field name="fault.bvEpVer">
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+     <!-- ec错误代码 -->
+    <field name="fault.ecErrorCode">
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[[^\u4E00-\u9FA5]*]]></param>
+            <message key="BSE00004"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field> 
+    
+     <!-- MTC代码 -->  
+    <field name="fault.mtcCode">
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[[^\u4E00-\u9FA5]*]]></param>
+            <message key="BSE00004"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+    <field name="fault.shineLight">
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>    
+ 
+     <field name="fault.stayShineLight">
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>     
+    
+     <field name="fault.outLight">
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>  
+</validators>

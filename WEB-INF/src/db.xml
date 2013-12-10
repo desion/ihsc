@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ConnectionPools>
+<!--  
+    <ConnectionPool>
+        <driver>oracle.jdbc.driver.OracleDriver</driver>
+        <name>oracle</name>
+        <url>jdbc:oracle:thin:@192.168.118.111:1521:oracle9i</url>
+        <user>struts_ct</user>
+        <password>1234</password>
+        <minConns>5</minConns>
+        <maxConns>10</maxConns>
+        <timeout>5000</timeout>
+    </ConnectionPool>
+    -->
+    
+   <ConnectionPool>
+        <driver>oracle.jdbc.driver.OracleDriver</driver>
+        <name>oracle</name>
+        <url>jdbc:oracle:thin:@10.134.26.233:1522:zkcl</url>
+        <user>zkcl</user>
+        <password>zkcl</password>
+        <minConns>5</minConns>
+        <maxConns>10</maxConns>
+        <timeout>5000</timeout>
+    </ConnectionPool>
+    
+    <!--  
+     <ConnectionPool>
+        <driver>oracle.jdbc.driver.OracleDriver</driver>
+        <name>oracle</name>
+        <url>jdbc:oracle:thin:@192.168.118.186:1521:ihsc</url>
+        <user>ihsc</user>
+        <password>ihsc</password>
+        <minConns>5</minConns>
+        <maxConns>10</maxConns>
+        <timeout>5000</timeout>
+    </ConnectionPool>
+    -->
+</ConnectionPools>

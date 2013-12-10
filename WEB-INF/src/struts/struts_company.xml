@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <package name="company" extends="default"> 
+
+        <!-- 公司信息列表 -->  
+        <action name="BS005_10" class="cn.com.bhh.erp.action.CompanyAction" method="listCompany"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/company/company_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/company/company_list.ftl</result> 
+        </action>  
+        
+         <!-- 公司查询操作 -->  
+        <action name="BS005_11" class="cn.com.bhh.erp.action.CompanyAction" method="searchCompany"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/company/company_search.ftl</result>  
+            <result name="success" type="chain">BS005_10</result> 
+        </action>  
+
+        <!-- 公司跳转到公司详细页面 -->  
+        <action name="BS005_12" class="cn.com.bhh.erp.action.CompanyAction" method="directToDetail"> 
+            <result name="input" type="chain">BS005_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/company/company_detail.ftl</result> 
+        </action> 
+        
+        <!-- 增加公司页面 -->  
+        <action name="BS005_20" class="cn.com.bhh.erp.action.CompanyAction" method="createCompanyPre"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/company/company_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/company/company_create.ftl</result> 
+        </action>  
+
+        <!-- 增加公司操作 -->  
+        <action name="BS005_21" class="cn.com.bhh.erp.action.CompanyAction" method="createCompany"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/company/company_create.ftl</result>  
+            <result name="success" type="chain">BS005_12</result> 
+        </action>  
+        
+         <!-- 增加模板公司操作 -->  
+        <action name="BS005_22" class="cn.com.bhh.erp.action.CompanyAction" method="templateAddCompanyPre"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/company/company_detail.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/company/company_create.ftl</result>  
+        </action>  
+        
+
+        <!-- 修改公司页面 -->  
+        <action name="BS005_30" class="cn.com.bhh.erp.action.CompanyAction" method="modifyCompanyPre"> 
+            <result name="input" type="chain">BS005_12</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/company/company_modify.ftl</result> 
+        </action>  
+
+        <!-- 修改公司操作 -->  
+        <action name="BS005_31" class="cn.com.bhh.erp.action.CompanyAction" method="modifyCompany"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/company/company_modify.ftl</result>  
+            <result name="success" type="chain">BS005_12</result> 
+        </action>  
+        
+        <!-- 作为历史修改操作 -->  
+        <action name="BS005_32" class="cn.com.bhh.erp.action.CompanyAction" method="modifyCompanyAsHistory"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/company/company_modify.ftl</result>  
+            <result name="success" type="chain">BS005_12</result> 
+        </action>  
+        
+        <!-- 临时删除公司操作 -->  
+        <action name="BS005_33" class="cn.com.bhh.erp.action.CompanyAction" method="deleteCompanyForTemp"> 
+            <result name="input" type="chain">BS005_12</result>  
+            <result name="success" type="redirectAction">BS005_10</result> 
+        </action>  
+        
+        <!-- 恢复公司操作 -->  
+        <action name="BS005_34" class="cn.com.bhh.erp.action.CompanyAction" method="recoverCompany"> 
+            <result name="input" type="chain">BS005_12</result>   
+            <result name="success" type="redirectAction">BS005_10</result> 
+        </action>  
+        
+        <!-- 公司客户编辑页面 -->  
+        <action name="BS005_37" class="cn.com.bhh.erp.action.CompanyAction" method="companyCustomerEditPre"> 
+            <result name="input" type="chain">BS005_12</result>    
+            <result name="success" type="freemarker">/WEB-INF/pages/company/company_customer_edit.ftl</result> 
+        </action> 
+        <!--  
+        <action name="BS005_38" class="cn.com.bhh.erp.action.CompanyAction" method="appendBank"> 
+            <result></result>  
+        </action>
+        -->
+        
+        <action name="BS005_38" class="cn.com.bhh.erp.action.CompanyAction" method="appendBank"> 
+            <result name="input" type="chain">BS005_37</result> 
+            <result name="success" type="chain">BS005_37</result> 
+        </action>           
+        
+        <!-- 公司客户编辑页面 -->  
+        <action name="BS005_39" class="cn.com.bhh.erp.action.CompanyAction" method="companyCustomerDelete"> 
+            <result name="input" type="chain">BS005_37</result> 
+            <result name="success" type="chain">BS005_37</result> 
+        </action> 
+        
+        <!-- 永久删除公司操作 -->  
+        <action name="BS005_40" class="cn.com.bhh.erp.action.CompanyAction" method="deleteCompany"> 
+            <result name="input" type="chain">BS005_12</result>   
+            <result name="success" type="redirectAction">BS005_10</result> 
+        </action>  
+
+         <!--公司查询页面 -->  
+        <action name="BS005_70" class="cn.com.bhh.erp.action.CompanyAction" method="searchCompanyPre"> 
+            <result name="success" type="freemarker">/WEB-INF/pages/company/company_search.ftl</result> 
+        </action> 
+        
+
+    </package> 
+</struts>

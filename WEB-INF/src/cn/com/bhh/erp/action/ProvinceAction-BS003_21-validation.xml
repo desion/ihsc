@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC 
+		"-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+	<field name="province.name">
+		<field-validator type="requiredstring" short-circuit="true">
+			<param name="trim">true</param>
+			<message key="BSE00002"></message>
+		</field-validator>
+
+		<field-validator type="stringlength">
+			<param name="minLength">1</param>
+			<param name="maxLength">40</param>
+			<param name="trim">true</param>
+			<message key="BSE00003"></message>
+		</field-validator>
+	</field>
+	<field name="province.shortName">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+
+        <field-validator type="regex" short-circuit="true">
+            <param name="expression" ><![CDATA[(\s|-|[A-Za-z_])*]]></param>
+            <message key="BSE00004"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">60</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+	<field name="province.countryId">
+		<field-validator type="required" short-circuit="true">
+		    <param name="trim">true</param>
+			<message key="BSE00002"></message>
+		</field-validator>
+	</field>
+</validators>

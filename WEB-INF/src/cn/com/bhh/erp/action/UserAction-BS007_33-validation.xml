@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC 
+		"-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+   
+	
+	<field name="user.oldPassword">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message key="BSE00002"></message>
+		</field-validator>
+		
+		<field-validator type="regex" short-circuit="true">
+            <param name="expression" ><![CDATA[[^\u4E00-\u9FA5]+]]></param>
+            <message key="BSE01029"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+	</field>
+		
+	<field name="user.newPassword">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message key="BSE00002"></message>
+		</field-validator>
+		
+		<field-validator type="regex" short-circuit="true">
+            <param name="expression" ><![CDATA[[^\u4E00-\u9FA5]+]]></param>
+            <message key="BSE01029"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+	</field>
+	
+	<field name="user.repeatPassword">
+		<field-validator type="requiredstring" short-circuit="true">
+			<message key="BSE00002"></message>
+		</field-validator>
+
+        <field-validator type="regex" short-circuit="true">
+            <param name="expression" ><![CDATA[[^\u4E00-\u9FA5]+]]></param>
+            <message key="BSE01029"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength" short-circuit="true">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+        
+		<field-validator type="fieldexpression">
+			<param name="expression">user.repeatPassword==user.newPassword</param>
+			<message key="BSE01003"></message>
+		</field-validator>
+
+	</field>
+	
+</validators>

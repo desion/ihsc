@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC 
+		"-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+    <field name="install.customerId">
+        <field-validator type="required" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00007"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.saleContractCompId">
+        <field-validator type="required" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00007"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.installCompId">
+        <field-validator type="required" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00007"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.fobDate">
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d|/|-){8,10}]]></param>
+             <message key="BSE00004"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.installDate">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+        
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d|/|-){8,10}]]></param>
+             <message key="BSE00004"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.openDate">
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d|/|-){8,10}]]></param>
+             <message key="BSE00004"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.acceptDate">
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d|/|-){8,10}]]></param>
+             <message key="BSE00004"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.guaranteeStartDate">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+        
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d|/|-){8,10}]]></param>
+             <message key="BSE00004"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.guaranteeEndDate">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+        
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d|/|-){8,10}]]></param>
+             <message key="BSE00004"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.guaranteePeriod">
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d){0,2}]]></param>
+             <message key="BSE01706"></message>
+        </field-validator>
+    </field>
+
+    <field name="install.branchCompanyName">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+    </field>
+
+    <field name="install.instPlaceTypeId">
+        <field-validator type="required" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00007"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.useStatusId">
+        <field-validator type="required" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00007"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.purpose">
+        <field-validator type="required" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00007"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.officePhone">
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d|-|\/)*]]></param>
+             <message key="BSE00004"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">60</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.mobilePhone">
+        <field-validator type="regex">
+            <param name="expression" ><![CDATA[(\d|-|\/)*]]></param>
+            <message key="BSE00004"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">60</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.fax">
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d|-|\/)*]]></param>
+             <message key="BSE00004"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">60</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+    <field name="install.email">
+        <field-validator type="email">
+            <message key="BSE00004"></message>
+        </field-validator>
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+</validators>

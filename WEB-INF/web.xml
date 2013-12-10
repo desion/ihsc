@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="ishc" version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	
+	
+	<!-- Servlet for initialising datasources -->
+	<servlet>
+		<servlet-name>DBInit</servlet-name>
+		<servlet-class>cn.com.bhh.erp.servlet.DBInitServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	
+	<servlet>
+        <servlet-name>SysConfig</servlet-name>
+        <servlet-class>cn.com.bhh.erp.servlet.SysConfigServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+	
+	<session-config>
+        <session-timeout>20</session-timeout>
+	</session-config>
+	 
+	 
+</web-app>

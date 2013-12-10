@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <package name="user" extends="default"> 
+
+        <!-- 显示用户列表 -->
+        <action name="BS007_10" class="cn.com.bhh.erp.action.UserAction" method="listUsers"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/user/user_list.ftl</result> 
+        </action>  
+
+        <!-- 显示在线用户列表 -->
+        <action name="BS007_11" class="cn.com.bhh.erp.action.UserAction" method="listOnline"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/list_online.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/user/list_online.ftl</result> 
+        </action>  
+
+        <!-- 跳转到详细页面 -->
+        <action name="BS007_12" class="cn.com.bhh.erp.action.UserAction" method="directToDetail"> 
+            <result name="input" type="chain">BS007_10</result>   
+            <result name="success" type="freemarker">/WEB-INF/pages/user/user_detail.ftl</result> 
+        </action>  
+
+        <!-- 用户查询页面 -->
+        <action name="BS007_13" class="cn.com.bhh.erp.action.UserAction" method="searchUserPre"> 
+            <result name="success" type="freemarker">/WEB-INF/pages/user/user_search.ftl</result> 
+        </action>  
+
+        <!-- 用户查询操作 -->
+        <action name="BS007_14" class="cn.com.bhh.erp.action.UserAction" method="searchUser"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_search.ftl</result>  
+            <result name="success" type="chain">BS007_10</result> 
+        </action>  
+
+        <!-- 增加用户页面 -->
+        <action name="BS007_20" class="cn.com.bhh.erp.action.UserAction" method="createUserPre"> 
+            <result name="input" type="chain">BS007_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/user/user_create.ftl</result> 
+        </action>  
+
+        <!-- 增加用户操作 -->
+        <action name="BS007_21" class="cn.com.bhh.erp.action.UserAction" method="createUser"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_create.ftl</result>  
+            <result name="success" type="redirectAction">BS007_10</result> 
+        </action>  
+
+        <!-- 模板增加用户页面 -->
+        <action name="BS007_22" class="cn.com.bhh.erp.action.UserAction" method="templateCreateUserPre"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_detail.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/user/user_create.ftl</result> 
+        </action>  
+
+        <!-- 修改用户信息页面 -->
+        <action name="BS007_30" class="cn.com.bhh.erp.action.UserAction" method="modifyUserPre"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_detail.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/user/user_modify.ftl</result> 
+        </action>  
+
+        <!-- 修改用户信息操作 -->
+        <action name="BS007_31" class="cn.com.bhh.erp.action.UserAction" method="modifyUserInfo"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_modify.ftl</result>  
+            <result name="success" type="redirectAction">BS007_10</result> 
+        </action>  
+
+        <!-- 修改登陆用户密码页面 -->
+        <action name="BS007_32" class="cn.com.bhh.erp.action.UserAction" method="preChangePassword"> 
+            <result name="success" type="freemarker">/WEB-INF/pages/user/user_change_password.ftl</result> 
+        </action>  
+
+        <!-- 修改登陆用户密码操作-->
+        <action name="BS007_33" class="cn.com.bhh.erp.action.UserAction" method="changePassword"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_change_password.ftl</result>  
+            <result name="success" type="redirectAction">BS007_10</result> 
+        </action>  
+
+        <!-- 删除用户打标志位 -->
+        <action name="BS007_34" class="cn.com.bhh.erp.action.UserAction" method="deleteUserForTemp"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_detail.ftl</result>  
+            <result name="success" type="redirectAction">BS007_10</result> 
+        </action>  
+
+        <!-- 恢复删除用户打标志位 -->
+        <action name="BS007_35" class="cn.com.bhh.erp.action.UserAction" method="recoverUser"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_detail.ftl</result>  
+            <result name="success" type="redirectAction">BS007_10</result> 
+        </action>  
+
+        <!-- 锁定用户 -->
+        <action name="BS007_36" class="cn.com.bhh.erp.action.UserAction" method=" lockUser"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_detail.ftl</result>  
+            <result name="success" type="redirectAction">BS007_10</result> 
+        </action>  
+
+        <!-- 解锁用户 -->
+        <action name="BS007_37" class="cn.com.bhh.erp.action.UserAction" method=" unLockUser"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_detail.ftl</result>  
+            <result name="success" type="redirectAction">BS007_10</result> 
+        </action>  
+
+        <!-- 修改当前用户页面 -->
+        <action name="BS007_38" class="cn.com.bhh.erp.action.UserAction" method="modifyLoginUserPre"> 
+            <result name="input" type="chain">BS007_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/user/login_user_modify.ftl</result> 
+        </action>  
+
+        <!-- 修改当前用户操作 -->
+        <action name="BS007_39" class="cn.com.bhh.erp.action.UserAction" method="modifyLoginUserInfo"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/login_user_modify.ftl</result>  
+            <result name="success" type="redirectAction">BS007_10</result> 
+        </action>  
+
+        <!-- 删除用户 -->
+        <action name="BS007_40" class="cn.com.bhh.erp.action.UserAction" method=" deleteUserForever"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/user/user_detail.ftl</result>  
+            <result name="success" type="redirectAction">BS007_10</result> 
+        </action> 
+
+    </package> 
+</struts>

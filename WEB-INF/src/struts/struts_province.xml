@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <package name="province" extends="default"> 
+
+        <!-- 省份信息列表 -->
+        <action name="BS003_10" class="cn.com.bhh.erp.action.ProvinceAction" method="listProvince"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/province/province_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/province/province_list.ftl</result> 
+        </action>  
+
+        <!-- 增加省份信息页面 -->
+        <action name="BS003_20" class="cn.com.bhh.erp.action.ProvinceAction" method="createProvincePre"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/province/province_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/province/province_create.ftl</result> 
+        </action>  
+
+        <!-- 增加省份信息操作 -->
+        <action name="BS003_21" class="cn.com.bhh.erp.action.ProvinceAction" method="createProvince"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/province/province_create.ftl</result>  
+            <result name="success" type="redirectAction">BS003_10</result> 
+        </action>  
+
+        <!-- 修改省份信息页面 -->
+        <action name="BS003_30" class="cn.com.bhh.erp.action.ProvinceAction" method="modifyProvincePre"> 
+            <result name="input" type="chain">BS003_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/province/province_modify.ftl</result> 
+        </action>  
+
+        <!-- 修改省份信息操作 -->
+        <action name="BS003_31" class="cn.com.bhh.erp.action.ProvinceAction" method="modifyProvince"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/province/province_modify.ftl</result>  
+            <result name="success" type="redirectAction">BS003_10</result> 
+        </action>  
+
+        <!-- 删除省份信息操作 -->
+        <action name="BS003_40" class="cn.com.bhh.erp.action.ProvinceAction" method="deleteProvince"> 
+            <result name="input" type="chain">BS003_10</result>  
+            <result name="success" type="redirectAction">BS003_10</result> 
+        </action> 
+
+    </package> 
+</struts>

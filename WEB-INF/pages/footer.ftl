@@ -1,0 +1,1 @@
+    <div id="footer"><@s.text name="footer" /></div>

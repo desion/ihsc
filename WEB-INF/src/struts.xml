@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <!-- 以下的值可以在src/struts.properties文件中设置，但不建议这么做 -->  
+    <constant name="struts.locale" value="zh_CN"/>  
+    <constant name="struts.i18n.encoding" value="UTF-8"/>  
+    <constant name="struts.action.extension" value=""/>  
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>  
+    <constant name="struts.custom.i18n.resources" value="message,information"/>  
+    <constant name="struts.mapper.class" value="org.apache.struts2.dispatcher.mapper.ImproveActionMapper"/>  
+    <constant name="struts.multipart.maxSize" value="40485760"/>  
+    <!-- 开发版   -->   
+    <constant name="struts.devMode" value="true"/>  
+    <constant name="struts.i18n.reload" value="true"/>  
+    <constant name="struts.configuration.xml.reload" value="true"/>  
+    <constant name="struts.freemarker.templatesCache" value="false"/> 
+  
+    <!-- 发布版 
+
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.i18n.reload" value="false" />
+	<constant name="struts.configuration.xml.reload" value="false" />
+	<constant name="struts.freemarker.templatesCache" value="true" />
+	 -->  
+    <package name="default" extends="struts-default"> 
+        <!-- 自定义拦截器 -->  
+        <interceptors> 
+            <!-- 登录验证拦截器 -->  
+            <interceptor name="security" class="cn.com.bhh.erp.interceptor.SecurityInterceptor"/>  
+            <!-- 定义拦截器栈 -->  
+            <interceptor-stack name="securityStack"> 
+                <interceptor-ref name="security"/>  
+                <interceptor-ref name="exception"/>
+                <!--
+                <interceptor-ref name="alias"/>
+                -->
+                <interceptor-ref name="servletConfig"/>
+                <interceptor-ref name="prepare"/>
+                <interceptor-ref name="i18n"/>
+                <interceptor-ref name="chain"/>
+                <!--
+                <interceptor-ref name="debugging"/>
+                <interceptor-ref name="profiling"/>
+                <interceptor-ref name="scopedModelDriven"/>
+                <interceptor-ref name="modelDriven"/>
+                <interceptor-ref name="fileUpload"/>
+                -->
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="params"/>
+                <interceptor-ref name="conversionError"/>
+                <interceptor-ref name="validation"/>
+                <interceptor-ref name="workflow"/>
+            </interceptor-stack> 
+            <interceptor-stack name="component">
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="params"/>
+            </interceptor-stack> 
+        </interceptors>  
+        <!-- 重定义默认拦截器栈 -->  
+        <default-interceptor-ref name="securityStack"/>  
+        <!--
+		-->  
+        <!-- 404 错误时候转向404error.jsp -->  
+        <default-action-ref name="BS008_00"/>  
+        <!--
+		-->  
+        <global-results> 
+            <result name="login" type="redirectAction">BS008_00</result>  
+            <result name="illegal_error" type="freemarker">/WEB-INF/pages/components/illegal_error.ftl</result> 
+        </global-results> 
+    </package>  
+
+    <!-- 公司分类管理 -->
+    <include file="struts/struts_companyType.xml"/>  
+
+    <!-- 国家信息管理 -->
+    <include file="struts/struts_country.xml"/>  
+
+    <!-- 省份信息管理 -->
+    <include file="struts/struts_province.xml"/>  
+
+    <!-- 城市信息管理 -->
+    <include file="struts/struts_city.xml"/>  
+
+    <!-- 公司信息管理 -->
+    <include file="struts/struts_company.xml"/>  
+
+    <!-- 用户组信息管理 -->
+    <include file="struts/struts_group.xml"/>  
+
+    <!-- 用户管理 -->
+    <include file="struts/struts_user.xml"/>  
+
+    <!-- 登录管理 -->  
+    <include file="struts/struts_login.xml"/>  
+    
+    <!-- 滚动消息管理 -->
+    <include file="struts/struts_message.xml"/>  
+
+    <!-- 产品分类管理 -->
+    <include file="struts/struts_productCategory.xml"/>  
+
+    <!-- 产品管理 -->
+    <include file="struts/struts_product.xml"/>  
+
+    <!-- 产品分类树 -->
+    <include file="struts/struts_productCategoryTree.xml"/>  
+
+    <!-- 产品使用情况变更申请管理 -->
+    <include file="struts/struts_installationApply.xml"/>  
+
+    <!-- 产品使用情况管理 -->
+    <include file="struts/struts_installation.xml"/>  
+    
+    <!-- 故障情况管理 -->
+    <include file="struts/struts_fault.xml"/>
+
+    <!-- 故障处理管理 -->
+    <include file="struts/struts_fault_handle.xml"/>
+    
+    <!-- 产品文档管理 -->
+    <include file="struts/struts_document.xml"/>
+        
+    <!-- 故障部位管理 -->
+    <include file="struts/struts_faultPart.xml"/>
+    
+     <!-- 银行管理 -->
+    <include file="struts/struts_bank.xml"/>
+
+    <!-- 可复用组件 -->
+    <include file="struts/struts_components.xml"/> 
+    
+</struts>

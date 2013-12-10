@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <package name="faultPart" extends="default"> 
+
+        <!-- 故障部位信息列表 -->
+        <action name="BS011_10" class="cn.com.bhh.erp.action.FaultPartAction" method="listFaultPart"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/faultPart/faultPart_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/faultPart/faultPart_list.ftl</result> 
+        </action>  
+
+        <!-- 增加故障部位信息页面 -->
+        <action name="BS011_20" class="cn.com.bhh.erp.action.FaultPartAction" method="createFaultPartPre"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/faultPart/faultPart_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/faultPart/faultPart_create.ftl</result> 
+        </action>  
+
+        <!-- 增加故障部位信息操作 -->
+        <action name="BS011_21" class="cn.com.bhh.erp.action.FaultPartAction" method="createFaultPart"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/faultPart/faultPart_create.ftl</result>  
+            <result name="success" type="redirectAction">BS011_10</result> 
+        </action>  
+
+        <!-- 修改故障部位信息页面 -->
+        <action name="BS011_30" class="cn.com.bhh.erp.action.FaultPartAction" method="modifyFaultPartPre"> 
+            <result name="input" type="chain">BS011_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/faultPart/faultPart_modify.ftl</result> 
+        </action>  
+
+        <!-- 修改故障部位信息操作 -->
+        <action name="BS011_31" class="cn.com.bhh.erp.action.FaultPartAction" method="modifyFaultPart"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/faultPart/faultPart_modify.ftl</result>  
+            <result name="success" type="redirectAction">BS011_10</result> 
+        </action>  
+
+        <!-- 删除故障部位信息操作 -->
+        <action name="BS011_40" class="cn.com.bhh.erp.action.FaultPartAction" method="deleteFaultPart"> 
+            <result name="input" type="chain">BS011_10</result>  
+            <result name="success" type="redirectAction">BS011_10</result> 
+        </action> 
+
+    </package> 
+</struts>
