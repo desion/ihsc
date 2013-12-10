@@ -57,7 +57,7 @@
 		</field-validator>
 
 	</field>
-	<field name="user.familyName">
+	<field name="user.fullName">
 		<field-validator type="requiredstring" short-circuit="true">
 			<param name="trim">true</param>
 			<message key="BSE00002"></message>
@@ -71,61 +71,6 @@
 		</field-validator>
 	</field>
 	
-	<field name="user.givenName">
-		<field-validator type="requiredstring" short-circuit="true">
-			<param name="trim">true</param>
-			<message key="BSE00002"></message>
-		</field-validator>	
-		<field-validator type="stringlength">
-			<param name="minLength">1</param>
-			<param name="maxLength">20</param>
-			<param name="trim">true</param>
-			<message key="BSE00003"></message>
-		</field-validator>
-	</field>
-
-	<field name="user.officePhone">
-		<field-validator type="regex">
-            <param name="expression" ><![CDATA[(\d|-|\/)*]]></param>
-            <message key="BSE00004"></message>
-        </field-validator>
-        
-        <field-validator type="stringlength">
-            <param name="minLength">1</param>
-            <param name="maxLength">60</param>
-            <param name="trim">true</param>
-            <message key="BSE00003"></message>
-        </field-validator>
-	</field>
-	
-	<field name="user.fax">
-		<field-validator type="regex">
-            <param name="expression" ><![CDATA[(\d|-|\/)*]]></param>
-            <message key="BSE00004"></message>
-        </field-validator>
-        
-        <field-validator type="stringlength">
-            <param name="minLength">1</param>
-            <param name="maxLength">60</param>
-            <param name="trim">true</param>
-            <message key="BSE00003"></message>
-        </field-validator>
-	</field>
-	
-	
-	<field name="user.homePhone">
-		<field-validator type="regex">
-            <param name="expression" ><![CDATA[(\d|-|\/)*]]></param>
-            <message key="BSE00004"></message>
-        </field-validator>
-        
-        <field-validator type="stringlength">
-            <param name="minLength">1</param>
-            <param name="maxLength">60</param>
-            <param name="trim">true</param>
-            <message key="BSE00003"></message>
-        </field-validator>
-	</field>
 	
 	 <field name="user.mobilePhone">
 		<field-validator type="regex">
@@ -143,6 +88,10 @@
 	
 	
     <field name="user.email">
+    	<field-validator type="requiredstring" short-circuit="true">
+			<param name="trim">true</param>
+			<message key="BSE00002"></message>
+		</field-validator>
 		<field-validator type="email">
 			<message key="BSE00004"></message>
 		</field-validator>
@@ -171,16 +120,7 @@
 			<message key="BSE00003"></message>
 		</field-validator>
 	</field>
-	
-	<field name="user.post">
-		<field-validator type="stringlength">
-			<param name="minLength">1</param>
-			<param name="maxLength">40</param>
-			<param name="trim">true</param>
-			<message key="BSE00003"></message>
-		</field-validator>
-	</field>
-	
+
 
 	<field name="user.groupId">
 		<field-validator type="required" >

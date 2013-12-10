@@ -99,7 +99,7 @@
 								   <th width="10%"><label><@s.text name="user.name" /></label></th>
 		                           <th width="10%"><label><@s.text name="user.fullName" /></label></th>
 		                           <th width="24%"><label><@s.text name="user.email" /></label></th>
-		                           <th width="20%"><label><@s.text name="user.companyID" /></label></th>
+		                           <th width="20%"><label><@s.text name="user.department" /></label></th>
 		                       <#if loginUser.hasPermission("BS006_10")> 
 								   <th width="10%"><label><@s.text name="group" /></label></th>
 							   </#if>
@@ -114,14 +114,9 @@
 								<tr>
 								    <td><input type="radio" nid="${usr.id!""}" name="rad" value="${usr.exclusiveKey!""}"/></td>
 									<td><label>${usr.name!""}</label></td>
-									<td><label>${usr.familyName!""} ${usr.givenName!""}</label></td>
+									<td><label>${usr.fullName!""}</label></td>
 									<td><label><a href="mailto:${usr.email!""}">${usr.email!""}</a></label></td>
-									<#if usr.companyID == 0> 
-									    <td><label>&nbsp;</label></td>
-									<#else>
-									  <td><label>${usr.companyName!""}</label></td>
-									</#if>
-									
+									<td><label>${usr.department!""}</label></td>
 									<#if loginUser.hasPermission("BS006_10")>   
 									   <td><label>${usr.groupName!""}</label></td>
 									</#if>

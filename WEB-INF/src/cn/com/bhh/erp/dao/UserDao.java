@@ -295,6 +295,7 @@ public class UserDao extends BaseDao {
                       " ID," +
                       " NAME," +
                       " FULLNAME," +
+                      " SEX," +
                       " PASSWORD," +
                       " MOBILE_PHONE, " +
                       " EMAIL," +
@@ -302,13 +303,14 @@ public class UserDao extends BaseDao {
                       " CREATOR_ID," +
                       " MODIFIER_ID, " +
                       " SIGN " +
-                      " ) VALUES(?,?,?,?,?,?,?,?,?,? )";
+                      " ) VALUES(?,?,?,?,?,?,?,?,?,?,? )";
             pstmt = conn.prepareStatement(sql);
 
             int index = 0;
             pstmt.setInt(++index, user.getId());
             pstmt.setString(++index, user.getName());
-            pstmt.setString(++index, user.getFamilyName() + user.getGivenName());
+            pstmt.setString(++index, user.getFullName());
+            pstmt.setInt(++index, user.getSex());
             pstmt.setString(++index, user.getPassword());
             pstmt.setString(++index, user.getMobilePhone());
             pstmt.setString(++index, user.getEmail());
@@ -473,18 +475,11 @@ public class UserDao extends BaseDao {
                        " A.ID," +
                        " A.NAME," +
                        " A.PASSWORD," +
-                       " A.FAMILY_NAME," +
-                       " A.GIVEN_NAME," +
+                       " A.FULLNAME," +
                        " A.SEX,"  + 
-                       " A.OFFICE_PHONE," +
-                       " A.FAX," +
-                       " A.HOME_PHONE," +
                        " A.MOBILE_PHONE," +
                        " A.EMAIL," +
-                       " A.COMPANY_ID," +
-                       " D.SHORT_NAME COMPANY_NAME, "+
                        " A.DEPARTMENT," +
-                       " A.POST,"+ 
                        " A.CREATOR_ID," +
                        " A.MODIFIER_ID," +
                        " A.LOCKED," +
@@ -494,11 +489,10 @@ public class UserDao extends BaseDao {
                        " B.GROUP_ID," +
                        " C.NAME GROUP_NAME" +
                        " FROM " +
-                       " USER_TBL A,USER_GROUP_TBL B,GROUP_TBL C,COMPANY_TBL D " +
+                       " USER_TBL A,USER_GROUP_TBL B,GROUP_TBL C " +
                        " WHERE " +
                        " A.ID=B.USER_ID" +
                        " AND B.GROUP_ID=C.ID" +
-                       " AND A.COMPANY_ID=D.ID  " +
                        " AND A.ID = ?";
             pstmt = conn.prepareStatement(sql);
 
@@ -513,18 +507,11 @@ public class UserDao extends BaseDao {
                 userSt.setId(rs.getInt(++index));
                 userSt.setName(rs.getString(++index));
                 userSt.setPassword(rs.getString(++index));
-                userSt.setFamilyName(rs.getString(++index));
-                userSt.setGivenName(rs.getString(++index));
+                userSt.setFullName(rs.getString(++index));
                 userSt.setSex(rs.getInt(++index));
-                userSt.setOfficePhone(rs.getString(++index));
-                userSt.setFax(rs.getString(++index));
-                userSt.setHomePhone(rs.getString(++index));
                 userSt.setMobilePhone(rs.getString(++index));
                 userSt.setEmail(rs.getString(++index));
-                userSt.setCompanyID(rs.getInt(++index));
-                userSt.setCompanyName(rs.getString(++index));
                 userSt.setDepartment(rs.getString(++index));
-                userSt.setPost(rs.getString(++index));
                 userSt.setCreatorID(rs.getInt(++index));
                 userSt.setModifierID(rs.getInt(++index));
                 userSt.setLocked(rs.getInt(++index));
@@ -669,7 +656,6 @@ public class UserDao extends BaseDao {
                      " A.FULLNAME," +
                      " A.MOBILE_PHONE," +
                      " A.EMAIL," +
-                     " A.COMPANY_ID," +
                      " A.DEPARTMENT," +
                      " A.CREATOR_ID," +
                      " A.MODIFIER_ID," +
@@ -687,9 +673,7 @@ public class UserDao extends BaseDao {
             int index = 0;
             pstmt.setString(++index, user.getName());
             pstmt.setString(++index, user.getPassword());
-
             rs = pstmt.executeQuery();
-
             User userOut = null;
 
             if (rs.next()) {
@@ -701,7 +685,6 @@ public class UserDao extends BaseDao {
                 userOut.setFullName(rs.getString(++index));
                 userOut.setMobilePhone(rs.getString(++index));
                 userOut.setEmail(rs.getString(++index));
-                userOut.setCompanyID(rs.getInt(++index));
                 userOut.setDepartment(rs.getString(++index));
                 userOut.setCreatorID(rs.getInt(++index));
                 userOut.setModifierID(rs.getInt(++index));
@@ -870,17 +853,11 @@ public class UserDao extends BaseDao {
             String sql = 
                       " UPDATE USER_TBL SET " +
                       " NAME=?," +
-            		  " FAMILY_NAME=?," +
-            		  " GIVEN_NAME=?," +
+            		  " FULLNAME=?," +
             		  " SEX=?,"+ 
-                      " OFFICE_PHONE=?," +
-                      " FAX=?," +
-                      " HOME_PHONE=?," +
                       " MOBILE_PHONE=?," + 
                       " EMAIL=?," +
-                      " COMPANY_ID=?," +
                       " DEPARTMENT=?," +
-                      " POST=?,"+ 
                       " MODIFY_TIME=?," +
                       " MODIFIER_ID=?," +
                       " EXCLUSIVE_KEY=?" +
@@ -891,17 +868,11 @@ public class UserDao extends BaseDao {
 
             int index = 0;
             pstmt.setString(++index, user.getName());
-            pstmt.setString(++index, user.getFamilyName());
-            pstmt.setString(++index, user.getGivenName());
+            pstmt.setString(++index, user.getFullName());
             pstmt.setInt(++index, user.getSex());
-            pstmt.setString(++index, user.getOfficePhone());
-            pstmt.setString(++index, user.getFax());
-            pstmt.setString(++index, user.getHomePhone());
             pstmt.setString(++index, user.getMobilePhone());
             pstmt.setString(++index, user.getEmail());
-            pstmt.setInt(++index, user.getCompanyID());
             pstmt.setString(++index, user.getDepartment());
-            pstmt.setString(++index, user.getPost());
             pstmt.setString(++index, user.getModifyTime());
             pstmt.setInt(++index, user.getModifierID());
             pstmt.setInt(++index, user.getExclusiveKey());
@@ -1345,13 +1316,11 @@ public class UserDao extends BaseDao {
                     " SELECT " +
                     " COUNT(*) " +
                     " FROM " +
-                    " USER_TBL A,USER_GROUP_TBL B,GROUP_TBL C,COMPANY_TBL D " +
+                    " USER_TBL A,USER_GROUP_TBL B,GROUP_TBL C " +
                     " WHERE " +
                     " A.ID=B.USER_ID " +
                     " AND B.GROUP_ID=C.ID " +
-                    " AND A.COMPANY_ID=D.ID " +
-                    " AND A.DELETABLE=1 " +
-                    " AND D.DELETED=0 ";
+                    " AND A.DELETABLE=1 ";
             StringBuffer sb = new StringBuffer(sql);
             
             if(!loginUser.filter("user_mng_all_data")){
@@ -1461,13 +1430,11 @@ public class UserDao extends BaseDao {
                      " SELECT " +
                      " ID," +
                      " NAME," +
-                     " FAMILY_NAME," +
-                     " GIVEN_NAME," +
+                     " FULLNAME," +
                      " EMAIL,"+
+                     " DEPARTMENT,"+
                      " GROUP_ID," +
                      " GROUP_NAME," +
-                     " COMPANY_ID," +
-                     " COMPANY_NAME," +
                      " EXCLUSIVE_KEY," +
                      " LOCKED," +
                      " DELETED " +
@@ -1480,16 +1447,13 @@ public class UserDao extends BaseDao {
                      "    A.*," +
                      "    B.GROUP_ID, " +
                      "    C.NAME " +
-                     "    GROUP_NAME," +
-                     "    D.SHORT_NAME COMPANY_NAME " +
+                     "    GROUP_NAME " +
                      "    FROM " +
-                     "    USER_TBL A,USER_GROUP_TBL B,GROUP_TBL C,COMPANY_TBL D " +
+                     "    USER_TBL A,USER_GROUP_TBL B,GROUP_TBL C " +
                      "    WHERE " +
                      "    A.ID=B.USER_ID " +
                      "    AND B.GROUP_ID=C.ID " +
-                     "    AND A.COMPANY_ID=D.ID " +
-                     "    AND A.DELETABLE=1  " +
-                     "    AND D.DELETED=0 " ;
+                     "    AND A.DELETABLE=1  ";
                         
            
 
@@ -1563,16 +1527,18 @@ public class UserDao extends BaseDao {
                 index = 0;
                 userSt.setId(rs.getInt(++index));
                 userSt.setName(rs.getString(++index));
-                userSt.setFamilyName(rs.getString(++index));
-                userSt.setGivenName(rs.getString(++index));
+                userSt.setFullName(rs.getString(++index));
                 userSt.setEmail(rs.getString(++index));
-                userSt.setGroupId(rs.getInt(++index));
-                userSt.setGroupName(rs.getString(++index));
-                userSt.setCompanyID(rs.getInt(++index));
-                userSt.setCompanyName(rs.getString(++index));
-                userSt.setExclusiveKey(rs.getInt(++index));
-                userSt.setLocked(rs.getInt(++index));
-                userSt.setDeleted(rs.getInt(++index));
+                userSt.setDepartment(rs.getString("DEPARTMENT"));
+                userSt.setGroupId(rs.getInt("GROUP_ID"));
+                userSt.setGroupName(rs.getString("GROUP_NAME"));
+                userSt.setLocked(rs.getInt("LOCKED"));
+                userSt.setDeleted(rs.getInt("DELETED"));
+                userSt.setExclusiveKey(rs.getInt("EXCLUSIVE_KEY"));
+//                userSt.setGroupName(rs.getString(++index));
+//                userSt.setExclusiveKey(rs.getInt(++index));
+//                userSt.setLocked(rs.getInt(++index));
+//                userSt.setDeleted(rs.getInt(++index));
                 list.add(userSt);
             }
 

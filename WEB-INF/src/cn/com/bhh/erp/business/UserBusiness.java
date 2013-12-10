@@ -416,24 +416,24 @@ public class UserBusiness extends BaseBusiness {
             }
             
             
-            ActionDao actionDao = new ActionDao(conn);
-            //if the selected group has not the manager right,
-            //the company must be selected
-            if(actionDao.getCountByGroupId(user.getGroupId())==0){
-                if(user.getCompanyID()==null){
-                    errors.add("BSE01017");
-                    return;
-                }else{
-                    CompanyDao companyDao = new CompanyDao(conn);
-                    if (companyDao.getCountByCompanyId(user.getCompanyID()) == 0) {
-                        errors.add("BSE01014");
-                        return;
-                    } 
-                }
-            }else{
-                //if the group has the mananger right, the company can't be  selected
-                user.setCompanyID(0);
-            }
+//            ActionDao actionDao = new ActionDao(conn);
+//            //if the selected group has not the manager right,
+//            //the company must be selected
+//            if(actionDao.getCountByGroupId(user.getGroupId())==0){
+//                if(user.getCompanyID()==null){
+//                    errors.add("BSE01017");
+//                    return;
+//                }else{
+//                    CompanyDao companyDao = new CompanyDao(conn);
+//                    if (companyDao.getCountByCompanyId(user.getCompanyID()) == 0) {
+//                        errors.add("BSE01014");
+//                        return;
+//                    } 
+//                }
+//            }else{
+//                //if the group has the mananger right, the company can't be  selected
+//                user.setCompanyID(0);
+//            }
             
             
 

@@ -60,16 +60,10 @@
 							    <input type="hidden" name="user.name" value="${user.name!""}" />
 						      </tr>
 						      <tr>
-							      <td class="lcell"><label><@s.text name="user.familyName" /></label></td>
-							      <td><label>${user.familyName!""}</label></td>
-							      <input type="hidden" name="user.familyName" value="${user.familyName!""}" />
+							      <td class="lcell"><label><@s.text name="user.fullName" /></label></td>
+							      <td><label>${user.fullName!""}</label></td>
+							      <input type="hidden" name="user.familyName" value="${user.fullName!""}" />
 							  </tr>
-							    
-							   <tr>
-							       <td class="lcell"><label><@s.text name="user.givenName" /></label></td>
-							       <td><label>${user.givenName!""}<label></td>
-							       <input type="hidden" name="user.givenName" value="${user.givenName!""}" />
-							   </tr>
 							   <tr>
 							        <td class="lcell"><label><@s.text name="user.sex" /></label></td>
 							        <input type="hidden" name="user.sex" value="${user.sex!""}" />
@@ -78,21 +72,6 @@
 							      <#else>
 							        <td><@s.text name="female"/></td>
 							      </#if>
-							    </tr>
-							    <tr>
-						            <td class="lcell"><label><@s.text name="user.officePhone" /></label></td>
-							        <td><label>${user.officePhone!""}<label></td>
-							        <input type="hidden" name="user.officePhone" value="${user.officePhone!""}" />
-							    </tr>
-							    <tr>
-							        <td class="lcell"><label><@s.text name="user.fax" /></label></td>
-							        <td><label>${user.fax!""}<label></td>
-							        <input type="hidden" name="user.fax" value="${user.fax!""}" />
-							    </tr>		    
-							    <tr>
-							        <td class="lcell"><label><@s.text name="user.homePhone" /></label></td>
-							        <td><label>${user.homePhone!""}<label></td>
-							        <input type="hidden" name="user.homePhone" value="${user.homePhone!""}" />
 							    </tr>
 							    <tr>
 							        <td class="lcell"><label><@s.text name="user.mobilePhone" /></label></td>
@@ -105,24 +84,9 @@
 							        <input type="hidden" name="user.email" value="${user.email!""}" /> 
 							    </tr>
 							    <tr>
-							        <td class="lcell"><label><@s.text name="user.companyID" /></label></td>
-							        <#if user.companyID == 0> 
-							         <td><label>&nbsp;<label></td>
-							        <#else>
-                                      <td><label>${user.companyName!""}</label></td>
-                                      <input type="hidden" name="user.companyName" value="${user.companyName!""}" /> 
-                                   </#if>
-                                   <input type="hidden" name="user.companyID" value="${user.companyID!""}" /> 
-							    </tr>
-							    <tr>
 							        <td class="lcell"><label><@s.text name="user.department" /></label></td>
 							        <td><label>${user.department!""}<label></td>
 							        <input type="hidden" name="user.department" value="${user.department!""}" /> 
-							    </tr>
-							    <tr>
-							        <td class="lcell"><label><@s.text name="user.post" /></label></td>
-							        <td><label>${user.post!""}<label></td>
-							        <input type="hidden" name="user.post" value="${user.post!""}" /> 
 							    </tr>
 							    <#if loginUser.hasPermission("BS006_10")>
 								    <tr>

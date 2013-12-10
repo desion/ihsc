@@ -39,20 +39,13 @@
 								</tr>
 								
 							    <tr>
-								   <td class="lcell"><label><@s.text name="user.familyName" /></label></td>
+								   <td class="lcell"><label><@s.text name="user.fullName" /></label></td>
 								   <td>
-								      <input type="text" name="user.familyName"  value="${user.familyName!""}" size="60"  maxLength="20"/>
+								      <input type="text" name="user.fullName"  value="${user.fullName!""}" size="60"  maxLength="20"/>
 								      <label  class="needed"><@s.text name="input_needed" /></label>
 								   </td>
 							    </tr>
 							    
-							    <tr>
-							        <td class="lcell"><label><@s.text name="user.givenName" /></label></td>
-							        <td>
-							           <input  type="text" name="user.givenName"  value="${user.givenName!""}"  size="60" maxLength="20" />
-							           <label  class="needed"><@s.text name="input_needed" /></label>
-							        </td>
-							    </tr>
 							    <tr>
 				                    <td class="lcell"><label><@s.text name="user.newPassword" /></label></td>
 				                    <td>
@@ -75,19 +68,6 @@
 							        </td>
 							    </tr>
 							    <tr>
-							        <td class="lcell"><label><@s.text name="user.officePhone" /></label></td>
-							        <td><input type="text" name="user.officePhone"  value="${user.officePhone!""}"  size="60" maxLength="60"/></td>
-							    </tr>
-							    <tr>
-							        <td class="lcell"><label><@s.text name="user.fax" /></label></td>
-							        <td><input type="text" name="user.fax"  value="${user.fax!""}"  size="60" maxLength="60"/></td>
-							    </tr>		    
-							    <tr>
-							        <td class="lcell"><label><@s.text name="user.homePhone" /></label></td>
-							        <td><input type="text" name="user.homePhone"  value="${user.homePhone!""}" size="60"  maxLength="60"/></td>
-							    </td>
-							    </tr>
-							    <tr>
 							        <td class="lcell"><label><@s.text name="user.mobilePhone" /></label></td>
 							        <td><input type="text" name="user.mobilePhone"  value="${user.mobilePhone!""}" size="60"  maxLength="60"/></td>
 							    </tr>
@@ -96,25 +76,10 @@
 							        <td><input type="text" name="user.email"  value="${user.email!""}"  size="60" maxLength="80"/></td>
 							    </tr>
 							    <tr>
-							        <td class="lcell"><label><@s.text name="user.companyID" /></label></td>
-							        <td>
-							          <select name="user.companyID" >
-				                       <@s.action name="company_drop" executeResult="true" ignoreContextParams="true">
-					                      <@s.param name="selectedComId">${user.companyID!"-1"}</@s.param>
-					                   </@s.action>
-					                   </select>
-					                   <label  class="needed"><@s.text name="user.comTipInfo" /></label>  
-				                    </td>
-							    </tr>
-							    <tr>
 							        <td class="lcell"><label><@s.text name="user.department" /></label></td>
 							        <td><input type="text" name="user.department"  value="${user.department!""}" size="60" maxLength="40"/></td>
 							    </tr>
 							    
-							     <tr>
-							        <td class="lcell"><label><@s.text name="user.post" /></label></td>
-							        <td><input type="text" name="user.post"  value="${user.post!""}"  size="60" maxLength="40"/></td>
-							    </tr>
 							    
 							     <tr>
 								    <td class="lcell"><@s.text name="user.groupId"  /></td>
@@ -146,7 +111,6 @@
           
 	   </div>
 	 </div>	
-   <#include "../footer.ftl"/>   
  </div>
 </#escape>  		
 </body>
