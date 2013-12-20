@@ -87,7 +87,7 @@ public class ValidationSignature {
 	}
 
 	public static void main(String[] args) {
-		String code = Encryption("101zkcl");
+		String code = Encryption("102rootroot");
 		System.out.println(code);
 
 	}

@@ -3,15 +3,18 @@
 <meta http-equiv="Cache-Control" content="no-cache" />  
 <meta http-equiv="Expires" content="-1" />
 
-
 <link rel="stylesheet" type="text/css" href="css/themes/base/ui.core.css" />
 <link rel="stylesheet" type="text/css" href="css/themes/base/ui.theme.css" />
+<link rel="stylesheet" type="text/css" href="css/themes/base/ui.dialog.css" />
 <link rel="stylesheet" type="text/css" href="css/themes/base/ui.datepicker.css" />
 <link rel="stylesheet" type="text/css" href="css/${locale}/style.css"  />
-
+<link rel="icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="bookmark" href="/favicon.ico" type="image/x-icon" />
 <script type="text/javascript" src="js/jquery/jquery-1.3.1.js" ></script>
 <script type="text/javascript" src="js/jquery/ui.core.js" ></script>
 <script type="text/javascript" src="js/jquery/ui.datepicker.js" ></script>
+<script type="text/javascript" src="js/jquery/ui.dialog.js" ></script>
 <script type="text/javascript" src="js/jquery/i18n/ui.datepicker-zh-CN.js" ></script>
 
 
@@ -39,7 +42,7 @@
             showOn: "button", 
             changeMonth: true,
             changeYear: true,
-            buttonImage: "/images/calendar.gif", 
+            buttonImage: "images/calendar.gif", 
             buttonImageOnly: true
             }, $.datepicker.regional['zh-CN']);
 	    $("table.datalist tr ").each(function(){

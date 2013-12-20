@@ -311,13 +311,14 @@ public class UserDao extends BaseDao {
             pstmt.setString(++index, user.getName());
             pstmt.setString(++index, user.getFullName());
             pstmt.setInt(++index, user.getSex());
-            pstmt.setString(++index, user.getPassword());
+            pstmt.setString(++index, ValidationSignature.Encryption(user.getPassword()));
             pstmt.setString(++index, user.getMobilePhone());
             pstmt.setString(++index, user.getEmail());
             pstmt.setString(++index, user.getDepartment());
             pstmt.setInt(++index, user.getCreatorID());
             pstmt.setInt(++index, user.getModifierID());
-            pstmt.setString(++index, ValidationSignature.Encryption(user.getId() + user.getName()));
+            String signpwd = ValidationSignature.Encryption(user.getPassword());
+            pstmt.setString(++index, ValidationSignature.Encryption(user.getId() + user.getName() + signpwd));
 
             pstmt.executeUpdate();
 
@@ -556,17 +557,11 @@ public class UserDao extends BaseDao {
                        " ID," +
                        " NAME," +
                        " PASSWORD," +
-                       " FAMILY_NAME," +
-                       " GIVEN_NAME," +
+                       " FULLNAME," +
                        " SEX,"  + 
-                       " OFFICE_PHONE," +
-                       " FAX," +
-                       " HOME_PHONE," +
                        " MOBILE_PHONE," +
                        " EMAIL," +
-                       " COMPANY_ID," +
                        " DEPARTMENT," +
-                       " POST,"+ 
                        " CREATOR_ID," +
                        " MODIFIER_ID," +
                        " LOCKED," +
@@ -590,17 +585,11 @@ public class UserDao extends BaseDao {
                 userSt.setId(rs.getInt(++index));
                 userSt.setName(rs.getString(++index));
                 userSt.setPassword(rs.getString(++index));
-                userSt.setFamilyName(rs.getString(++index));
-                userSt.setGivenName(rs.getString(++index));
+                userSt.setFullName(rs.getString(++index));
                 userSt.setSex(rs.getInt(++index));
-                userSt.setOfficePhone(rs.getString(++index));
-                userSt.setFax(rs.getString(++index));
-                userSt.setHomePhone(rs.getString(++index));
                 userSt.setMobilePhone(rs.getString(++index));
                 userSt.setEmail(rs.getString(++index));
-                userSt.setCompanyID(rs.getInt(++index));
                 userSt.setDepartment(rs.getString(++index));
-                userSt.setPost(rs.getString(++index));
                 userSt.setCreatorID(rs.getInt(++index));
                 userSt.setModifierID(rs.getInt(++index));
                 userSt.setLocked(rs.getInt(++index));
@@ -657,6 +646,7 @@ public class UserDao extends BaseDao {
                      " A.MOBILE_PHONE," +
                      " A.EMAIL," +
                      " A.DEPARTMENT," +
+                     " A.SIGN," +
                      " A.CREATOR_ID," +
                      " A.MODIFIER_ID," +
                      " A.DELETED," +
@@ -672,7 +662,7 @@ public class UserDao extends BaseDao {
 
             int index = 0;
             pstmt.setString(++index, user.getName());
-            pstmt.setString(++index, user.getPassword());
+            pstmt.setString(++index, ValidationSignature.Encryption(user.getPassword()));
             rs = pstmt.executeQuery();
             User userOut = null;
 
@@ -686,6 +676,7 @@ public class UserDao extends BaseDao {
                 userOut.setMobilePhone(rs.getString(++index));
                 userOut.setEmail(rs.getString(++index));
                 userOut.setDepartment(rs.getString(++index));
+                userOut.setSignature(rs.getString(++index));
                 userOut.setCreatorID(rs.getInt(++index));
                 userOut.setModifierID(rs.getInt(++index));
                 userOut.setDeleted(rs.getInt(++index));
@@ -779,7 +770,7 @@ public class UserDao extends BaseDao {
             pstmt = conn.prepareStatement(sql);
 
             int index = 0;
-            pstmt.setString(++index, user.getPassword());
+            pstmt.setString(++index, ValidationSignature.Encryption(user.getPassword()));
             pstmt.setString(++index, user.getModifyTime());
             pstmt.setInt(++index, user.getId());
 
@@ -952,18 +943,12 @@ public class UserDao extends BaseDao {
             String sql = 
                       " UPDATE USER_TBL SET " +
                       " NAME=?," +
-                      " FAMILY_NAME=?," +
-                      " GIVEN_NAME=?," +
+                      " FULLNAME=?," +
                       " PASSWORD=?," +
                       " SEX=?,"+ 
-                      " OFFICE_PHONE=?," +
-                      " FAX=?," +
-                      " HOME_PHONE=?," +
                       " MOBILE_PHONE=?," + 
                       " EMAIL=?," +
-                      " COMPANY_ID=?," +
                       " DEPARTMENT=?," +
-                      " POST=?,"+ 
                       " MODIFY_TIME=?," +
                       " MODIFIER_ID=?," +
                       " EXCLUSIVE_KEY=?" +
@@ -973,18 +958,12 @@ public class UserDao extends BaseDao {
 
             int index = 0;
             pstmt.setString(++index, user.getName());
-            pstmt.setString(++index, user.getFamilyName());
-            pstmt.setString(++index, user.getGivenName());
-            pstmt.setString(++index, user.getNewPassword());////////
+            pstmt.setString(++index, user.getFullName());
+            pstmt.setString(++index, ValidationSignature.Encryption(user.getNewPassword()));////////
             pstmt.setInt(++index, user.getSex());
-            pstmt.setString(++index, user.getOfficePhone());
-            pstmt.setString(++index, user.getFax());
-            pstmt.setString(++index, user.getHomePhone());
             pstmt.setString(++index, user.getMobilePhone());
             pstmt.setString(++index, user.getEmail());
-            pstmt.setInt(++index, user.getCompanyID());
             pstmt.setString(++index, user.getDepartment());
-            pstmt.setString(++index, user.getPost());
             pstmt.setString(++index, user.getModifyTime());
             pstmt.setInt(++index, user.getModifierID());
             pstmt.setInt(++index, user.getExclusiveKey());
@@ -1064,13 +1043,9 @@ public class UserDao extends BaseDao {
             String sql = 
                        " UPDATE USER_TBL  SET  " +
                        " SEX=?," +
-                       " OFFICE_PHONE=?," +
-                       " FAX=?," +
-                       " HOME_PHONE=?," +
                        " MOBILE_PHONE=?, " +
                        " EMAIL=?," +
                        " DEPARTMENT=?," +
-                       " POST=?, " +
                        " MODIFY_TIME=?," +
                        " MODIFIER_ID=?," +
                        " EXCLUSIVE_KEY=? " +
@@ -1080,13 +1055,9 @@ public class UserDao extends BaseDao {
 
             int index = 0;
             pstmt.setInt(++index, user.getSex());
-            pstmt.setString(++index, user.getOfficePhone());
-            pstmt.setString(++index, user.getFax());
-            pstmt.setString(++index, user.getHomePhone());
             pstmt.setString(++index, user.getMobilePhone());
             pstmt.setString(++index, user.getEmail());
             pstmt.setString(++index, user.getDepartment());
-            pstmt.setString(++index, user.getPost());
             pstmt.setString(++index, user.getModifyTime());
             pstmt.setInt(++index, user.getModifierID());
             pstmt.setInt(++index, user.getExclusiveKey());

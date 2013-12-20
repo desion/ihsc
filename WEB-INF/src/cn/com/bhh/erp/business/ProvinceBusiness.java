@@ -178,6 +178,36 @@ public class ProvinceBusiness extends BaseBusiness {
     }
     
     /**
+     * list all the province information.
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return List&ltProvince&gt
+     */
+    public List<Province> searchAllProvince() {
+        List<Province> provinceOut = new ArrayList<Province>();
+
+        try {
+            init();
+
+            // Start UOC
+
+            ProvinceDao provinceDao = new ProvinceDao(conn);
+            provinceOut = provinceDao.searchAllProvince();
+
+            // End UOC
+
+        } catch (Exception e) {
+            handleException(e);
+        } finally {
+            finish();
+        }
+
+        return provinceOut;
+    }
+    
+    /**
      * list all the province information of the country.
      * 
      * @auther  xiangzq

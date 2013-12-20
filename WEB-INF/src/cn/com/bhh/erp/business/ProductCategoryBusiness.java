@@ -660,22 +660,22 @@ public class ProductCategoryBusiness extends BaseBusiness {
                 errors.add("BSE00008");
                 return;
             }
-            // sub category exist check
-            if (currPC.getCateLevel() == 3) {
-                List<Product> productList = productDao.searchByPcId(productCategory.getId(), "1");
-                if (productList.size() != 0) {
-                    // 该产品分类下已经存在产品了,请先将该分类下的产品删除再删除该分类。
-                    errors.add("BSE01801");
-                    return;
-                }
-            } else {
-                List<ProductCategory> subCateList = productCategoryDao.searchByParentId(productCategory, "1");
-                if (subCateList.size() != 0) {
-                    // 该产品分类下已经存在子分类了,请先将该分类下的子分类删除再删除该分类。
-                    errors.add("BSE01802");
-                    return;
-                }
-            }
+//            // sub category exist check
+//            if (currPC.getCateLevel() == 3) {
+//                List<Product> productList = productDao.searchByPcId(productCategory.getId(), "1");
+//                if (productList.size() != 0) {
+//                    // 该产品分类下已经存在产品了,请先将该分类下的产品删除再删除该分类。//
+//                    errors.add("BSE01801");
+//                    return;
+//                }
+//            } else {
+//                List<ProductCategory> subCateList = productCategoryDao.searchByParentId(productCategory, "1");
+//                if (subCateList.size() != 0) {
+//                    // 该产品分类下已经存在子分类了,请先将该分类下的子分类删除再删除该分类。//
+//                    errors.add("BSE01802");
+//                    return;
+//                }
+//            }
 
             // agent exist check
             int count = agentProductDao.searchCountByPcId(productCategory.getId());

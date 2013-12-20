@@ -22,6 +22,7 @@
         <minConns>5</minConns>
         <maxConns>10</maxConns>
         <timeout>5000</timeout>
+        <maxIdleTime>5000</maxIdleTime>
     </ConnectionPool>
     
     <!--  

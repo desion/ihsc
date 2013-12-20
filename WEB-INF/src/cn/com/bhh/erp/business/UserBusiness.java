@@ -5,9 +5,11 @@
 //****************************************
 package cn.com.bhh.erp.business;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.com.bhh.erp.common.TimeUtil;
 import cn.com.bhh.erp.dao.ActionDao;
-import cn.com.bhh.erp.dao.CompanyDao;
 import cn.com.bhh.erp.dao.FaultDao;
 import cn.com.bhh.erp.dao.FaultHandleDao;
 import cn.com.bhh.erp.dao.GetPK;
@@ -17,9 +19,6 @@ import cn.com.bhh.erp.dao.UserDao;
 import cn.com.bhh.erp.dao.UserGroupDao;
 import cn.com.bhh.erp.entity.User;
 import cn.com.bhh.erp.entity.UserGroup;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * inlcude the user's business logic.
@@ -119,6 +118,11 @@ public class UserBusiness extends BaseBusiness {
             userOut = userDao.selectByUserIDPwd(user);
 
             if (userOut != null) {
+            	String signpwd =  ValidationSignature.Encryption(userOut.getPassword());
+            	if(!ValidationSignature.Encryption(userOut.getId() + userOut.getName() + userOut.getPassword()).equals(userOut.getSignature())){
+            		errors.add("BSE01018");
+            		return userOut;
+            	}
                 userOut.setFullName(userOut.getFullName());
 
                 ActionDao actionDao = new ActionDao(conn);

@@ -1,20 +1,11 @@
-//****************************************
-// ProjectName  ITインフラ改造作業
-// CreateDate   08/12/07
-// Copyright    © Beijing Hitachi Huasun Information Systems Co., Ltd. 2008. All rights reserved.
-//****************************************
+
 package cn.com.bhh.erp.action;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.com.bhh.erp.business.FaultBusiness;
-import cn.com.bhh.erp.business.InstallationApplyBusiness;
-import cn.com.bhh.erp.business.InstallationBusiness;
-import cn.com.bhh.erp.common.DateFormat;
-import cn.com.bhh.erp.entity.Fault;
-import cn.com.bhh.erp.entity.Installation;
-import cn.com.bhh.erp.entity.InstallationApply;
+import cn.com.bhh.erp.business.TopupOrderBusiness;
+import cn.com.bhh.erp.entity.TopupRecord;
 
 /**
  * prepare the data for the main page.
@@ -22,77 +13,36 @@ import cn.com.bhh.erp.entity.InstallationApply;
  */
 @SuppressWarnings("serial")
 public class MainPageAction extends BaseAction {
-    private List<Installation> installationList = new ArrayList<Installation>();
-    private List<Fault> faultList = new ArrayList<Fault>();
-    private List<InstallationApply> applyInstallList = new ArrayList<InstallationApply>();
+	private TopupRecord topupRecord = new TopupRecord();
+    private List<TopupRecord> topupOrderList = new ArrayList<TopupRecord>();
    
 
     public String execute() throws Exception {
         //unconfirmed installation list
-        InstallationBusiness installBussiness = new InstallationBusiness();
-        installationList = installBussiness.serchUseStatus(loginUser);
-        if (installBussiness.hasErrors()) {
-            setActionMessages(getMessageText(installBussiness.getErrors()));
+        TopupOrderBusiness topupBussiness = new TopupOrderBusiness();
+        topupOrderList = topupBussiness.serchUseStatus(loginUser);
+        if (topupBussiness.hasErrors()) {
+            setActionMessages(getMessageText(topupBussiness.getErrors()));
             return INPUT;
         }      
 
-        //unconfirmed fault list
-        FaultBusiness faultBusiness = new FaultBusiness();
-        faultList = faultBusiness.getFaultList(loginUser);
-        if (faultBusiness.hasErrors()) {
-            setActionMessages(getMessageText(faultBusiness.getErrors()));
-            return INPUT;
-        }
-        
-        //unconfirm installation apply list.
-        InstallationApplyBusiness insatllApplyBusiness = new InstallationApplyBusiness();
-        applyInstallList = insatllApplyBusiness.serchApplyList(loginUser);
-        if (insatllApplyBusiness.hasErrors()) {
-            setActionMessages(getMessageText(insatllApplyBusiness.getErrors()));
-            return INPUT;
-        }
-        
-        //format the date
-        DateFormat format = new DateFormat();
-        for (int i = 0; i < installationList.size(); i++) {
-            Installation temp = installationList.get(i);
-            temp.setInstallDate(format.changeDate(temp.getInstallDate()));
-        }
-        
-        
-        for (int i = 0; i < faultList.size(); i++) {
-            Fault temp = faultList.get(i);
-            temp.setOccurDate(format.changeDate(temp.getOccurDate()));
-        }
-        
-        for (int i = 0; i < applyInstallList.size(); i++) {
-            InstallationApply temp = applyInstallList.get(i);
-            temp.setApplyDate(format.changeDate(temp.getApplyDate()));
-        }
- 
         return SUCCESS;
     }
     
     /**
      * @return the installationList
      */
-    public List<Installation> getInstallationList() {
-        return installationList;
+    public List<TopupRecord> getTopupOrderList() {
+        return topupOrderList;
     }
  
-    /**
-     * @return the faultList
-     */
-    public List<Fault> getFaultList() {
-        return faultList;
-    }
+	public TopupRecord getTopupRecord() {
+		return topupRecord;
+	}
 
-    /**
-     * @return the applyInstallList
-     */
-    public List<InstallationApply> getApplyInstallList() {
-        return applyInstallList;
-    }
+	public void setTopupRecord(TopupRecord topupRecord) {
+		this.topupRecord = topupRecord;
+	}
 
     
 

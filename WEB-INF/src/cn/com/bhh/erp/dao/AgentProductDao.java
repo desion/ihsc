@@ -135,8 +135,8 @@ public class AgentProductDao extends BaseDao{
                 productOut = new Product();
                 index = 0;
                 productOut.setId(rs.getInt(++index));
-                productOut.setModel(rs.getString(++index));
-                productOut.setProductCategoryId(rs.getInt(++index));
+//                productOut.setModel(rs.getString(++index));
+//                productOut.setProductCategoryId(rs.getInt(++index));
                 productOut.setExclusiveKey(rs.getInt(++index));
 
                 list.add(productOut);
@@ -207,10 +207,10 @@ public class AgentProductDao extends BaseDao{
                 productOut = new Product();
                 index = 0;
                 productOut.setId(rs.getInt(++index));
-                productOut.setModel(rs.getString(++index));
-                productOut.setProductCategoryId(rs.getInt(++index));
-                productOut.setExclusiveKey(rs.getInt(++index));
-                productOut.setProductCategoryName(rs.getString(++index));
+//                productOut.setModel(rs.getString(++index));
+//                productOut.setProductCategoryId(rs.getInt(++index));
+//                productOut.setExclusiveKey(rs.getInt(++index));
+//                productOut.setProductCategoryName(rs.getString(++index));
                 list.add(productOut);
             }
                         
@@ -272,7 +272,7 @@ public class AgentProductDao extends BaseDao{
                 index = 0;
                 dataOut = new Product();
                 dataOut.setId(rs.getInt(++index));
-                dataOut.setModel(rs.getString(++index));
+//                dataOut.setModel(rs.getString(++index));
                 
                 list.add(dataOut);
             }

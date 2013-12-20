@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
-import cn.com.bhh.erp.business.DocumentBusiness;
+//import cn.com.bhh.erp.business.DocumentBusiness;
 import cn.com.bhh.erp.common.DateFormat;
 import cn.com.bhh.erp.common.TimeUtil;
 import cn.com.bhh.erp.entity.Document;
@@ -43,17 +43,17 @@ public class DocumentAction extends BaseAction {
      * @throws  Exception
      */
     public String listDocument() throws Exception {
-        DocumentBusiness documentBusiness = new DocumentBusiness();
-        documentList = documentBusiness.getDocumentList(null,loginUser);
-        if (documentBusiness.hasErrors()) {
-            setActionMessages(getMessageText(documentBusiness.getErrors()));
-            return INPUT;
-        }
-        
-        DateFormat dateFormat = new DateFormat();
-        for(Document doc:documentList){
-            doc.setPublishDate(dateFormat.changeDate(doc.getPublishDate()));
-        }
+//        DocumentBusiness documentBusiness = new DocumentBusiness();
+//        documentList = documentBusiness.getDocumentList(null,loginUser);
+//        if (documentBusiness.hasErrors()) {
+//            setActionMessages(getMessageText(documentBusiness.getErrors()));
+//            return INPUT;
+//        }
+//        
+//        DateFormat dateFormat = new DateFormat();
+//        for(Document doc:documentList){
+//            doc.setPublishDate(dateFormat.changeDate(doc.getPublishDate()));
+//        }
         
         return SUCCESS;
     }
@@ -127,19 +127,19 @@ public class DocumentAction extends BaseAction {
             return INPUT;
         }
 
-        DocumentBusiness documentBusiness = new DocumentBusiness();
-        
-        document.setName(docDataFileName);
-        document.setCreatorID(loginUser.getId());
-        document.setModifierID(loginUser.getId());
-        document.setPublishDate(publishDate);
-        
-        documentBusiness.createProductDocument(document, docData,interfaceDocProCateList,interfaceDocProductList,companyIdList);
-        if (documentBusiness.hasErrors()) {
-            setActionMessages(getMessageText(documentBusiness.getErrors()));
-            modifyFlag = 1;
-            return INPUT;
-        }
+//        DocumentBusiness documentBusiness = new DocumentBusiness();
+//        
+//        document.setName(docDataFileName);
+//        document.setCreatorID(loginUser.getId());
+//        document.setModifierID(loginUser.getId());
+//        document.setPublishDate(publishDate);
+//        
+//        documentBusiness.createProductDocument(document, docData,interfaceDocProCateList,interfaceDocProductList,companyIdList);
+//        if (documentBusiness.hasErrors()) {
+//            setActionMessages(getMessageText(documentBusiness.getErrors()));
+//            modifyFlag = 1;
+//            return INPUT;
+//        }
         modifyFlag = 0 ;
       
         return SUCCESS;
@@ -159,12 +159,12 @@ public class DocumentAction extends BaseAction {
         if (null == document.getId()) {
             return ILLEGAL_ERR;
         }
-        DocumentBusiness documentBusiness = new DocumentBusiness();
-        documentBusiness.deleteProductDocumentByDocId(document);
-        if (documentBusiness.hasErrors()) {
-            setActionMessages(getMessageText(documentBusiness.getErrors()));
-            return INPUT;
-        }
+//        DocumentBusiness documentBusiness = new DocumentBusiness();
+//        documentBusiness.deleteProductDocumentByDocId(document);
+//        if (documentBusiness.hasErrors()) {
+//            setActionMessages(getMessageText(documentBusiness.getErrors()));
+//            return INPUT;
+//        }
         
         return SUCCESS;
     }
@@ -184,16 +184,16 @@ public class DocumentAction extends BaseAction {
         if (null == document.getId()) {
             return ILLEGAL_ERR;
         }
-        DocumentBusiness documentBusiness = new DocumentBusiness();
-        Document dbDocument = documentBusiness.getDocumentById(document.getId());
-        if (documentBusiness.hasErrors()) {
-            setActionMessages(getMessageText(documentBusiness.getErrors()));
-            return INPUT;
-        }
+//        DocumentBusiness documentBusiness = new DocumentBusiness();
+//        Document dbDocument = documentBusiness.getDocumentById(document.getId());
+//        if (documentBusiness.hasErrors()) {
+//            setActionMessages(getMessageText(documentBusiness.getErrors()));
+//            return INPUT;
+//        }
         
-        DateFormat dateFormat = new DateFormat();
-        dbDocument.setPublishDate(dateFormat.changeDate(dbDocument.getPublishDate()));
-        document =dbDocument;
+//        DateFormat dateFormat = new DateFormat();
+//        dbDocument.setPublishDate(dateFormat.changeDate(dbDocument.getPublishDate()));
+//        document =dbDocument;
         
         return SUCCESS;
     }
@@ -237,17 +237,17 @@ public class DocumentAction extends BaseAction {
             }
         }
         
-        DocumentBusiness documentBusiness = new DocumentBusiness();
-        documentList = documentBusiness.getDocumentList(document,loginUser);
-        if (documentBusiness.hasErrors()) {
-            setActionMessages(getMessageText(documentBusiness.getErrors()));
-            return INPUT;
-        }
-        
-        DateFormat dateFormat = new DateFormat();
-        for(Document doc:documentList){
-            doc.setPublishDate(dateFormat.changeDate(doc.getPublishDate()));
-        }
+//        DocumentBusiness documentBusiness = new DocumentBusiness();
+//        documentList = documentBusiness.getDocumentList(document,loginUser);
+//        if (documentBusiness.hasErrors()) {
+//            setActionMessages(getMessageText(documentBusiness.getErrors()));
+//            return INPUT;
+//        }
+//        
+//        DateFormat dateFormat = new DateFormat();
+//        for(Document doc:documentList){
+//            doc.setPublishDate(dateFormat.changeDate(doc.getPublishDate()));
+//        }
         
         return SUCCESS;
         
@@ -270,45 +270,45 @@ public class DocumentAction extends BaseAction {
             return ILLEGAL_ERR;
         }
         
-        DocumentBusiness documentBusiness = new DocumentBusiness();
-        Document proDataDocument = documentBusiness.searchProductDocumentById(document);
-        if (documentBusiness.hasErrors()) {
-            setActionMessages(getMessageText(documentBusiness.getErrors()));
-            return INPUT;
-        }
-        
-        ActionContext.getContext().getActionInvocation().getProxy().setExecuteResult(false);
-        HttpServletResponse response = ServletActionContext.getResponse();
-//        response.setContentType("application/octet-stream");
-        String docName = document.getName();
-        BufferedOutputStream bufferedOutputStream = null;
-        BufferedInputStream bufferedInputStream  = null;
-        try{
-            String downloadName = URLEncoder.encode(docName, "UTF-8");
-            response.setCharacterEncoding("UTF-8");
-            response.setHeader("Content-Disposition", "attachment; filename="+downloadName);
-            bufferedOutputStream = new BufferedOutputStream(response.getOutputStream());
-            bufferedInputStream = new BufferedInputStream(proDataDocument.getDocFile().getBinaryStream());
-            
-            byte[] buf = new byte[1024] ;
-            int length = -1;
-            while((length = bufferedInputStream.read(buf)) != -1){
-                bufferedOutputStream.write(buf,0,length);
-            }
-        }catch(Exception ioe){
-            
-        }finally{
-            try{
-                if(bufferedInputStream != null){
-                    bufferedInputStream.close();
-                }
-                if(bufferedOutputStream != null){
-                    bufferedOutputStream.close();
-                }
-            }catch(IOException ioe2){
-                
-            }
-        }
+//        DocumentBusiness documentBusiness = new DocumentBusiness();
+//        Document proDataDocument = documentBusiness.searchProductDocumentById(document);
+//        if (documentBusiness.hasErrors()) {
+//            setActionMessages(getMessageText(documentBusiness.getErrors()));
+//            return INPUT;
+//        }
+//        
+//        ActionContext.getContext().getActionInvocation().getProxy().setExecuteResult(false);
+//        HttpServletResponse response = ServletActionContext.getResponse();
+////        response.setContentType("application/octet-stream");
+//        String docName = document.getName();
+//        BufferedOutputStream bufferedOutputStream = null;
+//        BufferedInputStream bufferedInputStream  = null;
+//        try{
+//            String downloadName = URLEncoder.encode(docName, "UTF-8");
+//            response.setCharacterEncoding("UTF-8");
+//            response.setHeader("Content-Disposition", "attachment; filename="+downloadName);
+//            bufferedOutputStream = new BufferedOutputStream(response.getOutputStream());
+//            bufferedInputStream = new BufferedInputStream(proDataDocument.getDocFile().getBinaryStream());
+//            
+//            byte[] buf = new byte[1024] ;
+//            int length = -1;
+//            while((length = bufferedInputStream.read(buf)) != -1){
+//                bufferedOutputStream.write(buf,0,length);
+//            }
+//        }catch(Exception ioe){
+//            
+//        }finally{
+//            try{
+//                if(bufferedInputStream != null){
+//                    bufferedInputStream.close();
+//                }
+//                if(bufferedOutputStream != null){
+//                    bufferedOutputStream.close();
+//                }
+//            }catch(IOException ioe2){
+//                
+//            }
+//        }
 
         return SUCCESS;
     }

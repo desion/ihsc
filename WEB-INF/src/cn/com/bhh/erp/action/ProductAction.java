@@ -1,13 +1,17 @@
-//****************************************
-// ProjectName  ITインフラ改造作業
-// CreateDate   08/12/07
-// Copyright    © Beijing Hitachi Huasun Information Systems Co., Ltd. 2008. All rights reserved.
-//****************************************
 package cn.com.bhh.erp.action;
 
-import java.util.*;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
-import cn.com.bhh.erp.business.*;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
+import cn.com.bhh.erp.business.ProductBusiness;
+import cn.com.bhh.erp.business.ProductCategoryBusiness;
 import cn.com.bhh.erp.entity.Product;
 import cn.com.bhh.erp.entity.ProductCategory;
 
@@ -33,6 +37,8 @@ public class ProductAction extends BaseAction {
     
     /** product category ID */
     private Integer productCategoryId = null;
+    
+    private Integer selectedProvinceId = null;
 
     /** product category name */
     private String productCategoryName = null;
@@ -81,8 +87,17 @@ public class ProductAction extends BaseAction {
 
     /** checked product ID */
     private Integer checkedProductId;
+    
 
-    /**
+    public Integer getSelectedProvinceId() {
+		return selectedProvinceId;
+	}
+
+	public void setSelectedProvinceId(Integer selectedProvinceId) {
+		this.selectedProvinceId = selectedProvinceId;
+	}
+
+	/**
      * @return the productCategoryId
      */
     public Integer getProductCategoryId() {
@@ -355,53 +370,61 @@ public class ProductAction extends BaseAction {
      */
     public String searchProductList() throws Exception {
 
-        ProductCategoryBusiness pcb = new ProductCategoryBusiness();
         ProductBusiness pb = new ProductBusiness();
-
-        // ILLEGAL ERROR
-        if (productCategoryId == null || productCategoryId.compareTo(Integer.valueOf(0)) <= 0) {
-            return ILLEGAL_ERR;
-        }
-
-        // get user action rights.
-        delRight = "0";
-        delFRight = "0";
-        if (loginUser.hasPermission("PR002_32")) {
-            delRight = "1";
-        }
-        if (loginUser.hasPermission("PR002_40")) {
-            delFRight = "1";
-        }
-
-        ProductCategory pcInfo = pcb.searchProductCategory(productCategoryId);
-        if (pcb.hasErrors()) {
-            setActionMessages(getMessageText(pcb.getErrors()));
-            if (!"PR001_10".equals(actionForwardP) || "true".equals(fromSelfFlg)) {
-                return ERROR;
-            }
-            return INPUT;
-        }
-        ProductCategory productCategory = new ProductCategory();
-        productCategory.setId(productCategoryId);
-        navigationList = pcb.searchProductCategoryNavi(productCategory);
-        if (pcb.hasErrors()) {
-            setActionMessages(getMessageText(pcb.getErrors()));
-            if (!"PR001_10".equals(actionForwardP) || "true".equals(fromSelfFlg)) {
-                return ERROR;
-            }
-            return INPUT;
-        }
-        productCategoryName = pcInfo.getName();
-        productCategoryDescription = pcInfo.getDescription();
-        productCategoryDeletedFlg = pcInfo.getDeleted().toString();
-        productList = pb.searchProductList(productCategoryId, delRight);
+        setTotalCount(pb.getProductCounts(product, loginUser));
+        productList = pb.getProductList(product, loginUser,currPage, pageSize);
         if (pb.hasErrors()) {
-            setActionMessages(getMessageText(pb.getErrors()));
-            if (!"PR001_10".equals(actionForwardP) || "true".equals(fromSelfFlg)) {
-                return ERROR;
-            }
-            return INPUT;
-        }
+          setActionMessages(getMessageText(pb.getErrors()));
+          if (!"PR001_10".equals(actionForwardP) || "true".equals(fromSelfFlg)) {
+              return ERROR;
+          }
+          return INPUT;
+      }
+
+//        // ILLEGAL ERROR
+//        if (productCategoryId == null || productCategoryId.compareTo(Integer.valueOf(0)) <= 0) {
+//            return ILLEGAL_ERR;
+//        }
+//
+//        // get user action rights.
+//        delRight = "0";
+//        delFRight = "0";
+//        if (loginUser.hasPermission("PR002_32")) {
+//            delRight = "1";
+//        }
+//        if (loginUser.hasPermission("PR002_40")) {
+//            delFRight = "1";
+//        }
+//
+//        ProductCategory pcInfo = pcb.searchProductCategory(productCategoryId);
+//        if (pcb.hasErrors()) {
+//            setActionMessages(getMessageText(pcb.getErrors()));
+//            if (!"PR001_10".equals(actionForwardP) || "true".equals(fromSelfFlg)) {
+//                return ERROR;
+//            }
+//            return INPUT;
+//        }
+//        ProductCategory productCategory = new ProductCategory();
+//        productCategory.setId(productCategoryId);
+//        navigationList = pcb.searchProductCategoryNavi(productCategory);
+//        if (pcb.hasErrors()) {
+//            setActionMessages(getMessageText(pcb.getErrors()));
+//            if (!"PR001_10".equals(actionForwardP) || "true".equals(fromSelfFlg)) {
+//                return ERROR;
+//            }
+//            return INPUT;
+//        }
+//        productCategoryName = pcInfo.getName();
+//        productCategoryDescription = pcInfo.getDescription();
+//        productCategoryDeletedFlg = pcInfo.getDeleted().toString();
+//        productList = pb.searchProductList(productCategoryId, delRight);
+//        if (pb.hasErrors()) {
+//            setActionMessages(getMessageText(pb.getErrors()));
+//            if (!"PR001_10".equals(actionForwardP) || "true".equals(fromSelfFlg)) {
+//                return ERROR;
+//            }
+//            return INPUT;
+//        }
 
         return SUCCESS;
     }
@@ -424,7 +447,7 @@ public class ProductAction extends BaseAction {
         }
         
         ProductBusiness productBusiness = new ProductBusiness();
-        productList = productBusiness.getModelList();
+//        productList = productBusiness.getModelList();
         if (productBusiness.hasErrors()) {
             setActionMessages(getMessageText(productBusiness.getErrors()));
             return ERROR;
@@ -457,15 +480,15 @@ public class ProductAction extends BaseAction {
                 Iterator<Product> iterator = productList.iterator();
                 while(iterator.hasNext()){
                     Product product = iterator.next();
-                    if(product.getProductCategoryId().equals(productCategory.getId())){
-                        if(map.get(productCategory) != null){
-                            list = map.get(productCategory);
-                        } else {
-                            list = new ArrayList();
-                        }
-                        list.add(product);
-                        map.put(productCategory, list);
-                    }
+//                    if(product.getProductCategoryId().equals(productCategory.getId())){
+//                        if(map.get(productCategory) != null){
+//                            list = map.get(productCategory);
+//                        } else {
+//                            list = new ArrayList();
+//                        }
+//                        list.add(product);
+//                        map.put(productCategory, list);
+//                    }
                 }
             }
         }
@@ -482,46 +505,9 @@ public class ProductAction extends BaseAction {
      */
     public String showProductDetail() throws Exception {
 
-        ProductCategoryBusiness pcb = new ProductCategoryBusiness();
         ProductBusiness pb = new ProductBusiness();
 
-        // ILLEGAL ERROR
-        if (product.getId() == null
-                || product.getId().compareTo(Integer.valueOf(0)) <= 0
-                || productCategoryId == null
-                || productCategoryId.compareTo(Integer.valueOf(0)) <= 0) {
-            return ILLEGAL_ERR;
-        }
-
-        //product exist check.
-        product = pb.searchProduct(product);
-        if (pb.hasErrors()) {
-            setActionMessages(getMessageText(pb.getErrors()));
-            if (!"PR001_10".equals(actionForwardP)) {
-                return ERROR;
-            }
-            fromSelfFlg = "true";
-            return INPUT;
-        }
-
-        //get navigation.
-        ProductCategory productCategory = new ProductCategory();
-        productCategory.setId(productCategoryId);
-        navigationList = pcb.searchProductCategoryNavi(productCategory);
-        if (pcb.hasErrors()) {
-            setActionMessages(getMessageText(pcb.getErrors()));
-            if (!"PR001_10".equals(actionForwardP)) {
-                return ERROR;
-            }
-            fromSelfFlg = "true";
-            return INPUT;
-        }
-
-        navigationString = "";
-
-        for (int i = 0; i < navigationList.size(); i++) {
-            navigationString = navigationString + "&nbsp;&gt;&nbsp;" + navigationList.get(i).getName();
-        }
+//        setActionMessages(getMessageText(pcb.getErrors()));
 
         return SUCCESS;
     }
@@ -564,8 +550,8 @@ public class ProductAction extends BaseAction {
         }
 
         product = new Product();
-        product.setProductCategoryId(productCategory.getId());
-        product.setProductCategoryName(productCategory.getName());
+//        product.setProductCategoryId(productCategory.getId());
+//        product.setProductCategoryName(productCategory.getName());
         productCategoryId = productCategory.getId();
         strOperationType = "";
         customerLoudspeakerSel = "";
@@ -585,24 +571,24 @@ public class ProductAction extends BaseAction {
 
         ProductBusiness pb = new ProductBusiness();
 
-        if (string_producer_id != null && !"".equals(string_producer_id.trim())) {
-            product.setProducerId(Integer.valueOf(string_producer_id));
-        }
-        if (strOperationType != null && !"".equals(strOperationType.trim())) {
-            product.setOperationType(Integer.valueOf(strOperationType));
-        } else {
-            product.setOperationType(Integer.valueOf(-1));
-        }
-        if (customerLoudspeakerSel != null && !"".equals(customerLoudspeakerSel.trim())) {
-            product.setCustomerLoudspeaker(Integer.valueOf(customerLoudspeakerSel));
-        } else {
-            product.setCustomerLoudspeaker(Integer.valueOf(-1));
-        }
-        if (customerVoiceWizardSel != null && !"".equals(customerVoiceWizardSel.trim())) {
-            product.setCustomerVoiceWizard(Integer.valueOf(customerVoiceWizardSel));
-        } else {
-            product.setCustomerVoiceWizard(Integer.valueOf(-1));
-        }
+//        if (string_producer_id != null && !"".equals(string_producer_id.trim())) {
+//            product.setProducerId(Integer.valueOf(string_producer_id));
+//        }
+//        if (strOperationType != null && !"".equals(strOperationType.trim())) {
+//            product.setOperationType(Integer.valueOf(strOperationType));
+//        } else {
+//            product.setOperationType(Integer.valueOf(-1));
+//        }
+//        if (customerLoudspeakerSel != null && !"".equals(customerLoudspeakerSel.trim())) {
+//            product.setCustomerLoudspeaker(Integer.valueOf(customerLoudspeakerSel));
+//        } else {
+//            product.setCustomerLoudspeaker(Integer.valueOf(-1));
+//        }
+//        if (customerVoiceWizardSel != null && !"".equals(customerVoiceWizardSel.trim())) {
+//            product.setCustomerVoiceWizard(Integer.valueOf(customerVoiceWizardSel));
+//        } else {
+//            product.setCustomerVoiceWizard(Integer.valueOf(-1));
+//        }
         pb.insertProduct(loginUser, product);
         if (pb.hasErrors()) {
             setActionMessages(getMessageText(pb.getErrors()));
@@ -634,18 +620,18 @@ public class ProductAction extends BaseAction {
         }
 
         //product category exist check.
-        Product tmpProduct = pb.searchProductFm(product);
-        if (pb.hasErrors()) {
-            setActionMessages(getMessageText(pb.getErrors()));
-            fromSelfFlg = "true";
-            return INPUT;
-        }
-        product = tmpProduct;
-
-        //get navigation.
-        ProductCategory productCategory = new ProductCategory();
-        productCategory.setId(product.getProductCategoryId());
-        navigationList = pcb.searchProductCategoryNavi(productCategory);
+//        Product tmpProduct = pb.searchProductFm(product);
+//        if (pb.hasErrors()) {
+//            setActionMessages(getMessageText(pb.getErrors()));
+//            fromSelfFlg = "true";
+//            return INPUT;
+//        }
+//        product = tmpProduct;
+//
+//        //get navigation.
+//        ProductCategory productCategory = new ProductCategory();
+//        productCategory.setId(product.getProductCategoryId());
+//        navigationList = pcb.searchProductCategoryNavi(productCategory);
         if (pcb.hasErrors()) {
             setActionMessages(getMessageText(pcb.getErrors()));
             fromSelfFlg = "true";
@@ -658,18 +644,49 @@ public class ProductAction extends BaseAction {
             navigationString = navigationString + "&nbsp;&gt;&nbsp;" + navigationList.get(i).getName();
         }
 
-        productCategoryId = product.getProductCategoryId();
-        string_producer_id = product.getProducerId().toString();
-        if (product.getOperationType() != null) {
-            strOperationType = product.getOperationType().toString();
-        } else {
-            strOperationType = "";
-        }
-        customerLoudspeakerSel = product.getCustomerLoudspeaker().toString();
-        customerVoiceWizardSel = product.getCustomerVoiceWizard().toString();
+//        productCategoryId = product.getProductCategoryId();
+//        string_producer_id = product.getProducerId().toString();
+//        if (product.getOperationType() != null) {
+//            strOperationType = product.getOperationType().toString();
+//        } else {
+//            strOperationType = "";
+//        }
+//        customerLoudspeakerSel = product.getCustomerLoudspeaker().toString();
+//        customerVoiceWizardSel = product.getCustomerVoiceWizard().toString();
 
         return SUCCESS;
     }
+    
+    public void outXml(Product product, String code) throws Exception{
+        StringBuilder sb = new StringBuilder();  
+        sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");  
+        sb.append("<product>"); 
+        sb.append("<index>");
+        sb.append(product.getIndex());
+        sb.append("</index>");
+        sb.append("<id>");
+        sb.append(product.getId());
+        sb.append("</id>");
+        sb.append("<price>");
+        sb.append(product.getPrice());
+        sb.append("</price>");
+        sb.append("<status>");
+        sb.append(product.getStatusName());
+        sb.append("</status>");
+        sb.append("<code>");
+        sb.append(code);
+        sb.append("</code>");
+        sb.append("</product>");  
+        HttpServletResponse response = ServletActionContext.getResponse();  
+        //设置编码  
+        response.setCharacterEncoding("UTF-8");  
+        response.setContentType("text/xml;charset=utf-8");  
+        response.setHeader("Cache-Control", "no-cache");  
+        PrintWriter out = response.getWriter();  
+        out.write(sb.toString());  
+        out.flush();  
+        out.close(); 
+     }
 
     /**
      * modify product information.
@@ -681,32 +698,17 @@ public class ProductAction extends BaseAction {
     public String modifyProduct() throws Exception {
 
         ProductBusiness pb = new ProductBusiness();
-
-        if (string_producer_id != null && !"".equals(string_producer_id.trim())) {
-            product.setProducerId(Integer.valueOf(string_producer_id));
+        if(product.getIndex() == null){
+        	return ERROR;
         }
-        if (strOperationType != null && !"".equals(strOperationType.trim())) {
-            product.setOperationType(Integer.valueOf(strOperationType));
-        } else {
-            product.setOperationType(Integer.valueOf(-1));
-        }
-        if (customerLoudspeakerSel != null && !"".equals(customerLoudspeakerSel.trim())) {
-            product.setCustomerLoudspeaker(Integer.valueOf(customerLoudspeakerSel));
-        } else {
-            product.setCustomerLoudspeaker(Integer.valueOf(-1));
-        }
-        if (customerVoiceWizardSel != null && !"".equals(customerVoiceWizardSel.trim())) {
-            product.setCustomerVoiceWizard(Integer.valueOf(customerVoiceWizardSel));
-        } else {
-            product.setCustomerVoiceWizard(Integer.valueOf(-1));
-        }
+        
         pb.modifyProduct(loginUser, product);
         if (pb.hasErrors()) {
             setActionMessages(getMessageText(pb.getErrors()));
             fromSelfFlg = "true";
             return ERROR;
         }
-
+        outXml(product,SUCCESS);
         return SUCCESS;
     }
 
@@ -731,7 +733,7 @@ public class ProductAction extends BaseAction {
 
         // business delete
         fromSelfFlg = "true";
-        pb.modifyProductFd(loginUser, product, 1);
+//        pb.modifyProductFd(loginUser, product, 1);
         if (pb.hasErrors()) {
             setActionMessages(getMessageText(pb.getErrors()));
             return ERROR;
@@ -761,7 +763,7 @@ public class ProductAction extends BaseAction {
 
         // recover
         fromSelfFlg = "true";
-        pb.modifyProductFd(loginUser, product, 0);
+//        pb.modifyProductFd(loginUser, product, 0);
         if (pb.hasErrors()) {
             setActionMessages(getMessageText(pb.getErrors()));
             return ERROR;
@@ -799,4 +801,5 @@ public class ProductAction extends BaseAction {
 
         return SUCCESS;
     }
+
 }

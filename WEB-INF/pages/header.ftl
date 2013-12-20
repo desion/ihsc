@@ -1,8 +1,7 @@
 <div id="head">
     <div id="head_l">
-        <li><a href="<@s.text name="hitache_in_japan_url" />"><@s.text name="hitache_in_japan" /> </a></li>
-        <li><a href="<@s.text name="hitache_in_china_url" />"><@s.text name="hitache_in_china" /> </a></li>
-        <li><a href="<@s.text name="ihsc_label_url" />"><@s.text name="ihsc_label" /> </a></li>   
+        <li><a href="<@s.text name="zkcl_url" />"><@s.text name="zkcl" /> </a></li>
+        <li><a href="<@s.text name="zkcl_tall_url" />"><@s.text name="zkcl_tmall" /> </a></li>
      </div>
      <div id="head_r">
          <ul>
@@ -17,8 +16,7 @@
       </div>
 </div>
 <div id="logo">
-         <img src="images/canpinzx_banner.gif" />
-        
+         <img src="images/canpinzx_banner.gif" style="width:100%;"/>   
 </div>
 <div id="header">
      <div id="menu_header">
@@ -40,8 +38,8 @@
                     <li><label><@s.text name="product_label" /></label>
                         <ul class="select-free">
                             <!--[if lte IE 6.5]><iframe></iframe><![endif]-->
-                        <#if loginUser.hasPermission("PR003_00")>
-                            <li><a href="PR003_00"><@s.text name="product_category_tree_label" /></a></li>
+                        <#if loginUser.hasPermission("PR002_10")>
+                            <li><a href="PR002_10"><@s.text name="product_search_label" /></a></li>
                         </#if>
                         <#if loginUser.hasPermission("PR001_10")>
                             <li><a href="PR001_10"><@s.text name="product_category_list_label" /></a></li>

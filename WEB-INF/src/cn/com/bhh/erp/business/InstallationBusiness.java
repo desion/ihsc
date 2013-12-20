@@ -498,11 +498,11 @@ public class InstallationBusiness extends BaseBusiness {
 
             ProductDao productDao = new ProductDao(conn);
 
-            if (productDao.getCountById(installation.getProductId()) == 0) {
-                // data not exists
-                errors.add("BSE00006,install.productId");
-                return;
-            }
+//            if (productDao.getCountById(installation.getProductId()) == 0) {
+//                // data not exists
+//                errors.add("BSE00006,install.productId");
+//                return;
+//            }
             
             
             
@@ -514,10 +514,10 @@ public class InstallationBusiness extends BaseBusiness {
                 return;
             }
             
-            if(productDao.getCountByAgentId(installation.getProductId(),installation.getInstallCompId()) == 0){
-                errors.add("BSE01729,install.installCompId");
-                return;
-            }
+//            if(productDao.getCountByAgentId(installation.getProductId(),installation.getInstallCompId()) == 0){
+//                errors.add("BSE01729,install.installCompId");
+//                return;
+//            }
 
             InstPlaceTypeDao iptd = new InstPlaceTypeDao(conn);
             if (iptd.getCountByID(installation.getInstPlaceTypeId()) == 0) {
@@ -718,16 +718,16 @@ public class InstallationBusiness extends BaseBusiness {
                 String notExistsErr = "BSE00015," + i;
 
                 Integer productId = null;
-                if (!user.filter("prod_cate_mng_all_data")) {
-                    for (int index = 0; index < productNameList.size(); index++) {
-                        if (productNameList.get(index).getModel().equals(pruductModelInCell)) {
-                            productId = productNameList.get(index).getId();
-                            break;
-                        }
-                    }
-                } else {
-                    productId = productDao.getIdByModel(pruductModelInCell);
-                }
+//                if (!user.filter("prod_cate_mng_all_data")) {
+//                    for (int index = 0; index < productNameList.size(); index++) {
+//                        if (productNameList.get(index).getModel().equals(pruductModelInCell)) {
+//                            productId = productNameList.get(index).getId();
+//                            break;
+//                        }
+//                    }
+//                } else {
+//                    productId = productDao.getIdByModel(pruductModelInCell);
+//                }
                 if (productId == null) {
                     // data not exists
                     errors.add(notExistsErr + ",install.pruductModel");
@@ -1045,10 +1045,10 @@ public class InstallationBusiness extends BaseBusiness {
                     isRight = false;
                     break;
                 } else {
-                    if(productDao.getCountByAgentId(installation.getProductId(),companyID) == 0){
-                        errors.add("BSE01730,"+i+",install.installCompId");
-                        break;
-                    }
+//                    if(productDao.getCountByAgentId(installation.getProductId(),companyID) == 0){
+//                        errors.add("BSE01730,"+i+",install.installCompId");
+//                        break;
+//                    }
 
                     installation.setInstallCompId(companyID);
                 }
@@ -1389,10 +1389,10 @@ public class InstallationBusiness extends BaseBusiness {
                 }
                 
                 ProductDao productDao = new ProductDao(conn);
-                if(productDao.getCountByAgentId(installation.getProductId(),installation.getInstallCompId()) == 0){
-                    errors.add("BSE01729,install.installCompId");
-                    return;
-                }
+//                if(productDao.getCountByAgentId(installation.getProductId(),installation.getInstallCompId()) == 0){
+//                    errors.add("BSE01729,install.installCompId");
+//                    return;
+//                }
                 
                 UseStatusDao UseStatusDao = new UseStatusDao(conn);
                 if (UseStatusDao.getCountByID(installation.getUseStatusId()) == 0) {
@@ -1424,10 +1424,10 @@ public class InstallationBusiness extends BaseBusiness {
                 }
                 
                 ProductDao productDao = new ProductDao(conn);
-                if(productDao.getCountByAgentId(installation.getProductId(),installation.getNowRepairCompanyId()) == 0){
-                    errors.add("BSE01729,install.nowRepairCompanyId");
-                    return;
-                }
+//                if(productDao.getCountByAgentId(installation.getProductId(),installation.getNowRepairCompanyId()) == 0){
+//                    errors.add("BSE01729,install.nowRepairCompanyId");
+//                    return;
+//                }
             }
 
             // update the installation
@@ -1531,10 +1531,10 @@ public class InstallationBusiness extends BaseBusiness {
                 }
 
                 ProductDao productDao = new ProductDao(conn);
-                if(productDao.getCountByAgentId(installation.getProductId(),installation.getInstallCompId()) == 0){
-                    errors.add("BSE01729,install.installCompId");
-                    return;
-                }
+//                if(productDao.getCountByAgentId(installation.getProductId(),installation.getInstallCompId()) == 0){
+//                    errors.add("BSE01729,install.installCompId");
+//                    return;
+//                }
                 
                 UseStatusDao UseStatusDao = new UseStatusDao(conn);
                 if (UseStatusDao.getCountByID(installation.getUseStatusId()) == 0) {
@@ -1566,10 +1566,10 @@ public class InstallationBusiness extends BaseBusiness {
                 }
                 
                 ProductDao productDao = new ProductDao(conn);
-                if(productDao.getCountByAgentId(installation.getProductId(),installation.getNowRepairCompanyId()) == 0){
-                    errors.add("BSE01729,install.nowRepairCompanyId");
-                    return;
-                }
+//                if(productDao.getCountByAgentId(installation.getProductId(),installation.getNowRepairCompanyId()) == 0){
+//                    errors.add("BSE01729,install.nowRepairCompanyId");
+//                    return;
+//                }
             }
 
             if (TimeUtil.getNowNextDay().compareTo(installation.getStartDate()) > 0) {

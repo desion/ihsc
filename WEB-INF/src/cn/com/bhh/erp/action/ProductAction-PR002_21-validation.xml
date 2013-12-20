@@ -4,7 +4,7 @@
 		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
 
 <validators>
-    <field name="product.model">
+    <!--  <field name="product.model">
         <field-validator type="requiredstring" short-circuit="true">
             <param name="trim">true</param>
             <message key="BSE00002"></message>
@@ -305,6 +305,6 @@
             <param name="maxLength">80</param>
             <message key="BSE00003"></message>
         </field-validator>
-    </field>
+    </field>-->
 
 </validators>

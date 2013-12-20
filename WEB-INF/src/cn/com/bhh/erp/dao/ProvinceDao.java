@@ -249,6 +249,60 @@ public class ProvinceDao extends BaseDao {
     }
     
     /**
+     * get all province.
+     * @auther  xiangzq
+     * @version 1.0
+     * @since   1.0
+     * @return  List&ltProvince&gt
+     * @throws  SQLException
+     */
+    public List<Province> searchAllProvince() throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Start UOC
+            List <Province>list = new ArrayList<Province>();
+            String sql = " SELECT " +
+            		     " P.ID," +
+            		     " P.NAME" +
+            		     " FROM " +
+            		     " PROVINCE_TBL P";
+            pstmt = conn.prepareStatement(sql);
+            int index = 0;
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                Province province = new Province();
+                index = 0;
+                province.setId(rs.getInt(++index));
+                province.setName(rs.getString(++index));
+                list.add(province);
+            }
+
+            return list;
+
+            // End UOC
+        } catch (SQLException e) {
+            logSQLException(e, "selectAll");
+            throw e;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                logSQLException(e, "selectAll");
+                throw e;
+            }
+        }
+    }
+    
+    /**
      * get all province of the country.
      * @auther  xiangzq
      * @version 1.0

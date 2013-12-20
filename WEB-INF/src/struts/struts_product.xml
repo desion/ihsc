@@ -41,9 +41,13 @@
 
         <!-- 修改产品信息-->
         <action name="PR002_31" class="cn.com.bhh.erp.action.ProductAction" method="modifyProduct">
-            <result name="error" type="freemarker">/WEB-INF/pages/product/product_modify.ftl</result>
-            <result name="input" type="freemarker">/WEB-INF/pages/product/product_modify.ftl</result>
-            <result name="success" type="chain">PR002_10</result>
+            <!--<result name="error" type="freemarker">/WEB-INF/pages/product/product_modify.ftl</result>
+            <result name="input" type="freemarker">/WEB-INF/pages/product/product_modify.ftl</result>-->
+            <result name="error" type="freemarker">/WEB-INF/pages/product/product_list.ftl</result>
+            <result name="input" type="freemarker">/WEB-INF/pages/product/product_list.ftl</result>
+            <result name="success" type="plaintext">
+            	/WEB-INF/pages/ajax.xml
+            </result>
         </action>
 
         <!-- 业务删除产品信息-->

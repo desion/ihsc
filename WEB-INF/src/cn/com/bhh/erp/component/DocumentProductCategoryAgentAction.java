@@ -13,7 +13,7 @@ import com.opensymphony.xwork2.ActionContext;
 
 import cn.com.bhh.erp.action.BaseAction;
 import cn.com.bhh.erp.action.UserAction;
-import cn.com.bhh.erp.business.DocumentBusiness;
+//import cn.com.bhh.erp.business.DocumentBusiness;
 import cn.com.bhh.erp.business.ProductBusiness;
 import cn.com.bhh.erp.business.ProductCategoryBusiness;
 import cn.com.bhh.erp.entity.Product;
@@ -48,13 +48,13 @@ public class DocumentProductCategoryAgentAction extends BaseAction {
         
         if(documentId!=null){
             
-            DocumentBusiness documentBusiness = new DocumentBusiness();
-            
-            //  获取该文档对应的产品分类关系
-            documentAgentProductCateList = documentBusiness.getDocumentAgentProductCategoryList(documentId);
-            
-            // 获取该文档对应的产品关系
-            documentAgentProductList = documentBusiness.getDocumentAgentProductList(documentId);
+//            DocumentBusiness documentBusiness = new DocumentBusiness();
+//            
+//            //  获取该文档对应的产品分类关系
+//            documentAgentProductCateList = documentBusiness.getDocumentAgentProductCategoryList(documentId);
+//            
+//            // 获取该文档对应的产品关系
+//            documentAgentProductList = documentBusiness.getDocumentAgentProductList(documentId);
         }
         
         if (loginUser == null) {
@@ -88,7 +88,7 @@ public class DocumentProductCategoryAgentAction extends BaseAction {
                            for(ProductCategory levelThreeProductCategory:levelThreeProductCateList){
                                List<Product> leafProductList= new ArrayList<Product>();
                                //获取第三级产品分类的产品
-                               leafProductList = productBusiness.searchProductList(levelThreeProductCategory.getId(),loginUser);
+//                               leafProductList = productBusiness.searchProductList(levelThreeProductCategory.getId(),loginUser);
                                //设置第三级产品分类的所有产品
                                levelThreeProductCategory.setChildProductList(leafProductList);
                                

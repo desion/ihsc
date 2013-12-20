@@ -27,6 +27,7 @@ public class User implements Serializable {
     private String email;
     private Integer companyID;
     private String department;
+    private String signature;
     private String post;
     private String lastLoginTime;
     private String lastLoginIP;
@@ -566,6 +567,14 @@ public class User implements Serializable {
     public void setCompanyType(String companyType) {
         this.companyType = companyType;
     }
+
+	public String getSignature() {
+		return signature;
+	}
+
+	public void setSignature(String signature) {
+		this.signature = signature;
+	}
 
 
     

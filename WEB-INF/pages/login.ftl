@@ -34,7 +34,7 @@
 
 <body>
     <#escape x as x!""?html>
-    <div class="aysw-pagewrap">
+    <div class="aysw-pagewrap" style="width:1024px;margin:0 auto;">
 	    <form id="form_login" name="loginForm" action="BS008_01" method="post">
 	    <div class="aysw-body pt20">
 		 <div class="page-login">

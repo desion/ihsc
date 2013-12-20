@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="WEB-INF/src"/>
+	<classpathentry excluding="cn/com/bhh/erp/business/DocumentBusiness.java" kind="src" path="WEB-INF/src"/>
 	<classpathentry kind="src" output="work" path="work"/>
 	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/annotations-api.jar"/>
 	<classpathentry kind="lib" path="F:/ihsc/WEB-INF/lib/commons-fileupload-1.2.1.jar"/>

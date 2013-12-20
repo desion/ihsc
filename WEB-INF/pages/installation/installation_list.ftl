@@ -127,9 +127,9 @@
         if(sort != "" && sortType != ""){
 	        var qText = "a[name='sortName'][value='"+sort+"']";
 	        if(sortType == "asc"){
-	          $(qText).append("<img src='../../../images/orderup.png'></img>");
+	          $(qText).append("<img src='images/orderup.png'></img>");
 	        }else if(sortType == "desc"){
-	          $(qText).append("<img src='../../../images/orderdown.png'></img>");
+	          $(qText).append("<img src='images/orderdown.png'></img>");
 	        } 
         }
         

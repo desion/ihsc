@@ -53,7 +53,7 @@ public class ProvinceDropAction extends BaseAction {
                 }
             }else{
                 //默认列出所有省份
-                provinceDropList = provinceBusiness.searchAllProvince(false,bankId,saleComId);
+                provinceDropList = provinceBusiness.searchAllProvince();
             }
         }
     }

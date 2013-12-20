@@ -1,5 +1,5 @@
 <div class="pagerbar" >
-               <div style="float:right">
+               <div style="float:left;">
                  <#if (currPage>1) >
                    <div>
                      <button type="button" onClick="changeAction('${pagebarAction}','first')" ><@s.text name="first_page" /></button>
