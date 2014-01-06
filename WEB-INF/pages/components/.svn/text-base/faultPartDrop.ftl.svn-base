@@ -1,0 +1,14 @@
+<option value=""><@s.text name="select_faultPart" /></option> 
+<#if selectedFaultPart??>
+	<#list faultPartList as faultPart>
+		<#if faultPart.id==selectedFaultPart >
+		   <option value="${faultPart.id!""}" selected >${faultPart.name!""}</option>
+		<#else>
+		  <option value="${faultPart.id!""}">${faultPart.name!""}</option> 
+		</#if>
+	</#list>
+<#else>
+	 <#list faultPartList as faultPart>
+		 <option value="${faultPart.id!""}">${faultPart.name!""}</option>
+	 </#list>
+</#if>

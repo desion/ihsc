@@ -35,14 +35,14 @@
                      loginUser.hasPermission("PR005_73") ||
                      loginUser.hasPermission("PR006_10") >
                      
-                    <li><label><@s.text name="product_label" /></label>
+                    <li><label><@s.text name="system_label" /></label>
                         <ul class="select-free">
                             <!--[if lte IE 6.5]><iframe></iframe><![endif]-->
                         <#if loginUser.hasPermission("PR002_10")>
-                            <li><a href="PR002_10"><@s.text name="product_search_label" /></a></li>
+                            <li><a href="PR002_10"><@s.text name="product_label" /></a></li>
                         </#if>
-                        <#if loginUser.hasPermission("PR001_10")>
-                            <li><a href="PR001_10"><@s.text name="product_category_list_label" /></a></li>
+                        <#if loginUser.hasPermission("BS004_10")>
+                            <li><a href="BS004_10"><@s.text name="channel_label" /></a></li>
                         </#if>
                         <#if loginUser.hasPermission("PR005_50")>
                             <li><a href="PR005_50"><@s.text name="import_use_situation_label" /></a></li>       

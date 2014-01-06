@@ -1,8 +1,4 @@
-//****************************************
-// ProjectName  ITインフラ改造作業
-// CreateDate   08/12/07
-// Copyright    © Beijing Hitachi Huasun Information Systems Co., Ltd. 2008. All rights reserved.
-//****************************************
+
 package cn.com.bhh.erp.entity;
 
 import java.io.Serializable;
@@ -20,6 +16,7 @@ import java.util.List;
 public class DownloadData implements Serializable {
     // head
     private String[] head;
+    private int[] width;
     // data
     @SuppressWarnings("unchecked")
     private List dataList;
@@ -38,5 +35,13 @@ public class DownloadData implements Serializable {
     public void setDataList(List dataList) {
         this.dataList = dataList;
     }
+    
+	public int[] getWidth() {
+		return width;
+	}
+	
+	public void setWidth(int[] width) {
+		this.width = width;
+	}
     
 }

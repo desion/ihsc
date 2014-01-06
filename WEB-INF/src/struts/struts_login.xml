@@ -23,12 +23,31 @@
         </action> 
         
         <!-- 主页 -->
-        <action name="BS010_00" class="cn.com.bhh.erp.action.MainPageAction" > 
+        <action name="BS010_00" class="cn.com.bhh.erp.action.MainPageAction" method="SearchOrderList"> 
             <result name="input" type="freemarker">/WEB-INF/pages/main.ftl</result> 
             <result name="error" type="freemarker">/WEB-INF/pages/main.ftl</result> 
             <result name="success" type="freemarker">/WEB-INF/pages/main.ftl</result> 
         </action> 
         
+        <!-- ajax调用-->
+        <action name="BS010_01" class="cn.com.bhh.erp.action.MainPageAction" method="getCurrTotal">
+            <result name="error" type="plaintext">/WEB-INF/pages/ajax.xml</result>
+            <result name="input" type="plaintext">/WEB-INF/pages/ajax.xml</result>
+            <result name="success" type="plaintext">/WEB-INF/pages/ajax.xml</result>
+        </action>
+         <!-- 产品使用情况导出 -->
+        <action name="BS010_02" class="cn.com.bhh.erp.action.MainPageAction" method="download">
+            <result name="success" type="stream">
+                <param name="bufferSize">4096</param>
+            </result>
+            <result name="input" type="freemarker">/WEB-INF/pages/main.ftl</result>
+            <result name="error" type="chain">BS010_00</result>  
+        </action>
+        
+         <!-- 订单状态更改 -->
+        <action name="BS010_03" class="cn.com.bhh.erp.action.MainPageAction" method="changeStatus">
+            <result name="success" type="plaintext">/WEB-INF/pages/ajax.xml</result>
+        </action>
 
     </package> 
 </struts>

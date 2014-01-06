@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC 
+		"-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+	<field name="user.name">
+		 <field-validator type="regex" short-circuit="true">
+            <param name="expression" ><![CDATA[(\w)*]]></param>
+            <message key="BSE01021"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="minLength">0</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+	</field>
+	
+	<field name="user.familyName">
+		<field-validator type="stringlength">
+			<param name="minLength">0</param>
+			<param name="maxLength">20</param>
+			<param name="trim">true</param>
+			<message key="BSE00003"></message>
+		</field-validator>
+	</field>
+	
+	<field name="user.givenName">
+		<field-validator type="stringlength">
+			<param name="minLength">0</param>
+			<param name="maxLength">20</param>
+			<param name="trim">true</param>
+			<message key="BSE00003"></message>
+		</field-validator>
+	</field>
+	
+	<field name="user.companyID">
+        <field-validator type="regex">
+             <param name="expression" ><![CDATA[(\d){0,10}]]></param>
+             <message key="BSE00004"></message>
+        </field-validator>
+	</field>
+
+</validators>

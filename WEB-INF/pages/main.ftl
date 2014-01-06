@@ -7,15 +7,79 @@
 <script type="text/javascript" src="js/jquery/ui.tabs.js" ></script>
 <script type="text/javascript">
     $(document).ready(function(){   
-       $("#tabs").tabs();  
        $("#StartDate").datepicker();
        $("#EndDate").datepicker();         
      });
+     
     
-    
- 	function changeAction(url,type)
+   function changeSearchAction(url)
+   {
+      var form=document.getElementById("actionForm");
+      form.action=url;
+      form.submit();
+   }
+   
+   function changeMdfAction(url)
+   {
+      var form=document.getElementById("mdfForm");
+      form.action=url;
+      form.submit();
+   }
+   
+   function updateStatus(type){
+   		selectedAffirm();
+   		if(type == 1){
+   			//recharge
+   			var flag= confirm("<@s.text name="BSC00008" />");
+       		if(flag==true){
+          		changeAction(url);
+        	}
+   		}else if(type == 2){
+   			//success
+   			var flag= confirm("<@s.text name="BSC00009" />");
+   			if(flag==true){
+          		changeAction(url);
+        	}
+   		}else if(type == 3){
+   			//fail
+   			var flag= confirm("<@s.text name="BSC00010" />");
+   			if(flag==true){
+          		changeAction(url);
+        	}
+   		}
+   }
+   
+   function changeStatus(type){
+   		var listSize = $(":checkbox[name='affirmChkList']:checked").length;
+      	if(listSize<=0){
+         	alert("<@s.text name="BSE01722" />")
+         	return false;
+      	}else if(listSize > 5){
+      	 	alert("<@s.text name="BSE01721" />")
+      	 	return false;
+     	}
+   		$("#statusType").val(type);
+		$.ajax({
+			  url: 'BS010_03',
+			  type: 'POST',
+			  data: $("#mdfForm").serialize(),
+			  dataType: 'text',
+			  timeout: 1000,
+			  cache:false,
+			  success: function(data, textStatus){
+			  	var ret = $(data).find("ret").text();
+			  	if(ret == 1){
+			  		changeSearchAction('BS010_00');
+			  	}else{
+			  		alert("<@s.text name="BSE01710" />")
+			  	}
+			  }
+		  });
+   }
+   
+    function changeAction(url,type)
     {
-        var form=document.getElementById("instlistForm");
+        var form=document.getElementById("mdfForm");
         var currentPage=document.getElementById("currPage");
         
         if(type!='undefined')
@@ -63,16 +127,25 @@
       }
     }
     
+    function exportData(url) {
+     <#if loginUser.hasPermission("BS010_02") || loginUser.hasPermission("BS010_00")>
+         var form=document.getElementById("actionForm");
+         form.action=url;
+         form.submit();
+     <#else>
+         alert("<@s.text name="BSE01731" />")
+     </#if>
+    }
     
-    function selectedAffirm(url){
+    
+    function selectedAffirm(){
       var listSize = $(":checkbox[name='affirmChkList']:checked").length;
       if(listSize<=0){
          alert("<@s.text name="BSE01722" />")
-      }else{
-       var flag= confirm("<@s.text name="BSC00008" />");
-       if(flag==true){
-          changeAction(url);
-        }
+         return false;
+      }else if(listSize > 5){
+      	 alert("<@s.text name="BSE01721" />")
+      	 return false;
       }
     }
    
@@ -158,13 +231,13 @@
         
         $("#pageSizeSel").change(function(){
             $("#psize").val($(this).val());
-            changeAction("PR005_10");
+            changeAction("BS010_00");
         });
         
         
         $("#toPageSel").change(function(){
             $("#currPage").val($(this).val());
-            changeAction("PR005_10");
+            changeAction("BS010_00");
         });
        
         $("tr").mouseover(function(){  
@@ -178,20 +251,43 @@
         var btnExportObj=$("#btnExport");
         var btnAffirmObj=$("#btnAffirm");
         if(radioSize>0){
-            btnDetailObj.removeAttr("disabled");
-            btnExportObj.removeAttr("disabled");
+            //btnDetailObj.removeAttr("disabled");
+            //btnExportObj.removeAttr("disabled");
             btnAffirmObj.removeAttr("disabled");
             var firstRad=$(":radio[name=inst_radio]:eq(0)")
             firstRad.attr("checked",true);
             $("#installId").val(firstRad.attr("id"));
         }else{
-            btnDetailObj.attr("disabled","disabled");
-            btnExportObj.attr("disabled","disabled");
+            //btnDetailObj.attr("disabled","disabled");
+            //btnExportObj.attr("disabled","disabled");
             btnAffirmObj.attr("disabled","disabled");
             
         } 
        
     });
+    
+    setInterval(function() {Push();},60000);
+    
+    function Push(){
+    	  var currTotal = $("#currTotal").val();
+		  $.ajax({
+			  url: 'BS010_01',
+			  type: 'POST',
+			  data: $("#actionForm").serialize(),
+			  dataType: 'text',
+			  timeout: 1000,
+			  cache:false,
+			  success: function(data, textStatus){
+			  	var newNum = $(data).find("totalNum").text();
+			  	if(newNum > currTotal){
+			  		var diff = newNum - currTotal;
+			  		var message = diff + "<@s.text name="note.message" />";
+			  		$("#newOrderNote").text(message);
+			  		$("#newOrderNote").attr("style","");
+			  	}
+			  }
+		  });
+    }
 </script>
 
 <style type="text/css" mce_bogus="1">  
@@ -232,6 +328,16 @@
 		background-color:#f5fafe;
 		height:30px;
 	} 
+	
+	a.notes {
+		background: #fefded;
+		color: #F48C12;
+		border: 1px solid #f9f2a7;
+		display: block;
+		height: 20px;
+		line-height: 23px;
+		text-align: center;
+}
 </style>
 </head>
 <body >
@@ -243,27 +349,28 @@
              <@s.action name="BS009_70" executeResult="true" ignoreContextParams="true">
              </@s.action> 
 		</#if>
+		<a class="notes" id="newOrderNote" style="display:none;" href="javascript:void(0);" onClick="changeSearchAction('BS010_00')"></a>
 		<div id="view">
 		    <div class="fields" cellspacing="0" cellpadding="0">
-        	<form id="actionForm" action="PR002_10" method="post">
-	        <table cellspacing="0" cellpadding="0" border="0" class="table_line2">
-	           <tbody>
-	              <tr>
-	                <td>		  
+        	    <form id="actionForm" action="BS010_00" method="post">
+	               <table cellspacing="0" cellpadding="0" border="0" class="table_line2">
+	                <tbody>
+	                  <tr>
+	                    <td>		  
 						 <table width="60%" class="field_tbl" align="center">
 							<tr>
 							   <td width="10%" class="lcell"><label><@s.text name="order.phoneNo" /></label></td>
-							   <td width="10%"><input type="text" name="topupRecord.phoneNo" value="${topupRecord.phoneNo!""}" size="11px" maxLength="11" /></td>
+							   <td width="10%"><input type="text" name="topupRecord.phoneNum" value="${topupRecord.phoneNum!""}" size="11px" maxLength="11" /></td>
 							   
 							   <td width="10%" class="lcell"><label><@s.text name="order.topupPhone" /></label></td>
 							   <td width="10%"><input type="text" name="topupRecord.topupPhone" value="${topupRecord.topupPhone!""}" size="11px" maxLength="11" /></td>
 							   
 							   <td width="10%" class="lcell"><label><@s.text name="order.price" /></label></td>
-			                   <td width="10%"><input type="text" name="topupRecord.price" value="${topupRecord.price!""}" size="10px" maxLength="3" /></td>
+			                   <td width="10%"><input type="text" name="topupRecord.sum" value="${topupRecord.sum!""}" size="10px" maxLength="3" /></td>
 							   
 							   <td width="10%" class="lcell"><label><@s.text name="order.province"  /></label></td>
 			                   <td width="10%">
-			                      <select name="order.province" >
+			                      <select name="topupRecord.province" >
 			                       <@s.action name="province_only_drop" executeResult="true" ignoreContextParams="true">
 			                          <@s.param name="selectedProvinceId">${topupRecord.province!"-1"}</@s.param>
 			                       </@s.action>
@@ -274,18 +381,50 @@
 							<tr>
 								<td width="14%" class="lcell"><label><@s.text name="order.startDate" /></label></td>
 		                        <td width="11%">
-		                             <input id="StartDate" type="text" name="StartDate" value="${topupRecord.startDate!""}" maxLength="10" />
+		                             <input id="StartDate" type="text" name="topupRecord.startDate" value="${topupRecord.startDate!""}" maxLength="10" />
 		                        </td>
 		                        <td width="14%" class="lcell"><label><@s.text name="order.endDate" /></label></td>
 		                        <td width="11%">
-		                             <input id="EndDate" type="text" name="EndDate" value="${topupRecord.endDate!""}" maxLength="10" />
+		                             <input id="EndDate" type="text" name="topupRecord.endDate" value="${topupRecord.endDate!""}" maxLength="10" />
 		                        </td>
 		                        <td width="14%" class="lcell"><label><@s.text name="order.requestNo" /></label></td>
-			                    <td width="11%"><input type="text" name="topupRecord.requestNo" value="${topupRecord.requestNo!""}" size="10px" maxLength="10" /></td>
+			                    <td width="11%"><input type="text" name="topupRecord.requestNo" value="${topupRecord.requestNo!""}" size="13px" maxLength="13" /></td>
+			                    
 								<td width="10%" class="lcell"><label><@s.text name="order.status" /></label></td>
 			                    <td width="10%">
 									<select name="topupRecord.status" style="width:150px;"  >
 			                        		<#include "components/orderStatusDrop.ftl">
+			                      	</select>
+								</td>
+							</tr>
+							<tr>
+								<td width="10%" class="lcell"><label><@s.text name="order.operator" /></label></td>
+			                    <td width="10%">
+									<select name="topupRecord.operator" style="width:150px;"  >
+			                        		<#include "components/operatorDrop.ftl">
+			                      	</select>
+								</td>
+								
+								<td width="10%" class="lcell"><label><@s.text name="order.proxy"  /></label></td>
+								<td width="10%">
+			                      <select name="topupRecord.proxy" style="width:150px;">
+			                       <@s.action name="channel_drop" executeResult="true" ignoreContextParams="true">
+			                          <@s.param name="selectedChannelId">${topupRecord.proxy!"-1"}</@s.param>
+			                       </@s.action>
+			                       </select>
+			                    </td>
+			                    
+			                    <td width="10%" class="lcell"><label><@s.text name="order.notify" /></label></td>
+			                    <td width="10%">
+									<select name="topupRecord.notify" style="width:150px;"  >
+			                        		<#include "components/noticeDrop.ftl">
+			                      	</select>
+								</td>
+								
+								<td width="10%" class="lcell"><label><@s.text name="order.source" /></label></td>
+			                    <td width="10%">
+									<select name="topupRecord.source" style="width:150px;"  >
+			                        		<#include "components/sourceDrop.ftl">
 			                      	</select>
 								</td>
 							</tr>
@@ -295,26 +434,26 @@
 		         </tbody>
 		      </table>  						  
 		   </form>
+		   
 		   <div class="btn_row">
-		   	  <#if loginUser.hasPermission("PR002_20")>
-                 <button type="button" id="btnAdd" onClick="changeDialogAction('PR002_31')" ><@s.text name="btn_add" /></button>
-              </#if>
-              <#if loginUser.hasPermission("PR002_10")>
-                 <button type="button" onClick="changeSearchAction('PR002_10')"><@s.text name="btn_search" /></button>
+		   	 <#if loginUser.hasPermission("BS010_02")>
+				 <button type="button" id="btnExport" onClick="exportData('BS010_02')" ><@s.text name="btn_export" /></button>
+			  </#if>
+              <#if loginUser.hasPermission("BS010_00")>
+                 <button type="button" onClick="changeSearchAction('BS010_00')"><@s.text name="btn_search" /></button>
               </#if> 
            </div>	            
-          </div>     
-		 <div id="tabs-1" align="center" class="gridview"  style="margin-bottom:0px; width:100%">
-				<#assign pagebarAction="PR005_10">
+        </div>  
+        <form id="mdfForm" action="BS010_00" method="post">   
+		    <div id="tabs-1" align="center" class="gridview"  style="margin-bottom:0px; width:100%">
+				<#assign pagebarAction="BS010_00">
 				<#include "components/pagebar.ftl">
 				<div style="margin-bottom:0px; width:100%;overflow: auto;">
-					
 						<table cellspacing="0" cellpadding="0" border="0" class="table_line2">
 							<tbody>
 								<tr>
 									<td>  
 										<table class="datalist" width="100%" cellspacing="0" cellpadding="0">
-											<form id="instlistForm" method="post">
 											<tbody>
 												<tr>
 													    <th width=5%>&nbsp;</th>
@@ -326,12 +465,12 @@
 														<th style="width:12%"><a name="sortName" value="topupPhone"><@s.text name="order.topupPhone" /></a></th>
 														<th style="width:8%"><a name="sortName" value="price"><@s.text name="order.price" /></a></th>
 														<th style="width:15%"><a name="sortName" value="requestNo"><@s.text name="order.requestNo" /></a></th>
-														<th style="width:15%"><a name="sortName" value="requestNo"><@s.text name="order.requestNo" /></a></th>
 														<th style="width:15%"><a name="sortName" value="createTime"><@s.text name="order.createTime" /></a></th>
 														<th style="width:15%"><a name="sortName" value="updateTime"><@s.text name="order.updateTime" /></a></th>
 														<th style="width:8%"><a name="sortName" value="status"><@s.text name="order.status" /></a></th>
+														<th style="width:8%"><a name="sortName" value="notify"><@s.text name="order.notify" /></a></th>
 														<th style="width:10%"><a name="sortName" value="source"><@s.text name="order.source" /></a></th>
-														<th style="width:10%"><a name="sortName" value="source"><@s.text name="order.source" /></a></th>
+														<th style="width:10%"><a name="sortName" value="proxy"><@s.text name="order.proxy" /></a></th>
 														<th style="width:10%"><a name="sortName" value="operator"><@s.text name="order.operator" /></a></th>
 														<th style="width:6%"><a name="sortName" value="salePrice"><@s.text name="order.salePrice" /></a></th>
 														<th style="width:6%"><a name="sortName" value="inPrice"><@s.text name="order.inPrice" /></a></th>
@@ -339,7 +478,7 @@
 													</tr>
 													<#list topupOrderList as topup>
 													<tr id="test${topup.systemNo!""}">
-														<td><label>${topup_index+1}</label></td>
+														<td><a href="javascript:void(0);" >${topup_index+1}</a></td>
 														<#if loginUser.hasPermission("PR005_37") ||loginUser.hasPermission("PR005_60")>
 															<#if affirmChkList?? && affirmChkList.contains("${topup.systemNo}")>
 																<td><input type="checkbox" name="affirmChkList" value="${topup.systemNo!""}" checked></td>
@@ -347,48 +486,65 @@
 																<td><input type="checkbox" name="affirmChkList" value="${topup.systemNo!""}" ></td>
 															</#if>
 														</#if>
-														<td><label>${topup.phoneNum!""}</label></td>
-														<td><label>${topup.provinceName!""}</label></td>
-														<td><label>${topup.topupPhone!""}</label></td>
-														<td><label>${topup.sum!""}</label></td>
-														<td><label>${topup.requestNo!""}</label></td>
-														<td><label>${topup.requestNo!""}</label></td>
+														<td>${topup.phoneNum!""}</td>
+														<td>${topup.provinceName!""}</td>
+														<td>${topup.topupPhone!""}</td>
+														<td>${topup.sum!""}</td>
+														<td>${topup.requestNo!""}</td>
 														<td>${topup.createTime!""}</td>
 														<td>${topup.updateTime!""}</td>
-														<td><label>${topup.status!""}</label></td>
-														<td><label>${topup.source!""}</label></td>
-														<td><label>${topup.proxy!""}</label></td>
-														<td><label>${topup.operatorName!""}</label></td>
-														<td><label>${topup.salePrice?if_exists?string.number}</label></td>
-														<td><label>${topup.inPrice?if_exists?string.number}</label></td>
-														<td><label>${topup.profit?if_exists?string.number}</label></td>
+														<#if topup.status == 0>
+															<td>${topup.statusName!""}</td>
+														<#elseif topup.status == 1>
+															<td><font color="#8B668B">${topup.statusName!""}</font></td>
+														<#elseif topup.status == 2>
+															<td><font color="green">${topup.statusName!""}</font></td>
+														<#else>
+															<td><font color="red">${topup.statusName!""}</font></td>
+														</#if>
+														<#if topup.notify == 0>
+															<td><font color="red">${topup.noticeName!""}</font></td>
+														<#else>
+															<td><font color="green">${topup.noticeName!""}</font></td>
+														</#if>
+														<td>${topup.sourceName!""}</td>
+														<td>${topup.proxy!""}</td>
+														<td>${topup.operatorName!""}</td>
+														<td>${topup.salePrice?if_exists?string.number}</td>
+														<td>${topup.inPrice?if_exists?string.number}</td>
+														<td>${topup.profit?if_exists?string.number}</td>
 													</tr>
 													</#list>
 											</tbody>
-						            
-											</form>
 										</table> 
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div> 
-				</div>      	
+				</div> 
+				<input type="hidden" id="currPage" name="currPage" value="${currPage!0}" />
+	    		<input type="hidden"  id="psize"   name="pageSize" value="${pageSize!0}" /> 
+	    		<input type="hidden"  id="currTotal"   name="currentTotalNum" value="${currentTotalNum!0}" />
+	    		<input type="hidden"  id="statusType"   name="statusType" value="${statusType!0}" />    
+	        </form>
+	    		  	
 				<div class="btn_row">
-				
-					<#if loginUser.hasPermission("PR005_60")>
-						<button type="button" id="btnExport" onClick="exportManuNo('PR005_60')" ><@s.text name="btn_export" /></button>
+					<#if loginUser.hasPermission("BS010_00")>
+						<button type="button" id="btn_update_success" onClick="changeStatus(2)" ><@s.text name="btn_update_success" /></button>
 					</#if>
-					<#if loginUser.hasPermission("PR005_11")>
-						<button type="button" id="btnDetail" onClick="executeAction('PR005_11')" ><@s.text name="btn_detail" /></button>
+					<#if loginUser.hasPermission("BS010_00")>
+						<button type="button" id="btn_update_fail" onClick="changeStatus(3)" ><@s.text name="btn_update_fail" /></button>
 					</#if>
 					<#if loginUser.hasPermission("PR005_37")>
-						<button type="button" id="btnAffirm" onClick="selectedAffirm('PR005_37')" ><@s.text name="btn_select_affirm" /></button>
+						<button type="button" id="btn_update_retopup" onClick="changeStatus(1)" ><@s.text name="btn_update_retopup" /></button>
 					</#if>
 				</div>           
 			</div>   
 		</div>
 	</div>
+ </div>
+ <div id="dialog" title="Order Detail">
  </div>     
  <#include "components/error_reference.ftl"/> 
 </#escape>

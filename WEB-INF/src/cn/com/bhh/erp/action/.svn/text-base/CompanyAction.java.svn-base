@@ -1,0 +1,501 @@
+//****************************************
+// ProjectName  ITインフラ改造作業
+// CreateDate   08/12/07
+// Copyright    © Beijing Hitachi Huasun Information Systems Co., Ltd. 2008. All rights reserved.
+//****************************************
+package cn.com.bhh.erp.action;
+
+import cn.com.bhh.erp.business.CompanyBusiness;
+import cn.com.bhh.erp.common.StringUtil;
+import cn.com.bhh.erp.entity.Company;
+import cn.com.bhh.erp.entity.User;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
+
+import com.opensymphony.xwork2.ActionContext;
+
+/**
+ * this class has the functions such as: list,create,modify and delete company,
+ * and direct to the detail company
+ * 
+ * @author xiangzq
+ * @version 1.0
+ * @since 1.0
+ */
+@SuppressWarnings("serial")
+public class CompanyAction extends BaseAction  {
+    private Company company = new Company();
+    private List<Company> comList = new ArrayList<Company>();
+    private List<Integer> companyCustomerAgentList = new ArrayList<Integer>();
+    private List<Integer> productCategoryAgentList = new ArrayList<Integer>();
+   
+
+    private Integer modifyFlag=0;
+    
+    /**
+     * list the company by page
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @param
+     * @return String
+     * @throws Exception
+     */
+    public String listCompany() throws Exception {
+        
+        CompanyBusiness companyBusiness = new CompanyBusiness();
+        setTotalCount(companyBusiness.getCompanyCounts(company,loginUser));
+
+        if (companyBusiness.hasErrors()) {
+            setActionMessages(getMessageText(companyBusiness.getErrors()));
+            return INPUT;
+        }
+
+        comList = companyBusiness.getComByPage(currPage, pageSize, company,loginUser);
+        if (companyBusiness.hasErrors()) {
+            setActionMessages(getMessageText(companyBusiness.getErrors()));
+            return INPUT;
+        }
+
+        return SUCCESS;
+    }
+
+    /**
+     * direct to the company create page, and do some handles
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    public String createCompanyPre() throws Exception {
+        company = new Company();
+        return SUCCESS;
+    }
+
+    /**
+     * create the company
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    public String createCompany() throws Exception {
+        
+       
+        CompanyBusiness companyBusiness = new CompanyBusiness();
+        company.setCreatorId(loginUser.getId());
+        company.setModifierId(loginUser.getId());
+        companyBusiness.createCompany(company, companyCustomerAgentList, productCategoryAgentList);
+
+        if (companyBusiness.hasErrors()) {
+            setActionMessages(getMessageText(companyBusiness.getErrors()));
+            return INPUT;
+        }
+
+        return SUCCESS;
+    }
+    
+    
+    public void validateCreateCompany() {
+        companyValidate();
+    }
+    
+    public void  validateModifyCompany(){
+        companyValidate();
+    }
+    
+    public void  validateModifyCompanyAsHistory(){
+        companyValidate();
+    }
+    
+    
+    private void companyValidate(){
+        List<Integer> comTypeList = company.getComTypeList();
+        List<String> newErrors= new ArrayList<String>();
+        if(comTypeList.size() <= 0){
+            newErrors.add("BSE00001,company.typeId");
+            setActionErrors(getMessageText(newErrors));
+        }   
+        
+        if(comTypeList.contains(new Integer(4))){
+            //选择了最终用户，即必须填总店名和分店名
+            if(company.getMainCompanyName()==null || "".equals(company.getMainCompanyName().trim())){
+                newErrors.add("BSE00001,company.mainCompanyName");
+                setActionErrors(getMessageText(newErrors));
+            }else{
+                if(company.getMainCompanyName().trim().length() >40 ){
+                    newErrors.add("BSE00027,company.mainCompanyName,1,40");
+                    setActionErrors(getMessageText(newErrors));
+                }
+            }
+            if(company.getSubCompanyName()==null || "".equals(company.getSubCompanyName().trim())){
+                newErrors.add("BSE00001,company.subCompanyName");
+                setActionErrors(getMessageText(newErrors));
+            }else{
+                if(company.getSubCompanyName().trim().length() >20 ){
+                    newErrors.add("BSE00027,company.subCompanyName,1,20");
+                    setActionErrors(getMessageText(newErrors));
+                }
+            }
+        }else{
+            //没有选择，则只需填写公司名称
+            if(company.getMainCompanyName()==null || "".equals(company.getMainCompanyName().trim())){
+                newErrors.add("BSE00001,company.name");
+                setActionErrors(getMessageText(newErrors));
+            }else{
+                if(company.getMainCompanyName().trim().length() >40 ){
+                    newErrors.add("BSE00027,company.name,1,40");
+                    setActionErrors(getMessageText(newErrors));
+                }
+            }
+        }
+        company.setTypeId(StringUtil.arrayToString(comTypeList));
+
+    }
+
+    /**
+     * direct to the modify company info page
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    public String modifyCompanyPre() throws Exception {
+
+        if (null == company.getId() || null == company.getExclusiveKey()) {
+            return ILLEGAL_ERR;
+        }
+
+        
+        CompanyBusiness companyBusiness = new CompanyBusiness();
+        Company dbCompany = companyBusiness.searchCompanyById(company);
+        if (companyBusiness.hasErrors()) {
+            setActionMessages(getMessageText(companyBusiness.getErrors()));
+            modifyFlag=1;
+            return INPUT;
+        }
+        company = dbCompany;
+        modifyFlag=0;
+        return SUCCESS;
+    }
+
+    /**
+     * direct to the template add page
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    public String templateAddCompanyPre() throws Exception {
+        if (null == company.getId() || null == company.getExclusiveKey()) {
+            return ILLEGAL_ERR;
+        }
+        CompanyBusiness companyBusiness = new CompanyBusiness();
+        Company dbCompany = companyBusiness.searchCompanyById(company);
+        if (companyBusiness.hasErrors()) {
+            setActionMessages(getMessageText(companyBusiness.getErrors()));
+            modifyFlag=1;
+            return INPUT;
+        }
+        company = dbCompany;
+        modifyFlag=0;
+        return SUCCESS;
+    }
+
+    /**
+     * modify the company
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    public String modifyCompany() throws Exception {
+        if (null == company.getId() || null == company.getExclusiveKey()) {
+            return ILLEGAL_ERR;
+        }
+
+    
+        CompanyBusiness companyBusiness = new CompanyBusiness();
+        companyBusiness.modifyCompanyInfo(company, loginUser, companyCustomerAgentList, productCategoryAgentList);
+
+        if (companyBusiness.hasErrors()) {
+            setActionMessages(getMessageText(companyBusiness.getErrors()));
+            modifyFlag=1;
+            return INPUT;
+        }
+        modifyFlag=0;
+        return SUCCESS;
+    }
+
+    /**
+     * modify the company as history
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    public String modifyCompanyAsHistory() throws Exception {
+        if (null == company.getId() || null == company.getExclusiveKey()) {
+            return ILLEGAL_ERR;
+        }
+              
+        CompanyBusiness companyBusiness = new CompanyBusiness();
+        companyBusiness.modifyCompanyAsHistory(company, loginUser, companyCustomerAgentList, productCategoryAgentList);
+        if (companyBusiness.hasErrors()) {
+            setActionMessages(getMessageText(companyBusiness.getErrors()));
+            modifyFlag=1;
+            return INPUT;
+        }
+        modifyFlag=0;
+        return SUCCESS;
+    }
+
+    /**
+     * delete the company for temp
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    @SuppressWarnings("unchecked")
+    public String deleteCompanyForTemp() throws Exception {
+        if (null == company.getId() || null == company.getExclusiveKey()) {
+            return ILLEGAL_ERR;
+        }
+        CompanyBusiness companyBusiness = new CompanyBusiness();
+        companyBusiness.deleteCompanyForTemp(company);
+
+        if (companyBusiness.hasErrors()) {
+            setActionMessages(getMessageText(companyBusiness.getErrors()));
+            company.setDeleted(0);
+            modifyFlag=1;
+            return INPUT;
+        }
+
+        ActionContext context = ActionContext.getContext();
+        Map app = context.getApplication();
+        HashSet onlineUsers = (HashSet) app.get(UserAction.ONLINE_USERS);
+
+        if (onlineUsers != null) {
+            Iterator it = onlineUsers.iterator();
+            while (it.hasNext()) {
+                try {
+                    Map session = (Map) it.next();
+                    User onLineUser = (User) session.get(UserAction.USER);
+
+                    if (onLineUser != null && company.getId() != null) {
+                        if (onLineUser.getCompanyID().compareTo(company.getId()) == 0) {
+                            it.remove();
+                            session.clear();
+                        }
+                    }
+                } catch (Exception e) {
+                    continue;
+                }
+            }
+        }
+
+        modifyFlag=0;
+        return SUCCESS;
+    }
+
+    /**
+     * recover company
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    public String recoverCompany() throws Exception {
+        if (null == company.getId() || null == company.getExclusiveKey()) {
+            return ILLEGAL_ERR;
+        }
+        CompanyBusiness companyBusiness = new CompanyBusiness();
+        companyBusiness.recoverCompany(company);
+        if (companyBusiness.hasErrors()) {
+            setActionMessages(getMessageText(companyBusiness.getErrors()));
+            company.setDeleted(1);
+            modifyFlag=1;
+            return INPUT;
+        }
+        modifyFlag=0;
+        return SUCCESS;
+    }
+
+    /**
+     * direct to detail company info page
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    public String directToDetail() throws Exception {
+        if (null == company.getId() || null == company.getExclusiveKey()) {
+            return ILLEGAL_ERR;
+        }
+
+        CompanyBusiness companyBusiness = new CompanyBusiness();
+        Company dbCompany = companyBusiness.searchCompanyById(company);
+        if (companyBusiness.hasErrors()) {
+            setActionMessages(getMessageText(companyBusiness.getErrors()));
+            modifyFlag=1;
+            return INPUT;
+        }
+        company = dbCompany;
+        modifyFlag=0;
+        return SUCCESS;
+    }
+
+    /**
+     * the operation of deleting company
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    public String deleteCompany() throws Exception {
+
+        if (null == company.getId() || null == company.getExclusiveKey()) {
+            return ILLEGAL_ERR;
+        }
+
+        CompanyBusiness companyBusiness = new CompanyBusiness();
+        companyBusiness.deleteCompany(company);
+
+        if (companyBusiness.hasErrors()) {
+            setActionMessages(getMessageText(companyBusiness.getErrors()));
+            modifyFlag=1;
+            return INPUT;
+        }
+        modifyFlag=0;
+        return SUCCESS;
+    }
+    
+
+    /**
+     * the operation of excuting search
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    public String searchCompany() throws Exception {
+        if(company.getTypeId()!=null && !"".equals(company.getTypeId())){
+            company.setTypeId(","+company.getTypeId()+",");
+        }
+        return SUCCESS;
+    }
+
+    /**
+     * direct to the company search page.
+     * 
+     * @auther xiangzq
+     * @version 1.0
+     * @since 1.0
+     * @return String
+     * @throws Exception
+     */
+    public String searchCompanyPre() throws Exception {
+        return SUCCESS;
+    }
+
+    /**
+     * @return the company
+     */
+    public Company getCompany() {
+        return company;
+    }
+
+    /**
+     * @param company the company to set
+     */
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    /**
+     * @return the comList
+     */
+    public List<Company> getComList() {
+        return comList;
+    }
+
+    /**
+     * @param comList the comList to set
+     */
+    public void setComList(List<Company> comList) {
+        this.comList = comList;
+    }
+
+
+    /**
+     * @return the productCategoryAgentList
+     */
+    public List<Integer> getProductCategoryAgentList() {
+        return productCategoryAgentList;
+    }
+
+    /**
+     * @param productCategoryAgentList the productCategoryAgentList to set
+     */
+    public void setProductCategoryAgentList(List<Integer> productCategoryAgentList) {
+        this.productCategoryAgentList = productCategoryAgentList;
+    }
+
+    /**
+     * @return the companyCustomerAgentList
+     */
+    public List<Integer> getCompanyCustomerAgentList() {
+        return companyCustomerAgentList;
+    }
+
+    /**
+     * @param companyCustomerAgentList the companyCustomerAgentList to set
+     */
+    public void setCompanyCustomerAgentList(List<Integer> companyCustomerAgentList) {
+        this.companyCustomerAgentList = companyCustomerAgentList;
+    }
+
+    /**
+     * @return the modifyFlag
+     */
+    public Integer getModifyFlag() {
+        return modifyFlag;
+    }
+
+    /**
+     * @param modifyFlag the modifyFlag to set
+     */
+    public void setModifyFlag(Integer modifyFlag) {
+        this.modifyFlag = modifyFlag;
+    }
+  
+}

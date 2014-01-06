@@ -21,7 +21,7 @@ public final class TimeUtil {
     }
 
     public static String getNow() {
-        return new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+        return new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date());
     }
 
     public static String getNowNoSecond() {
@@ -29,7 +29,15 @@ public final class TimeUtil {
     }
     
     public static String getNowDate() {
-        return new SimpleDateFormat("yyyyMMdd").format(new Date());
+        return new SimpleDateFormat("yyyy/MM/dd").format(new Date());
+    }
+    
+    public static String getTodayStart() {
+        return new SimpleDateFormat("yyyy/MM/dd").format(new Date()) + " 00:00:00";
+    }
+    
+    public static String getTodayEnd() {
+        return new SimpleDateFormat("yyyy/MM/dd").format(new Date()) + " 24:00:00";
     }
 
     /**

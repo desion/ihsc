@@ -1,0 +1,86 @@
+//****************************************
+// ProjectName  ITインフラ改造作業
+// CreateDate   08/12/07
+// Copyright    © Beijing Hitachi Huasun Information Systems Co., Ltd. 2008. All rights reserved.
+//****************************************
+package cn.com.bhh.erp.component;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.com.bhh.erp.action.BaseAction;
+import cn.com.bhh.erp.business.ProvinceBusiness;
+import cn.com.bhh.erp.entity.Province;
+
+
+/**
+ * this is a component to list all
+ * the province from province_tbl,and select
+ * the relative item according to the
+ * selectedProvinceId
+ * @author  xiangzq
+ * @version 1.0
+ * @since   1.0
+ */
+@SuppressWarnings("serial")
+public class ProvinceDropAction extends BaseAction {
+    private List<Province> provinceDropList = new ArrayList<Province>();
+    private Integer selectedProvinceId;
+    private Integer countryId;
+
+    public ProvinceDropAction() {
+       initData();
+    }
+
+    @Override
+    public String execute() throws Exception {
+        initData();
+        return SUCCESS;
+    }
+
+    private void initData(){
+        ProvinceBusiness provinceBusiness = new ProvinceBusiness();
+        if(countryId!=null){
+            provinceDropList = provinceBusiness.searchProvinceByCountryId(countryId);
+        }else{
+            provinceDropList = provinceBusiness.searchAllProvince();
+        }
+    }
+    /**
+     * @return the provinceDropList
+     */
+    public List<Province> getProvinceDropList() {
+        return provinceDropList;
+    }
+
+
+    /**
+     * @return the selectedProvinceId
+     */
+    public Integer getSelectedProvinceId() {
+        return selectedProvinceId;
+    }
+
+    /**
+     * @param selectedProvinceId the selectedProvinceId to set
+     */
+    public void setSelectedProvinceId(Integer selectedProvinceId) {
+        this.selectedProvinceId = selectedProvinceId;
+    }
+
+    /**
+     * @return the countryId
+     */
+    public Integer getCountryId() {
+        return countryId;
+    }
+
+    /**
+     * @param countryId the countryId to set
+     */
+    public void setCountryId(Integer countryId) {
+        this.countryId = countryId;
+    }
+    
+    
+}

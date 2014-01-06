@@ -1,0 +1,35 @@
+//****************************************
+// ProjectName  ITインフラ改造作業
+// CreateDate   08/12/07
+// Copyright    © Beijing Hitachi Huasun Information Systems Co., Ltd. 2008. All rights reserved.
+//****************************************
+package cn.com.bhh.erp.business;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.com.bhh.erp.dao.FaultPartDao;
+import cn.com.bhh.erp.entity.FaultPart;
+
+public class FaultPartBusiness extends BaseBusiness{
+
+    public List<FaultPart> getFaultPartList() {
+        List<FaultPart> faultPartList = new ArrayList<FaultPart>();
+        
+        try{
+            init();
+            
+            // Strat UOC
+            FaultPartDao faultPartDao = new FaultPartDao(conn);
+            faultPartList = faultPartDao.searchAll();
+            // End UOC
+            
+        } catch (Exception e) {
+            handleException(e);
+        } finally {
+            finish();
+        }
+        
+        return faultPartList;
+    }
+}

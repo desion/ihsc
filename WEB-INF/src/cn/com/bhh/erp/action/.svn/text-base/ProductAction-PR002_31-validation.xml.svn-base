@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC 
+		"-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+		"http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+    <field name="product.model">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+
+        <field-validator type="regex">
+            <param name="expression"><![CDATA[[A-Za-z0-9|-]*]]></param>
+            <message key="BSE00004"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">60</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="string_producer_id">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="strOperationType">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="min">1</param>
+            <param name="max">10</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.length">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.width">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.height">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.weight">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.guardLevel">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.runtimeTemp">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.standbyTemp">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.humidity">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.voltage">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.frequency">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.waveFrequency">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.grounding">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.impactCurrent">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.runtimePower">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.standbyPower">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.lightPower">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.runtimeHeat">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.standbyHeat">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.customerLcd">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.customerInput1">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.customerInput2">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.customerInput3">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.customerInput4">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.customerInput5">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.customerLoudspeaker">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">1</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.customerVoiceWizard">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">1</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.administratorLcd">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.administratorInput">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+    <field name="product.operationSystem">
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">80</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+
+</validators>

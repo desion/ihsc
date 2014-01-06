@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <package name="installationApply" extends="default"> 
+
+        <!-- 产品使用情况变更申请列表 -->  
+        <action name="PR004_10" class="cn.com.bhh.erp.action.InstallationApplyAction" method="serchInstApplyList"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/install_apply/install_apply_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/install_apply/install_apply_list.ftl</result> 
+        </action>  
+
+        <!-- 产品使用情况变更申请详细画面 -->  
+        <action name="PR004_11" class="cn.com.bhh.erp.action.InstallationApplyAction" method="serchInstApplyListDetail"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/install_apply/install_apply_view.ftl</result>  
+            <result name="error" type="chain">PR004_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/install_apply/install_apply_view.ftl</result> 
+        </action>  
+
+        <!-- 增加产品使用情况变更申请的页面显示 -->  
+        <action name="PR004_20" class="cn.com.bhh.erp.action.InstallationApplyAction" method="addInstApplyLoad"> 
+            <result name="error" type="chain">PR005_10</result>
+            <result name="success" type="freemarker">/WEB-INF/pages/install_apply/install_apply_create.ftl</result> 
+        </action>
+
+        <!-- 增加产品使用情况变更申请操作 -->  
+        <action name="PR004_21" class="cn.com.bhh.erp.action.InstallationApplyAction" method="doAddInstApply"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/install_apply/install_apply_create.ftl</result>
+            <result name="error" type="freemarker">/WEB-INF/pages/install_apply/install_apply_create.ftl</result>
+            <result name="success" type="chain">PR004_10</result> 
+        </action>  
+
+        <!-- 修改产品使用情况变更申请的页面显示 -->  
+        <action name="PR004_30" class="cn.com.bhh.erp.action.InstallationApplyAction" method="modifyInstApplyLoad"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/install_apply/install_apply_modify.ftl</result>
+            <result name="error" type="chain">PR004_10</result>
+            <result name="success" type="freemarker">/WEB-INF/pages/install_apply/install_apply_modify.ftl</result> 
+        </action>  
+
+        <!-- 修改产品使用情况变更申请操作 -->  
+        <action name="PR004_31" class="cn.com.bhh.erp.action.InstallationApplyAction" method="doModifyInstApply"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/install_apply/install_apply_modify.ftl</result> 
+            <result name="error" type="freemarker">/WEB-INF/pages/install_apply/install_apply_modify.ftl</result> 
+            <result name="success" type="chain">PR004_10</result> 
+        </action>  
+
+        <!-- 删除产品使用情况变更申请操作 -->  
+        <action name="PR004_40" class="cn.com.bhh.erp.action.InstallationApplyAction" method="deleteInstApply"> 
+            <result name="success" type="chain">PR004_10</result> 
+        </action> 
+
+        <!-- 确认产品使用情况变更申请操作 -->  
+        <action name="PR004_70" class="cn.com.bhh.erp.action.InstallationApplyAction" method="doApply"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/install_apply/install_apply_view.ftl</result> 
+            <result name="error" type="freemarker">/WEB-INF/pages/install_apply/install_apply_view.ftl</result> 
+            <result name="success" type="chain">PR004_10</result> 
+        </action> 
+
+    </package> 
+</struts>

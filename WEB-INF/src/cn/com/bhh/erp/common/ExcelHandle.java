@@ -8,7 +8,12 @@ import java.util.ArrayList;
 import jxl.Cell;
 import jxl.Sheet;
 import jxl.Workbook;
+import jxl.format.Alignment;
+import jxl.format.Colour;
+import jxl.format.UnderlineStyle;
 import jxl.write.Label;
+import jxl.write.WritableCellFormat;
+import jxl.write.WritableFont;
 import jxl.write.WritableSheet;
 import cn.com.bhh.erp.business.BaseBusiness;
 import cn.com.bhh.erp.entity.DownloadData;
@@ -35,18 +40,25 @@ public class ExcelHandle extends BaseBusiness{
             wbook = Workbook.createWorkbook(os);
             
             WritableSheet wsheet = wbook.createSheet("sheet1",0);
+            wsheet.getSettings().setShowGridLines(false);
+            WritableCellFormat formatTitle = new WritableCellFormat();  
+            formatTitle.setAlignment(Alignment.CENTRE);
+            WritableFont font = new WritableFont(WritableFont.createFont("宋体"));
+            formatTitle.setFont(font);
+            formatTitle.setWrap(false); 
             String[] head = dataList.getHead();
+            int[] width = dataList.getWidth();
             for (int i = 0; i < head.length; i++) {
-                wsheet.addCell(new Label(i, 0, head[i]));    
+                wsheet.addCell(new Label(i, 0, head[i],formatTitle));
+                wsheet.setColumnView(i, width[i]);
             }
-            
             for (int j = 1; j <= dataList.getDataList().size(); j++) {
                 ArrayList row = (ArrayList)dataList.getDataList().get(j-1);
                 for (int i = 0; i < row.size(); i++) {
                     if (row.get(i) == null) {
-                        wsheet.addCell(new Label(i, j, ""));
+                        wsheet.addCell(new Label(i, j, "",formatTitle));
                     } else {
-                        wsheet.addCell(new Label(i, j, String.valueOf (row.get(i))));
+                        wsheet.addCell(new Label(i, j, String.valueOf (row.get(i)),formatTitle));
                     }
                 }
             }

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <package name="document" extends="default"> 
+
+        <!-- 产品信息列表 -->  
+        <action name="PR006_10" class="cn.com.bhh.erp.action.DocumentAction" method="listDocument"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/product_document/product_doc_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/product_document/product_doc_list.ftl</result> 
+        </action>  
+
+        <!-- 文档详细页面 -->
+        <action name="PR006_11" class="cn.com.bhh.erp.action.DocumentAction" method="directToDetail"> 
+            <result name="input" type="chain">PR006_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/product_document/product_doc_detail.ftl</result> 
+        </action> 
+         
+
+        <!-- 文档查询操作 -->
+        <action name="PR006_12" class="cn.com.bhh.erp.action.DocumentAction" method="documentSearch"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/product_document/product_doc_search.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/product_document/product_doc_list.ftl</result> 
+        </action>  
+
+        <!-- 新增文档画面 -->
+        <action name="PR006_20" class="cn.com.bhh.erp.action.DocumentAction" method="createProductDocumentPre"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/product_document/product_doc_create.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/product_document/product_doc_create.ftl</result> 
+        </action>  
+        
+       <!-- 新增文档操作-->
+        <action name="PR006_21" class="cn.com.bhh.erp.action.DocumentAction" method="createProductDocument">
+            <interceptor-ref name="security"/>  
+            <interceptor-ref name="exception"/>
+            <interceptor-ref name="servletConfig"/>
+            <interceptor-ref name="prepare"/>
+            <interceptor-ref name="i18n"/>
+            <interceptor-ref name="chain"/>
+            <interceptor-ref name="fileUpload" />
+            <interceptor-ref name="checkbox"/>
+            <interceptor-ref name="staticParams"/>
+            <interceptor-ref name="params"/>
+            <interceptor-ref name="conversionError"/>
+            <interceptor-ref name="validation"/>
+            <interceptor-ref name="workflow"/>
+            <result name="input" type="freemarker">/WEB-INF/pages/product_document/product_doc_create.ftl</result>  
+            <result name="success" type="redirectAction">PR006_10</result>
+        </action>
+        
+        <!-- 删除文档-->
+        <action name="PR006_41" class="cn.com.bhh.erp.action.DocumentAction" method="deleteProductDocument"> 
+            <result name="input" type="chain">PR006_10</result>  
+            <result name="success" type="chain">PR006_10</result> 
+        </action> 
+        
+        <!-- 下载文档-->
+        <action name="PR006_60" class="cn.com.bhh.erp.action.DocumentAction" method="downloadProductDocument"> 
+            <result name="input" type="chain">PR006_10</result>  
+            <result name="success" type="stream">
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>   
+        
+        <!-- 文档查询页面 -->
+        <action name="PR006_70" class="cn.com.bhh.erp.action.DocumentAction" method="searchPre"> 
+            <result name="input" type="chain">PR006_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/product_document/product_doc_search.ftl</result> 
+        </action>  
+              
+    </package> 
+</struts>

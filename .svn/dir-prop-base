@@ -1,0 +1,10 @@
+K 10
+svn:ignore
+V 55
+work
+.classpath
+.cvsignore
+.project
+.tomcatplugin
+
+END

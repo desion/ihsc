@@ -82,11 +82,11 @@
     <!-- 省份信息管理 -->
     <include file="struts/struts_province.xml"/>  
 
-    <!-- 城市信息管理 -->
-    <include file="struts/struts_city.xml"/>  
+    <!-- 渠道信息管理 -->
+    <include file="struts/struts_channel.xml"/>  
 
     <!-- 公司信息管理 -->
-    <include file="struts/struts_company.xml"/>  
+    <!--  <include file="struts/struts_company.xml"/>  -->
 
     <!-- 用户组信息管理 -->
     <include file="struts/struts_group.xml"/>  

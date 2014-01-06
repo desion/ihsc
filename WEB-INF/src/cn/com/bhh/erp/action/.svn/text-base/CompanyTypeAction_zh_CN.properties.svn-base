@@ -1,0 +1,11 @@
+companyType.listInfo=\u516c\u53f8\u5206\u7c7b\u4fe1\u606f\u5217\u8868
+companyType.modify=\u4fee\u6539\u516c\u53f8\u5206\u7c7b\u4fe1\u606f
+companyType.create=\u65b0\u589e\u516c\u53f8\u5206\u7c7b\u4fe1\u606f
+companyType.id=\u516c\u53f8\u5206\u7c7b
+companyType.name=\u516c\u53f8\u5206\u7c7b\u540d\u79f0
+companyType.description=\u516c\u53f8\u5206\u7c7b\u8bf4\u660e
+companyType.createTime=\u521b\u5efa\u65f6\u95f4
+companyType.createId=\u521b\u5efa\u8005
+companyType.modifyTime=\u4fee\u6539\u65f6\u95f4
+companyType.modifierId=\u4fee\u6539\u8005
+companyType.exclusiveKey=\u6392\u4ed6\u503c

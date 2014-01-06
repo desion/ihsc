@@ -1,0 +1,106 @@
+8
+
+dir
+2383
+svn://192.168.118.123/IHSC/trunk/ihsc/WEB-INF/src
+svn://192.168.118.123/IHSC
+
+
+
+2009-06-05T05:57:38.419324Z
+2357
+fenghy
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+2149c3ff-adf6-4243-bab5-2c98c1e6dbaa
+
+system.properties
+file
+
+
+
+
+2009-08-17T06:22:20.974846Z
+f1dbd0fb2e4af23f19dc78987ac6ccea
+2009-03-04T08:33:30.431720Z
+2131
+xiangzq
+
+cn
+dir
+
+message_zh_CN.properties
+file
+
+
+
+
+2009-08-17T06:22:20.990470Z
+3287190a46385c835a6919238a17acc6
+2009-05-21T05:35:18.975783Z
+2356
+xiangzq
+
+information_zh_CN.properties
+file
+
+
+
+
+2009-08-17T06:22:21.006094Z
+b5aa4f8c00cad106cfb579d2fba0f864
+2009-05-11T08:03:55.632248Z
+2347
+xiangzq
+
+struts.xml
+file
+
+
+
+
+2009-08-17T06:22:21.021718Z
+c964dd1bf0ee2d4af0d84cf321177ccb
+2009-05-12T08:29:29.787592Z
+2350
+xiangzq
+
+struts
+dir
+
+db.xml
+file
+
+
+
+
+2009-08-17T06:22:21.021718Z
+3e8f634cfa87cd787bbe52fa9e151dc7
+2009-02-11T08:03:28.063408Z
+1977
+fenghy
+
+freemarker.properties
+file
+
+
+
+
+2009-08-17T06:22:21.037342Z
+0da2e0d81dfd6fe0c98186bef4477027
+2009-04-29T09:40:16.459516Z
+2277
+xiangzq
+

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <package name="installation" extends="default"> 
+
+        <!-- 产品使用情况列表 -->  
+        <action name="PR005_10" class="cn.com.bhh.erp.action.InstallationAction" method="serchUseStatus"> 
+            <result name="error" type="freemarker">/WEB-INF/pages/installation/installation_list.ftl</result>
+            <result name="input" type="freemarker">/WEB-INF/pages/installation/installation_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_list.ftl</result> 
+        </action>  
+
+        <!-- 浏览产品使用情况 -->  
+        <action name="PR005_11" class="cn.com.bhh.erp.action.InstallationAction" method="serchUseStatusDetail"> 
+            <result name="error" type="chain">PR005_10</result>  
+            <result name="input" type="chain">PR005_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_view.ftl</result> 
+        </action>  
+
+        <!-- 制造号检索 -->  
+        <action name="PR005_12" class="cn.com.bhh.erp.action.InstallationAction" method="searchByManuNo"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/installation/installation_search_by_manu_no.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_view.ftl</result> 
+        </action>  
+        
+        <!-- 产品使用情况检索 -->  
+        <action name="PR005_13" class="cn.com.bhh.erp.action.InstallationAction" method="installationSearch"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/installation/installation_search.ftl</result>
+            <result name="success" type="chain">PR005_10</result>
+        </action> 
+
+        <!-- 增加产品使用情况的页面显示 -->  
+        <action name="PR005_20" class="cn.com.bhh.erp.action.InstallationAction" method="createInstallationLoad"> 
+            <result name="input" type="chain">PR005_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_create.ftl</result> 
+        </action>  
+
+        <!-- 增加产品使用情况 -->  
+        <action name="PR005_21" class="cn.com.bhh.erp.action.InstallationAction" method="createInstallation"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/installation/installation_create.ftl</result>  
+            <result name="success" type="redirectAction">
+                <param name="actionName">PR005_10</param>
+                <param name="install.affirmFlag">0</param>
+            </result> 
+        </action>  
+
+        <!-- 模板创建产品使用情况画面显示 -->  
+        <action name="PR005_22" class="cn.com.bhh.erp.action.InstallationAction" method="tempCreateLoad"> 
+            <result name="input" type="chain">PR005_10</result>
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_create.ftl</result> 
+        </action>  
+
+        <!-- 更新产品使用情况的页面显示 -->  
+        <action name="PR005_30" class="cn.com.bhh.erp.action.InstallationAction" method="modifyInstallationLoad"> 
+            <result name="input" type="chain">PR005_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_modify.ftl</result> 
+        </action>  
+
+        <!-- 更新产品使用情况 -->  
+        <action name="PR005_31" class="cn.com.bhh.erp.action.InstallationAction" method="modifyInstallation"> 
+            <result name="error" type="chain">PR005_10</result>  
+            <result name="input" type="freemarker">/WEB-INF/pages/installation/installation_modify.ftl</result>  
+            <result name="success" type="redirectAction">
+                <param name="actionName">PR005_10</param>
+            </result>
+        </action>  
+
+        <!-- 确认产品使用情况 -->  
+        <action name="PR005_32" class="cn.com.bhh.erp.action.InstallationAction" method="installationAffirm"> 
+            <result name="error" type="chain">PR005_10</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">PR005_10</param>
+            </result>
+        </action>  
+
+        <!-- 取消确认产品使用情况 -->  
+        <action name="PR005_33" class="cn.com.bhh.erp.action.InstallationAction" method="installationAffirmCancel"> 
+            <result name="error" type="chain">PR005_10</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">PR005_10</param>
+            </result>
+        </action>  
+
+        <!-- 删除产品使用情况 -->  
+        <action name="PR005_34" class="cn.com.bhh.erp.action.InstallationAction" method="installationLogicDel"> 
+            <result name="error" type="chain">PR005_10</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">PR005_10</param>
+            </result>
+        </action>  
+
+        <!-- 恢复已删除产品使用情况 -->  
+        <action name="PR005_35" class="cn.com.bhh.erp.action.InstallationAction" method="installationRecover"> 
+            <result name="error" type="chain">PR005_10</result> 
+            <result name="success" type="redirectAction">
+                <param name="actionName">PR005_10</param>
+            </result>
+        </action>  
+
+        <!-- 增加产品使用情况履历并更新产品使用情况 -->  
+        <action name="PR005_36" class="cn.com.bhh.erp.action.InstallationAction" method="modifyHistory"> 
+            <result name="error" type="chain">PR005_10</result>  
+            <result name="input" type="freemarker">/WEB-INF/pages/installation/installation_modify.ftl</result>  
+            <result name="success" type="redirectAction">
+                <param name="actionName">PR005_10</param>
+            </result>
+        </action>  
+
+        <!-- 确认選中产品使用情况 -->  
+        <action name="PR005_37" class="cn.com.bhh.erp.action.InstallationAction" method="installSelectAffirm"> 
+            <result name="error" type="chain">PR005_10</result>
+            <result name="success" type="chain">PR005_10</result>
+        </action>  
+        
+        <!-- 永久删除产品使用情况 -->  
+        <action name="PR005_40" class="cn.com.bhh.erp.action.InstallationAction" method="installationDelete"> 
+            <result name="error" type="chain">PR005_10</result> 
+            <result name="success" type="redirectAction">
+                <param name="actionName">PR005_10</param>
+            </result>
+        </action>
+        
+        <!-- 产品使用情况导入的画面显示 -->  
+        <action name="PR005_50" class="cn.com.bhh.erp.action.InstallationAction" method="uploadLoad"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/installation/installation_import.ftl</result>
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_import.ftl</result>
+        </action>
+        
+        <!-- 产品使用情况导入 -->  
+        <action name="PR005_51" class="cn.com.bhh.erp.action.InstallationAction" method="upload">
+        
+            <interceptor-ref name="security"/>  
+            <interceptor-ref name="exception"/>
+            <interceptor-ref name="servletConfig"/>
+            <interceptor-ref name="prepare"/>
+            <interceptor-ref name="i18n"/>
+            <interceptor-ref name="chain"/>
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">100097152</param>
+            </interceptor-ref>
+            <interceptor-ref name="checkbox"/>
+            <interceptor-ref name="staticParams"/>
+            <interceptor-ref name="params"/>
+            <interceptor-ref name="conversionError"/>
+            <interceptor-ref name="validation"/>
+            <interceptor-ref name="workflow"/>
+            <result name="input" type="freemarker">/WEB-INF/pages/installation/installation_import.ftl</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">PR005_10</param>
+                <param name="install.affirmFlag">0</param>
+            </result>
+        </action>
+        
+        <!-- 产品使用情况导出 -->
+        <action name="PR005_60" class="cn.com.bhh.erp.action.InstallationAction" method="download">
+            <result name="success" type="stream">
+                <param name="bufferSize">4096</param>
+            </result>
+            <result name="input" type="freemarker">/WEB-INF/pages/installation/installation_search.ftl</result>
+            <result name="error" type="chain">PR005_10</result>  
+        </action>
+
+        <!-- 代理商产品使用情况的页面显示 -->  
+        <action name="PR005_70" class="cn.com.bhh.erp.action.InstallationAction" method="agentInstallationLoad"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/installation/agent_installation.ftl</result> 
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/agent_installation.ftl</result> 
+        </action>  
+
+        <!-- 产品使用情况检索页面显示 -->  
+        <action name="PR005_71" class="cn.com.bhh.erp.action.InstallationAction" method="installationSearchLoad"> 
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_search.ftl</result> 
+        </action>  
+
+        <!-- 产品使用情况检索页面显示 -->  
+        <action name="PR005_72" class="cn.com.bhh.erp.action.InstallationAction" method="manufactureNoSearchLoad"> 
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_search_by_manu_no.ftl</result> 
+        </action>  
+
+        <!-- 保修期查询页面显示 -->  
+        <action name="PR005_73" class="cn.com.bhh.erp.action.InstallationAction" method="guaranteeSearchLoad"> 
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_guarantee.ftl</result> 
+        </action>  
+
+        <!-- 保修期查询结果 -->  
+        <action name="PR005_74" class="cn.com.bhh.erp.action.InstallationAction" method="guaranteeSearch"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/installation/installation_guarantee.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_guarantee_result.ftl</result> 
+        </action> 
+        
+        <!-- 打印产品使用情况画面显示 -->  
+        <action name="PR005_80" class="cn.com.bhh.erp.action.InstallationAction" method="print"> 
+            <result name="input" type="chain">PR005_10</result>
+            <result name="success" type="freemarker">/WEB-INF/pages/installation/installation_print.ftl</result> 
+        </action>  
+
+    </package> 
+</struts>

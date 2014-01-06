@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <package name="fault" extends="default"> 
+
+        <!-- 故障情况列表 -->  
+        <action name="FA001_10" class="cn.com.bhh.erp.action.FaultAction" method="searchFaultList"> 
+            <result name="error" type="freemarker">/WEB-INF/pages/fault/fault_list.ftl</result>
+            <result name="input" type="freemarker">/WEB-INF/pages/fault/fault_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/fault/fault_list.ftl</result> 
+        </action>
+        
+        <!-- 故障详细画面 -->  
+        <action name="FA001_11" class="cn.com.bhh.erp.action.FaultAction" method="showFaultDetail">
+            <result name="error" type="chain">${faultActionFrom}</result> 
+            <result name="input" type="chain">${faultActionFrom}</result>
+            <result name="success" type="freemarker">/WEB-INF/pages/fault/fault_view.ftl</result> 
+        </action>
+        
+        <!-- 故障详细画面 -->  
+        <action name="FA001_12" class="cn.com.bhh.erp.action.FaultAction" method="showFaultDetailByMngId">
+            <result name="error" type="freemarker">/WEB-INF/pages/fault/fault_search_by_mng_id.ftl</result> 
+            <result name="input" type="freemarker">/WEB-INF/pages/fault/fault_search_by_mng_id.ftl</result>
+            <result name="success" type="freemarker">/WEB-INF/pages/fault/fault_view.ftl</result> 
+        </action>
+        
+        <!-- 故障情况检索 -->  
+        <action name="FA001_13" class="cn.com.bhh.erp.action.FaultAction" method="faultSearch"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/fault/fault_search.ftl</result>
+            <result name="success" type="chain">FA001_10</result>
+        </action> 
+        
+        <!-- 新增故障画面显示 -->
+        <action name="FA001_20" class="cn.com.bhh.erp.action.FaultAction" method="showFaultCreate"> 
+            <result name="error" type="chain">PR005_11</result>
+            <result name="input" type="chain">PR005_11</result>
+            <result name="success" type="freemarker">/WEB-INF/pages/fault/fault_create.ftl</result>
+        </action>
+        
+        <!-- 新增故障信息 -->
+        <action name="FA001_21" class="cn.com.bhh.erp.action.FaultAction" method="createFault"> 
+            <result name="error" type="freemarker">/WEB-INF/pages/fault/fault_create.ftl</result>
+            <result name="input" type="freemarker">/WEB-INF/pages/fault/fault_create.ftl</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">FA001_10</param>
+                <param name="fault.repairState">0</param>
+                <param name="fault.repairCompanyId">${fault.repairCompanyId}</param>
+            </result>
+        </action>
+        
+        <!-- 修改故障画面显示 -->
+        <action name="FA001_30" class="cn.com.bhh.erp.action.FaultAction" method="showFaultModify"> 
+            <result name="error" type="chain">FA001_10</result>
+            <result name="input" type="chain">FA001_10</result>
+            <result name="success" type="freemarker">/WEB-INF/pages/fault/fault_modify.ftl</result>
+        </action>
+        
+        <!-- 修改故障信息 -->
+        <action name="FA001_31" class="cn.com.bhh.erp.action.FaultAction" method="modifyFault"> 
+            <result name="error" type="freemarker">/WEB-INF/pages/fault/fault_modify.ftl</result>
+            <result name="input" type="freemarker">/WEB-INF/pages/fault/fault_modify.ftl</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">FA001_10</param>
+                <param name="fault.repairState">0</param>
+                <param name="fault.repairCompanyId">${fault.repairCompanyId}</param>
+            </result>
+        </action>
+        
+        <!-- 逻辑删除故障信息 -->
+        <action name="FA001_32" class="cn.com.bhh.erp.action.FaultAction" method="deleteFault"> 
+            <result name="error" type="chain">FA001_11</result>
+            <result name="input" type="chain">FA001_11</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">FA001_10</param>
+                <param name="fault.repairCompanyId">${fault.repairCompanyId}</param>
+            </result>
+        </action>
+        
+        <!-- 恢复故障信息 -->
+        <action name="FA001_33" class="cn.com.bhh.erp.action.FaultAction" method="recoverFault"> 
+            <result name="error" type="chain">FA001_11</result>
+            <result name="input" type="chain">FA001_11</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">FA001_10</param>
+                <param name="fault.repairCompanyId">${fault.repairCompanyId}</param>
+            </result>
+        </action>
+        
+        <!-- 此故障处理结束 -->
+        <action name="FA001_34" class="cn.com.bhh.erp.action.FaultAction" method="finishFault"> 
+            <result name="error" type="chain">FA001_11</result>
+            <result name="input" type="chain">FA001_11</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">FA001_10</param>
+                <param name="fault.repairCompanyId">${fault.repairCompanyId}</param>
+            </result>
+        </action>
+        
+        <!-- 此故障处理结束取消 -->
+        <action name="FA001_35" class="cn.com.bhh.erp.action.FaultAction" method="cancelFinishFault"> 
+            <result name="error" type="chain">FA001_11</result>
+            <result name="input" type="chain">FA001_11</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">FA001_10</param>
+                <param name="fault.repairCompanyId">${fault.repairCompanyId}</param>
+            </result>
+        </action>
+        
+        <!-- 选中的故障处理结束 -->
+        <action name="FA001_36" class="cn.com.bhh.erp.action.FaultAction" method="finishSelectFault"> 
+            <result name="input" type="chain">FA001_10</result>
+            <result name="success" type="chain">FA001_10</result>
+        </action>
+        
+        <!-- 永久删除故障信息 -->
+        <action name="FA001_40" class="cn.com.bhh.erp.action.FaultAction" method="deleteFaultF"> 
+            <result name="error" type="chain">FA001_11</result>
+            <result name="input" type="chain">FA001_11</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">FA001_10</param>
+                <param name="fault.repairCompanyId">${fault.repairCompanyId}</param>
+            </result>
+        </action>
+        
+        <!-- 故障情况导入的画面显示 -->  
+        <action name="FA001_50" class="cn.com.bhh.erp.action.FaultAction" method="uploadLoad"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/fault/fault_import.ftl</result>
+            <result name="success" type="freemarker">/WEB-INF/pages/fault/fault_import.ftl</result>
+        </action>
+        
+        <!-- 故障情况导入 -->  
+        <action name="FA001_51" class="cn.com.bhh.erp.action.FaultAction" method="upload">
+            <interceptor-ref name="security"/>  
+            <interceptor-ref name="exception"/>
+            <interceptor-ref name="servletConfig"/>
+            <interceptor-ref name="prepare"/>
+            <interceptor-ref name="i18n"/>
+            <interceptor-ref name="chain"/>
+            <interceptor-ref name="fileUpload">
+                <param name="maximumSize">80971520</param>
+            </interceptor-ref>
+            <interceptor-ref name="checkbox"/>
+            <interceptor-ref name="staticParams"/>
+            <interceptor-ref name="params"/>
+            <interceptor-ref name="conversionError"/>
+            <interceptor-ref name="validation"/>
+            <interceptor-ref name="workflow"/>
+            <result name="input" type="freemarker">/WEB-INF/pages/fault/fault_import.ftl</result>
+            <result name="success" type="redirectAction">
+                <param name="actionName">FA001_10</param>
+                <param name="fault.repairState">0</param>
+            </result>
+        </action>
+        
+        <!-- 故障情况导出 -->
+        <action name="FA001_60" class="cn.com.bhh.erp.action.FaultAction" method="download">
+            <result name="success" type="stream">
+                <param name="bufferSize">4096</param>
+            </result>
+            <result name="input" type="freemarker">/WEB-INF/pages/fault/fault_search.ftl</result>
+            <result name="error" type="chain">FA001_10</result>  
+        </action>
+        
+        <!-- 代理商产品故障情况的页面显示 -->  
+        <action name="FA001_70" class="cn.com.bhh.erp.action.FaultAction" method="agentFaultLoad">
+            <result name="input" type="freemarker">/WEB-INF/pages/fault/agent_fault.ftl</result> 
+            <result name="success" type="freemarker">/WEB-INF/pages/fault/agent_fault.ftl</result> 
+        </action>  
+        
+        <!-- 查询故障信息的页面显示 -->  
+        <action name="FA001_71" class="cn.com.bhh.erp.action.FaultAction" method="faultSearchLoad"> 
+            <result name="success" type="freemarker">/WEB-INF/pages/fault/fault_search.ftl</result> 
+        </action>
+        
+        <!-- 故障编号查询页面显示 -->  
+        <action name="FA001_72" class="cn.com.bhh.erp.action.FaultAction" method="managementIdSearchLoad"> 
+            <result name="success" type="freemarker">/WEB-INF/pages/fault/fault_search_by_mng_id.ftl</result> 
+        </action>
+        
+        <!-- 故障打印画面 -->  
+        <action name="FA001_80" class="cn.com.bhh.erp.action.FaultAction" method="showFaultDetailFp">
+            <result name="error" type="chain">FA001_11</result> 
+            <result name="input" type="chain">FA001_11</result>
+            <result name="success" type="freemarker">/WEB-INF/pages/fault/fault_print.ftl</result> 
+        </action>
+
+        <action name="FA001_81" class="cn.com.bhh.erp.action.WeeklyReportDownloadAction" >
+            <result name="success" type="stream">
+                <param name="bufferSize">4096</param>
+            </result>
+            <result name="input" type="freemarker">/WEB-INF/pages/main.ftl</result>
+        </action>
+        
+    </package> 
+</struts>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <package name="group" extends="default"> 
+
+        <!-- 用户组信息列表 -->  
+        <action name="BS006_10" class="cn.com.bhh.erp.action.GroupAction" method="listGroup"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/group/group_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/group/group_list.ftl</result> 
+        </action>  
+
+        <!-- 增加用户组页面 -->  
+        <action name="BS006_20" class="cn.com.bhh.erp.action.GroupAction" method="createGroupPre"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/group/group_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/group/group_create.ftl</result> 
+        </action>  
+
+        <!-- 增加用户组操作 -->  
+        <action name="BS006_21" class="cn.com.bhh.erp.action.GroupAction" method="createGroup"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/group/group_create.ftl</result>  
+            <result name="success" type="chain">BS006_10</result> 
+        </action>  
+
+        <!-- 修改用户组页面 -->  
+        <action name="BS006_30" class="cn.com.bhh.erp.action.GroupAction" method="modifyGroupPre"> 
+            <result name="input" type="chain">BS006_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/group/group_modify.ftl</result> 
+        </action>  
+
+        <!-- 修改用户组操作 -->  
+        <action name="BS006_31" class="cn.com.bhh.erp.action.GroupAction" method="modifyGroup"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/group/group_modify.ftl</result>  
+            <result name="success" type="chain">BS006_10</result> 
+        </action>  
+
+        <!-- 删除用户组操作 -->  
+        <action name="BS006_40" class="cn.com.bhh.erp.action.GroupAction" method="deleteGroup"> 
+            <result name="input" type="chain">BS006_10</result>  
+            <result name="success" type="chain">BS006_10</result> 
+        </action> 
+
+    </package> 
+</struts>

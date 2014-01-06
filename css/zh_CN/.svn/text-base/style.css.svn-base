@@ -1,0 +1,852 @@
+@charset "utf-8";
+
+html {
+    overflow:-moz-scrollbars-vertical;
+}
+
+body, table {
+    font-family:"SimSun","宋体";
+    font-size:9pt;
+    /*
+    scrollbar-3dlight-color: #D7E2EC;
+    scrollbar-arrow-color: #333333;
+    scrollbar-darkshadow-color: #D7E2EC;
+    scrollbar-face-color: #D0D0D0;
+    scrollbar-highlight-color: #FFFFFF;
+    scrollbar-shadow-color: #FFFFFF;
+    scrollbar-track-color: #C7D1DA;
+    */
+}
+
+body {
+    background:#FFFFFF none repeat scroll 0 0;
+    color:#000000;
+    margin:0;
+    padding:0;
+}
+
+#header {
+    background:transparent url(../../images/grdheader.png) repeat-x scroll left top;
+    width:100%;
+    /*
+    height:80px;
+    */
+    position: relative;
+    z-index:10;
+    
+}
+
+
+input, select, textarea {
+    background-color:transparent #FFFFFF;
+    color:#000000;
+    border:1px solid #9bb8d5;
+    font-family:"SimSun","宋体";
+    font-size:9pt;
+    /*
+    */
+}
+
+/**start logo**/
+#head{
+   height:26px;
+   background:#fff;
+   width:100%
+}
+#head_l{
+  padding:0px 0 5px 2px;
+}
+#head_l li{
+   margin:0 40px 0 0;
+   padding:0px;
+   float:left;
+   list-style:none;
+}
+#head_l li a{
+    text-decoration:underline;
+    line-height:26px;
+    color:#08427c;
+    font-size:12px;
+}
+#head_l li a:hover{
+     text-decoration: none;
+}
+#head_r {
+     float:right;
+     padding:0px 2px 5px 0;
+}
+#head_r ul{
+     padding:0px;
+     margin:0;
+}
+#head_r li{
+    margin:0 0px 0 20px;
+    padding:0 0 0 15px;
+    float:left;
+    list-style:none;
+    background-image: url(../../images/x_jt.gif);
+    background-repeat: no-repeat;
+    background-position: 0px 4px;
+}
+
+#head_r li a{
+    color:#08427c;
+    font-size:12px;
+    text-decoration:none;
+    
+}
+#head_r li a:hover{text-decoration: underline;}
+
+
+#logo {
+    width: 100%;
+    height: 98px;
+    background: #e6e6e6 url(../../images/head_bj.png) repeat-x;
+}
+
+#logo ul {
+    margin: 0;
+    padding: 0;
+}
+
+#self_logo, #hitachi_logo {
+    height: 98px;
+    overflow: hidden;
+}
+
+
+#self_logo {
+    width: 609px;float:left;
+}
+#hitachi_logo {
+    width: 156px;float:right;
+}
+
+/**end logo**/
+
+/*ie6*/
+*html input {
+    border:expression((this.type=="text" || this.type=="password")?"1px solid #C0C0A0":"");
+}
+
+/*ie7*/
+*+html input {
+    border:expression((this.type=="text" || this.type=="password")?"1px solid #C0C0A0":"");
+}
+
+input, textarea, label {
+    /*
+    vertical-align:bottom;
+    */
+}
+
+button {
+    /*
+    clear:both;
+    color:#000000;
+    width:80px;
+    */
+    background:transparent url(../../images/button_bg.png) repeat-x scroll left top;
+    border:1px solid #9cb3cb;
+    padding:0 2px 1px 2px;
+    white-space:nowrap;
+}
+
+select {
+    border:1px solid #9cb3cb;
+}
+
+a:link, a:visited, a:active, a:hover {
+    text-decoration: none; 
+}
+
+a:link, a:visited {
+    color: blue;
+} 
+
+a:active {
+    color: #0000FF;
+}
+
+a:hover {
+    color: #FF0000;
+}
+
+#container {
+    margin:0 auto;
+    /*
+    width:100%;
+    */
+    width:1003px;
+}
+
+#container_small {
+    margin:0 auto;
+    width:765px;
+}
+
+
+/******************************************/
+#menu_header {
+	height:34px;
+	white-space:nowrap;
+	font-size:14px;
+	line-height:34px;
+	background-color: #ffffff;
+	background: url(../../images/menu_bj.gif) repeat-x;margin:0;
+	
+	
+}
+
+#menu_header a:link, #menu_header a:visited, #user_logout a:link, #user_logout a:visited{
+    color:#000000;
+} 
+
+#menu_header a:active, #user_logout a:active {
+    color: #666666;
+}
+
+#menu_header a:hover, #user_logout a:hover{
+    color: #666666;
+}
+
+#menu_header ul {
+    margin:0 0 0 2px;
+    padding:0;
+}
+
+#menu_header ul li label {
+    color:#000000;
+}
+
+#menu_header  li {
+	background:transparent url(../../images/menu_line.gif) no-repeat scroll 0px 7px;
+    list-style:none; 
+    float:left;
+    position:relative;
+    margin:0 5px 0px 5px;
+    padding:0px 20px 0px 35px;
+
+}
+
+#menu_header  li ul li{
+	background:none;
+	padding-left:12px;
+}
+.menu_line {
+	width:1px;
+	height:19px;
+	background:#bababa;
+	border-right:1px #fcfdfe solid;
+	margin:0px;padding:0px;
+}
+/*
+#menu_header  li.line{
+	margin:7px 0 0 0;
+	padding:0 0 0 15px;;
+	width:2px;
+	height:19px;
+	background: url(../../images/menu_line.gif) 0px 0px no-repeat;
+}
+*/
+#menu_header li ul {
+    margin:0;
+    background:#f0f7fe;
+    border:1px solid #96adc3;
+    padding:8px 0 0;
+    position:absolute;
+    top:32px;
+    left:0;
+    display:none;
+    height:auto;
+    width:120px;
+	color:#333333;
+	font-size:12px;
+	line-height:16px;
+}
+
+#menu_header li li {
+    float:none;
+    height:24px;
+    margin:0 10px;
+}
+/******************************************/
+.marquee_dd{
+padding-left:100px;
+	width:901px;
+	heigth:54px;
+	border-top: 1px #cee2f6 solid;
+	border-right:1px #a6a6a6 solid;;
+	border-bottom:1px #a6a6a6 solid;;
+	border-left:1px #cee2f6 solid;;
+	margin-bottom:6px;
+	background:#ffffff url(../../images/gg_img.gif) no-repeat;;
+}
+/********buyun******************************/
+.list_an a{
+	background: url(../../images/an1_a.png) no-repeat;width:121px;height:25px;color:#ffffff;
+	 
+}
+.list_an a:hover{
+	background: url(../../images/an1_b.png) no-repeat;width:121px;height:25px;color:#08427c;
+	 
+}
+.list_an a:active{
+	background: url(../../images/an1_b.png) no-repeat;width:121px;height:25px;color:#08427c;
+	 
+}
+
+#view {
+    width:979px;border:2px #bcbdc0 solid;margin:6px auto;padding:10px;
+}
+
+.needed{
+    color:red;
+}
+
+.error {
+    font-weight: bold;
+    color: red;
+    
+}
+
+.error_field {
+    background-color:#ffc0c0;
+}
+
+
+#errDiv{
+    width:220px;
+    height:140px;
+    border:1px #8da6c0 solid;
+    z-index:11;
+    background-color:white;
+    position:absolute ;
+    left:40%;
+    top:200px;
+}
+
+/***
+#errDiv button{
+    border:1px solid #9cb3cb;
+    padding:0px 2px 0 2px;
+    white-space:nowrap;
+    background-attachment: scroll;
+    background-color: transparent;
+    background-image: url(images/cw_an.jpg);
+    background-repeat: repeat-x;
+    background-position: left top;
+}
+**/
+
+#err_title{
+    background-image: url(/images/cw_t1.jpg);width:180px;height:24px;color:#FF0000;padding:0 0 0 40px;line-height:24px;font-size:14px;
+}
+#err_con{
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding:1px 0 3px 5px;
+    margin:0;
+    color:#FF0000;
+    font-size:12px;
+    line-height:18px;
+    height:80px;
+   }
+
+#errDiv ul {
+    margin-top:0;
+    margin-bottom:0;
+}
+
+*html #errDiv {
+    top:200px ;
+}
+
+*+html #errDiv {
+    top:200px ;
+}
+.select-free
+{
+    position:absolute;
+    z-index:10;
+    cursor:move;
+
+    overflow:hidden;/*must have*/
+    width:33em;/*must have for any value*/;
+    
+}
+
+.select-free iframe, #errDiv iframe
+{
+    display:none;/*sorry for IE5*/
+    display/**/:block;/*sorry for IE5*/
+    position:absolute;/*must have*/
+    top:0;/*must have*/
+    left:0;/*must have*/
+    z-index:-1;/*must have*/
+    filter:mask();/*must have*/
+    width:300px;/*must have for any big value*/
+    height:300px/*must have for any big value*/;
+}
+
+.btn_row {
+    margin: 10px auto;
+    text-align:center;
+}
+
+.btn_row button {
+    margin:0 5px;
+    width:80px;
+    height:24px;line-height:24px;
+}
+
+/*ie6*/
+*html .btn_row button {
+    padding: 0 0 3px;
+}
+
+/*ie7*/
+*+html .btn_row button {
+    padding-bottom:3px;
+}
+
+
+#footer {
+    /**
+    width:100%;
+    font-family:monospace;
+    border-top:1px solid #888888;
+    clear:both;
+    color:#777777;
+    font-size:11px;
+    line-height:20px;
+    margin-top:25px;
+    text-align:center;
+    **/
+    width: 100%;
+    height: 40px;
+    background-color:#f2f2f2;
+    border-top:6px #e6e6e6 solid;
+    color:#666;
+    font:12px monospace;
+    text-align: center;
+    line-height: 40px;
+    margin:0;
+    padding:0;
+}
+
+.welcome {
+    color:#990033;
+    font-size:16px;
+    font-weight:bold;
+    text-align:center;
+}
+
+
+/**login css**/
+/******************************************/
+#login_img{
+    margin: 0;
+    padding: 0;
+    width: 765px;
+    height: 168px;
+}
+/*ie6*/
+*html #login_img{
+    margin:0 0 -4px 0;
+}
+
+/*ie7*/
+*+html #login_img{
+     margin:0 0 -4px 0;
+}
+#login_title{
+    width:605px;
+    height:29px;
+    border-top:4px #bcbdc0 solid;
+    border-bottom:1px #fff solid;
+    padding:2px 0 0 160px;
+    color:#174d83;
+    font-size:20px;
+    font-weight:bold;
+    background:#e6e6e6;
+    margin:0;
+    line-height:29px;
+    font-family: "宋体";
+}
+#login_con{
+    width:1003px;
+    height:200px;
+    border-top:2px #e6e6e6 solid;
+    background:#e6e6e6 url(/images/login_bj2.jpg)  no-repeat;margin:0 0 6px 0;
+    
+}
+
+#login_con_small{
+    width:765px;
+    height:200px;
+    border-top:2px #e6e6e6 solid;
+    background:#e6e6e6 url(/images/login_bj2.jpg)  no-repeat;margin:0 0 6px 0;
+    
+}
+
+.loginform_row {
+    margin:2px auto;
+    width:220px;
+}
+.box {
+    
+    margin:15px 0;
+    padding:10px;
+    width:390px;float:left;
+}
+.loginform_row input {
+    /*
+    background-color:#FFFFFF;
+    */
+    height:14px;margin:0 0 5px 0;
+}
+/*ie6*/
+*html .loginform_row {
+    margin:1px auto;
+    width:207px;
+}
+
+/*ie7*/
+*+html .loginform_row {
+    margin:1px auto;
+    width:204px;
+}
+
+.loginform_row label {
+    float:left;
+    width:50px;
+    padding-top:2px;color:#08427c;font-size:12px;
+}
+
+/*ie7*/
+*+html .loginform_row label {
+    padding-top:4px;
+}
+
+.loginform_row input {
+    width:150px; float:left;
+}
+
+.loginform_row button {
+    height:24px;
+    border:1px #7f9db9 solid;
+    width:50px;
+    color:#08427c;
+    font-size:12px;
+    margin:15px 0 0 0;
+    background:#ffffff url(/images/button_bg.png) repeat-x scroll left top;
+    padding:0 2px 1px 2px;
+    white-space:nowrap;
+}
+
+/*ie6*/
+*html .loginform_row button {
+    padding-top:3px;
+}
+
+/*ie7*/
+*+html .loginform_row button {
+    padding-top:3px;
+}
+
+/******************************************/
+/**end login css**/
+
+/******************************************/
+.gridview {
+    border-color:#999999 -moz-use-text-color -moz-use-text-color;
+    
+    /*
+    border-style:solid none none;
+    border-width:1px medium medium;
+    */
+}
+
+.gridview .pagerbar {
+    height:24px;
+    color:#00000;
+    background:#eef2f6 none repeat scroll 0 0;
+    border-top:1px solid #8da6c0;
+    border-left:1px solid #8da6c0;
+    border-right:1px solid #8da6c0;
+	border-bottom:2px solid #8da6c0;
+    margin:5px 0;padding:0px 5px;
+    /*
+    border-bottom:1px solid #999999;
+    line-height:22px;
+    */
+}
+
+.gridview .pagerbar  div {
+    float:left;
+}
+
+.gridview .pagerbar button {
+    height:20px;
+    width:50px;
+    margin-right:5px;
+    margin-left:0;
+    margin-top:2px;
+    /*
+    line-height:18px;
+    */
+}
+
+/*ie6*/
+*html .gridview .pagerbar button {
+    padding-top:1px;
+    margin-top:2px;
+}
+
+.gridview .pagerbar select {
+    margin-top:2px;
+    margin-right:5px;
+    border-width:1px;
+    overflow:hidden;
+}
+
+.gridview .pagerbar label {
+    vertical-align:middle;
+    line-height:24px;
+}
+.table_line{border:1px #08427c solid;width:100%;padding:2px 1px 1px 2px;}
+*html .table_line{padding:1px;}/*ie6*/
+*+html .table_line{padding:1px;}/*ie7*/
+.table_line2{border:1px #08427c solid;width:100%;padding:3px 2px 2px 3px;margin:0px auto;}
+*html .table_line2{padding:2px;}/*ie6*/
+*+html .table_line2{padding:2px;}/*ie7*/
+
+.gridview .datalist {
+    border-collapse:collapse;
+    table-layout:fixed;
+    border:1px #08427c solid;width:100%;padding:3px 2px 2px 3px;margin:0px auto
+}
+
+.gridview .datalist th {
+	border-top:3px solid #8da6c0;
+	border-bottom:2px solid #8da6c0;
+	border-left:1px solid #8da6c0;
+	border-right:1px solid #8da6c0;
+	color:#08427c;
+	text-align:left;
+	vertical-align:middle;
+	padding:3px 10px 0px;
+	height:25px;
+	background:#eef2f6;
+	 url(../../imagess/tt_bj.gif);
+	font-size: 12px;
+	font-weight: normal;
+}
+.gridview .datalist td {
+    text-align:left;
+    border:1px solid #9cb3cb;
+    vertical-align:bottom;
+    padding: 0px 10px 2px;
+    height:22px;
+}
+
+.gridview .datalist td label{
+    /*
+    white-space: pre-wrap;
+    word-break:break-all;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    overflow:hidden;
+    word-wrap: break-word;
+    white-space:normal;
+    word-wrap: break-word;
+    word-break:break-all;
+    overflow: auto;
+    white-space:nowrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    white-space:normal;
+    text-overflow:ellipsis;
+    */
+    overflow: auto;
+    
+    /* firefox
+    white-space:nowrap;
+    word-break:keep-all;
+    */
+
+    white-space:normal;
+    word-break:break-all;
+    word-wrap: break-word;
+}
+
+.gridview .datalist td pre {
+    margin:0;
+    padding-left:2px;
+    font-family:"SimSun","宋体";
+    font-size:9pt;
+    overflow: auto;
+    white-space:normal;
+    word-break:break-all;
+    word-wrap: break-word;
+}
+
+/* ie
+*html .gridview .datalist td div{
+    word-break:break-all;
+    white-space:normal;
+    word-wrap: break-word;
+}
+*/
+
+
+.gridview .datalist tr.over td {
+    background:#F3F3F3;
+}
+/******************************************/
+
+
+/******************************************/
+.fields {
+    width:100%;
+    background:#fff none repeat scroll 0 50%;
+}
+
+.field_tbl {
+    border-collapse:collapse;width:100%;
+}
+.field_tbl th{
+	background:#eef2f6;
+	vertical-align:middle;
+	padding:3px;
+	line-height:18px;
+	font-size:10pt;
+	border:1px solid #8da6c0;
+	border-top:4px solid #8da6c0;
+	border-bottom:2px solid #8da6c0;
+	color:#08427c;
+	font-weight: normal;margin:0;
+}
+
+.field_tbl td{
+    border:1px solid #8da6c0;
+    line-height:22px;padding:1px 10px 2px;margin:0;
+}
+
+.field_tbl label {
+    padding-left:2px;
+}
+
+.field_tbl pre {
+    margin:0;
+    padding-left:2px;
+    font-family:"SimSun","宋体";
+    font-size:9pt;
+    overflow: auto;
+    /*
+    white-space:normal;
+    */
+    word-break:break-all;
+    word-wrap: break-word;
+}
+
+.field_tbl input, .field_tbl textarea {
+    padding-left:4px;
+    /*
+    background-color:#FFFFFF;
+    */  
+}
+
+.field_tbl textarea {
+    height:34px;
+}
+
+.field_tbl input {
+    height:16px;
+}
+
+.field_tbl select {
+    height:18px;
+}
+
+.field_tbl input[readonly="readonly"] {
+    border:none;
+}
+
+.field_tbl select {
+    /*
+    background-color:#FFFFFF;
+    */
+}
+
+.lcell {
+    background-color:#eef2f6;
+}
+/******************************************/
+
+
+/******************************************/
+.tree_tbl {
+/*
+    width:80%;
+    */
+    border-collapse:collapse;
+    width:100%;
+}
+
+.tree_tbl td{
+/*
+    padding-left:2px;
+*/
+}
+
+.tree-cell-left{
+    /*
+    vertical-align:bottom;
+    padding: 0 4px;
+    height:20px;
+    border:1px solid #666666;
+    */
+    border-left:1px solid #666666;
+    border-top:1px solid #666666;
+    
+    line-height:25px;   
+    padding-bottom:3px;
+    padding-top:3px;
+    padding-left:3px;
+}
+
+.title-cell-tree {
+/*
+*/
+    background-color:#E6E6E6;
+    border-left:1px solid #666666;
+    border-right:1px solid #666666;
+    border-top:1px solid #666666;
+    font-weight:bold;
+    padding-bottom:3px;
+    padding-top:3px;
+    text-align:center;
+    height-line:25px;
+    font-size:11pt;
+}
+.tree-cell {
+    border-left:1px solid #666666;
+    border-right:1px solid #666666;
+    border-top:1px solid #666666;
+    padding-bottom:3px;
+    padding-top:3px;
+    text-align:center;
+}
+
+.tree-cell button {
+    margin:0 5px;
+    width:40px;
+    height:20px;
+}
+
+
+
+/******************************************/

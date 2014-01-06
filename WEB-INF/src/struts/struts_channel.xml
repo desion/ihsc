@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <package name="channel" extends="default"> 
+
+        <!-- 渠道信息列表 -->  
+        <action name="BS004_10" class="cn.com.bhh.erp.action.ChannelAction" method="SearchChannelList"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/channel/channel_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/channel/channel_list.ftl</result> 
+        </action> 
+        <!-- 渠道详细信息列表 -->
+        <action name="BS005_10" class="cn.com.bhh.erp.action.ChannelDetailAction" method="SearchChannelList"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/channel/channel_detail_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/channel/channel_detail_list.ftl</result> 
+        </action> 
+
+        <!-- 城市查询操作 -->  
+        <action name="BS004_11" class="cn.com.bhh.erp.action.CityAction" method="searchCity"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/city/city_search.ftl</result>  
+            <result name="success" type="chain">BS004_10</result> 
+        </action>  
+        
+        <!-- 增加渠道信息页面 -->  
+        <action name="BS004_20" class="cn.com.bhh.erp.action.ChannelAction" method="createChannelPre"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/channel/channel_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/channel/channel_create.ftl</result> 
+        </action> 
+        <!-- 平台加款页面 -->
+        <action name="BS004_25" class="cn.com.bhh.erp.action.ChannelAccumuAction" method="ChannelAccumulatePre"> 
+            <result name="input" type="redirectAction">BS004_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/channel/channel_accumulate.ftl</result> 
+        </action>
+         
+        <!-- 增加充值渠道信息页面 -->  
+        <action name="BS005_20" class="cn.com.bhh.erp.action.ChannelDetailAction" method="createChannelPre"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/channel/channel_detail_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/channel/channel_detail_create.ftl</result> 
+        </action>
+
+        <!-- 增加渠道信息操作 -->  
+        <action name="BS004_21" class="cn.com.bhh.erp.action.ChannelAction" method="createChannel"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/channel/channel_create.ftl</result>  
+            <result name="success" type="redirectAction">BS004_10</result> 
+        </action>  
+        <!-- 平台加款操作 -->
+        <action name="BS004_26" class="cn.com.bhh.erp.action.ChannelAccumuAction" method="ChannelAccumulate"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/channel/channel_accumulate.ftl</result>  
+            <result name="success" type="redirectAction">BS004_10</result> 
+        </action>
+        <!-- 增加充值渠道信息操作 -->  
+        <action name="BS005_21" class="cn.com.bhh.erp.action.ChannelDetailAction" method="createChannel"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/channel/channel_detail_create.ftl</result>  
+            <result name="success" type="redirectAction">BS004_10</result> 
+        </action>
+
+        <!-- 修改城市信息页面 -->  
+        <action name="BS004_30" class="cn.com.bhh.erp.action.CityAction" method="modifyCityPre"> 
+            <result name="input" type="chain">BS004_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/city/city_modify.ftl</result> 
+        </action>  
+
+        <!-- 修改城市信息操作 -->  
+        <action name="BS004_31" class="cn.com.bhh.erp.action.CityAction" method="modifyCity"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/city/city_modify.ftl</result>  
+            <result name="success" type="redirectAction">BS004_10</result> 
+        </action>  
+
+        <!-- 删除城市信息操作 -->  
+        <action name="BS004_40" class="cn.com.bhh.erp.action.CityAction" method="deleteCity"> 
+            <result name="input" type="chain">BS004_10</result>  
+            <result name="success" type="chain">BS004_10</result> 
+        </action>
+        
+        <!--加款操作记录 -->  
+        <action name="BS004_70" class="cn.com.bhh.erp.action.ChannelAccumuAction" method="SearchChannelAccumuList"> 
+            <result name="input" type="redirectAction">BS004_10</result> 
+            <result name="success" type="freemarker">/WEB-INF/pages/channel/channel_acc_list.ftl</result> 
+        </action>  
+
+    </package> 
+</struts>

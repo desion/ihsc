@@ -1,0 +1,356 @@
+//****************************************
+// ProjectName  ITインフラ改造作業
+// CreateDate   08/12/07
+// Copyright    © Beijing Hitachi Huasun Information Systems Co., Ltd. 2008. All rights reserved.
+//****************************************
+package cn.com.bhh.erp.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import cn.com.bhh.erp.entity.Fault;
+
+
+public class FaultDetailDao extends BaseDao {
+    public FaultDetailDao(Connection conn) {
+        super(conn);
+    }
+
+    /**
+     * insert fault detail information.
+     * @author luyan
+     * @since 1.0
+     * @param faultIn fault information
+     * @throws SQLException
+     */
+    public void insert(Fault faultIn) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Start UOC
+            String sql = " INSERT INTO FAULT_DETAIL_TBL ( " +
+                "   ID, " +
+                "   OCCUR_CONDICTION_1, " +
+                "   OCCUR_CONDICTION_2, " +
+                "   ERROR_CODE, " +
+                "   RX278, " +
+                "   COUNTER, " +
+                "   APPEARANCE, " +
+                "   REASON, " +
+                "   STRATEGY, " +
+                "   STRATEGY_DETAIL, " +
+                "   RESULT, " +
+                "   OPERATION_1, " +
+                "   OPERATION_2, " +
+                "   OPERATION_3, " +
+                "   OPERATION_4, " +
+                "   OPERATION_5, " +
+                "   OPERATION_6, " +
+                "   OPERATION_7, " +
+                "   OPERATION_8, " +
+                "   CASH_LEFT, " +
+                "   EXCEPTION_DISPLAY, " +
+                "   DISPLAY, " +
+                "   BACK_LIGHT, " +
+                "   DISPLAY_CONTENT, " +
+                "   INPUTABLE, " +
+                "   KNOCK_SOUND, " +
+                "   RESET, " +
+                "   CUT_POWER, " +
+                "   REBOOT_NORMALLY, " +
+                "   MOTION_COUNTER, " +
+                "   ERROR_NO, " +
+                "   NO_REPON, " +
+                "   OTHER_DISPLAY, " +
+                "   TRACE_INFOMATION, " +
+                "   FAULT_RECORD, " +
+                "   STATISTICS, " +
+                "   TRADE_LOG, " +
+                "   APPLICATION_VERSION, " +
+                "   OTHERS, " +
+                "   C_RAS, " +
+                "   D_RAS, " +
+                "   MCU_LOG, " +
+                "   SYSTEM_EVENT, " +
+                "   D_BILLBOX, " +
+                "   D_COLLECT, " +
+                "   C_FEP, " +
+                "   C_ERR, " +
+                "   APPLY_DATE, " +
+                "   DELIVER_DATE, " +
+                "   REPLACE_DATE, " +
+                "   RECEIVE_DATE " +
+                " ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " +
+                " ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, " +
+                " ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
+
+
+            pstmt = conn.prepareStatement(sql);
+
+            int index = 0;
+            pstmt.setInt(++index, faultIn.getId());
+            pstmt.setInt(++index, faultIn.getOccurCondiction1());
+            pstmt.setInt(++index, faultIn.getOccurCondiction2());
+            pstmt.setString(++index, faultIn.getErrorCode());
+            pstmt.setString(++index, faultIn.getRx278());
+            pstmt.setString(++index, faultIn.getCounter());
+            pstmt.setString(++index, faultIn.getAppearance());
+            pstmt.setString(++index, faultIn.getReason());
+            pstmt.setString(++index, faultIn.getStrategy());
+            pstmt.setString(++index, faultIn.getStrategyDetail());
+            pstmt.setInt(++index, faultIn.getResultId());
+            pstmt.setString(++index, faultIn.getOperation1());
+            pstmt.setString(++index, faultIn.getOperation2());
+            pstmt.setString(++index, faultIn.getOperation3());
+            pstmt.setString(++index, faultIn.getOperation4());
+            pstmt.setString(++index, faultIn.getOperation5());
+            pstmt.setString(++index, faultIn.getOperation6());
+            pstmt.setString(++index, faultIn.getOperation7());
+            pstmt.setString(++index, faultIn.getOperation8());
+            pstmt.setInt(++index, faultIn.getCashLeft());
+            pstmt.setInt(++index, faultIn.getExceptionDisplay());
+            pstmt.setInt(++index, faultIn.getDisplay());
+            pstmt.setInt(++index, faultIn.getBackLight());
+            pstmt.setString(++index, faultIn.getDisplayContent());
+            pstmt.setInt(++index, faultIn.getInputable());
+            pstmt.setInt(++index, faultIn.getKnockSound());
+            pstmt.setInt(++index, faultIn.getReset());
+            pstmt.setInt(++index, faultIn.getCutPower());
+            pstmt.setInt(++index, faultIn.getRebootNormally());
+            pstmt.setString(++index, faultIn.getMotionCounter());
+            pstmt.setString(++index, faultIn.getErrorNo());
+            pstmt.setString(++index, faultIn.getNoRepon());
+            pstmt.setString(++index, faultIn.getOtherDisplay());
+            pstmt.setInt(++index, faultIn.getTraceInfomation());
+            pstmt.setInt(++index, faultIn.getFaultRecord());
+            pstmt.setInt(++index, faultIn.getStatistics());
+            pstmt.setInt(++index, faultIn.getTradeLog());
+            pstmt.setInt(++index, faultIn.getApplicationVersion1());
+            pstmt.setString(++index, faultIn.getOthers());
+            pstmt.setInt(++index, faultIn.getCras());
+            pstmt.setInt(++index, faultIn.getDras());
+            pstmt.setInt(++index, faultIn.getMcuLog());
+            pstmt.setInt(++index, faultIn.getSystemEvent());
+            pstmt.setInt(++index, faultIn.getDbillbox());
+            pstmt.setInt(++index, faultIn.getDcollect());
+            pstmt.setInt(++index, faultIn.getCfep());
+            pstmt.setInt(++index, faultIn.getCerr());
+            pstmt.setString(++index, faultIn.getApplyDate());
+            pstmt.setString(++index, faultIn.getDeliverDate());
+            pstmt.setString(++index, faultIn.getReplaceDate());
+            pstmt.setString(++index, faultIn.getIhscReceiveDate());
+            pstmt.executeUpdate();
+
+            // End UOC
+        } catch (SQLException e) {
+            logSQLException(e, "insert");
+            throw e;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                logSQLException(e, "insert");
+                throw e;
+            }
+        }
+    }
+
+    /**
+     * modify fault detail information by ID.
+     * @author luyan
+     * @since 1.0
+     * @param faultIn fault information
+     * @throws SQLException
+     */
+    public void modifyById(Fault faultIn) throws SQLException {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Start UOC
+            String sql = " UPDATE" +
+                "   FAULT_DETAIL_TBL" +
+                " SET" +
+                "   OCCUR_CONDICTION_1 = ?, " +
+                "   OCCUR_CONDICTION_2 = ?, " +
+                "   ERROR_CODE = ?, " +
+                "   RX278 = ?, " +
+                "   COUNTER = ?, " +
+                "   APPEARANCE = ?, " +
+                "   REASON = ?, " +
+                "   STRATEGY = ?, " +
+                "   STRATEGY_DETAIL = ?, " +
+                "   RESULT = ?, " +
+                "   OPERATION_1 = ?, " +
+                "   OPERATION_2 = ?, " +
+                "   OPERATION_3 = ?, " +
+                "   OPERATION_4 = ?, " +
+                "   OPERATION_5 = ?, " +
+                "   OPERATION_6 = ?, " +
+                "   OPERATION_7 = ?, " +
+                "   OPERATION_8 = ?, " +
+                "   CASH_LEFT = ?, " +
+                "   EXCEPTION_DISPLAY = ?, " +
+                "   DISPLAY = ?, " +
+                "   BACK_LIGHT = ?, " +
+                "   DISPLAY_CONTENT = ?, " +
+                "   INPUTABLE = ?, " +
+                "   KNOCK_SOUND = ?, " +
+                "   RESET = ?, " +
+                "   CUT_POWER = ?, " +
+                "   REBOOT_NORMALLY = ?, " +
+                "   MOTION_COUNTER = ?, " +
+                "   ERROR_NO = ?, " +
+                "   NO_REPON = ?, " +
+                "   OTHER_DISPLAY = ?, " +
+                "   TRACE_INFOMATION = ?, " +
+                "   FAULT_RECORD = ?, " +
+                "   STATISTICS = ?, " +
+                "   TRADE_LOG = ?, " +
+                "   APPLICATION_VERSION = ?, " +
+                "   OTHERS = ?, " +
+                "   C_RAS = ?, " +
+                "   D_RAS = ?, " +
+                "   MCU_LOG = ?, " +
+                "   SYSTEM_EVENT = ?, " +
+                "   D_BILLBOX = ?, " +
+                "   D_COLLECT = ?, " +
+                "   C_FEP = ?, " +
+                "   C_ERR = ?, " +
+                "   APPLY_DATE = ?, " +
+                "   DELIVER_DATE = ?, " +
+                "   REPLACE_DATE = ?, " +
+                "   RECEIVE_DATE = ? " +
+                " WHERE " +
+                "   ID = ? ";
+
+            pstmt = conn.prepareStatement(sql);
+
+            int index = 0;
+            pstmt.setInt(++index, faultIn.getOccurCondiction1());
+            pstmt.setInt(++index, faultIn.getOccurCondiction2());
+            pstmt.setString(++index, faultIn.getErrorCode());
+            pstmt.setString(++index, faultIn.getRx278());
+            pstmt.setString(++index, faultIn.getCounter());
+            pstmt.setString(++index, faultIn.getAppearance());
+            pstmt.setString(++index, faultIn.getReason());
+            pstmt.setString(++index, faultIn.getStrategy());
+            pstmt.setString(++index, faultIn.getStrategyDetail());
+            pstmt.setInt(++index, faultIn.getResultId());
+            pstmt.setString(++index, faultIn.getOperation1());
+            pstmt.setString(++index, faultIn.getOperation2());
+            pstmt.setString(++index, faultIn.getOperation3());
+            pstmt.setString(++index, faultIn.getOperation4());
+            pstmt.setString(++index, faultIn.getOperation5());
+            pstmt.setString(++index, faultIn.getOperation6());
+            pstmt.setString(++index, faultIn.getOperation7());
+            pstmt.setString(++index, faultIn.getOperation8());
+            pstmt.setInt(++index, faultIn.getCashLeft());
+            pstmt.setInt(++index, faultIn.getExceptionDisplay());
+            pstmt.setInt(++index, faultIn.getDisplay());
+            pstmt.setInt(++index, faultIn.getBackLight());
+            pstmt.setString(++index, faultIn.getDisplayContent());
+            pstmt.setInt(++index, faultIn.getInputable());
+            pstmt.setInt(++index, faultIn.getKnockSound());
+            pstmt.setInt(++index, faultIn.getReset());
+            pstmt.setInt(++index, faultIn.getCutPower());
+            pstmt.setInt(++index, faultIn.getRebootNormally());
+            pstmt.setString(++index, faultIn.getMotionCounter());
+            pstmt.setString(++index, faultIn.getErrorNo());
+            pstmt.setString(++index, faultIn.getNoRepon());
+            pstmt.setString(++index, faultIn.getOtherDisplay());
+            pstmt.setInt(++index, faultIn.getTraceInfomation());
+            pstmt.setInt(++index, faultIn.getFaultRecord());
+            pstmt.setInt(++index, faultIn.getStatistics());
+            pstmt.setInt(++index, faultIn.getTradeLog());
+            pstmt.setInt(++index, faultIn.getApplicationVersion1());
+            pstmt.setString(++index, faultIn.getOthers());
+            pstmt.setInt(++index, faultIn.getCras());
+            pstmt.setInt(++index, faultIn.getDras());
+            pstmt.setInt(++index, faultIn.getMcuLog());
+            pstmt.setInt(++index, faultIn.getSystemEvent());
+            pstmt.setInt(++index, faultIn.getDbillbox());
+            pstmt.setInt(++index, faultIn.getDcollect());
+            pstmt.setInt(++index, faultIn.getCfep());
+            pstmt.setInt(++index, faultIn.getCerr());
+            pstmt.setString(++index, faultIn.getApplyDate());
+            pstmt.setString(++index, faultIn.getDeliverDate());
+            pstmt.setString(++index, faultIn.getReplaceDate());
+            pstmt.setString(++index, faultIn.getIhscReceiveDate());
+            pstmt.setInt(++index, faultIn.getId());
+            pstmt.executeUpdate();
+
+            // End UOC
+        } catch (SQLException e) {
+            logSQLException(e, "insert");
+            throw e;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                logSQLException(e, "insert");
+                throw e;
+            }
+        }
+    }
+
+    /**
+     * delete fault detail information by fault ID.
+     * @author luyan
+     * @since 1.0
+     * @param faultIn fault information
+     * @throws SQLException
+     */
+    public void deleteById(Fault faultIn) throws Exception {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            // Start UOC
+
+            String sql = " DELETE FROM " +
+                "   FAULT_DETAIL_TBL " +
+                " WHERE " +
+                "   ID = ? ";
+
+            pstmt = conn.prepareStatement(sql);
+
+            int index = 0;
+            pstmt.setInt(++index, faultIn.getId());
+            pstmt.executeUpdate();
+
+            // End UOC
+        } catch (SQLException e) {
+            logSQLException(e, "deleteById");
+            throw e;
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                logSQLException(e, "deleteById");
+                throw e;
+            }
+        }
+    }
+}

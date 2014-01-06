@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC 
+        "-//OpenSymphony Group//XWork Validator 1.0.2//EN" 
+        "http://www.opensymphony.com/xwork/xwork-validator-1.0.2.dtd">
+
+<validators>
+    <field name="country.name">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+
+        <field-validator type="stringlength">
+            <param name="trim">true</param>
+            <param name="minLength">1</param>
+            <param name="maxLength">40</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+    <field name="country.nameEn">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+
+        <field-validator type="regex">
+            <param name="expression" ><![CDATA[[A-Za-z|\s]*]]></param>
+            <message key="BSE00004"></message>
+        </field-validator>
+        
+        <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">120</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+  <field name="country.shortName">
+       <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+       </field-validator>
+       
+       
+      <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">20</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>
+    </field>
+    
+     <field name="country.shortNameEn">
+        <field-validator type="requiredstring" short-circuit="true">
+            <param name="trim">true</param>
+            <message key="BSE00002"></message>
+        </field-validator>
+
+         <field-validator type="regex">
+            <param name="expression" ><![CDATA[[A-Za-z|\s]*]]></param>
+            <message key="BSE00004"></message>
+        </field-validator>
+        
+         <field-validator type="stringlength">
+            <param name="minLength">1</param>
+            <param name="maxLength">60</param>
+            <param name="trim">true</param>
+            <message key="BSE00003"></message>
+        </field-validator>                
+    </field>
+
+     
+</validators>

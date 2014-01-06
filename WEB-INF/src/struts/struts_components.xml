@@ -25,7 +25,21 @@
             <result name="input" type="freemarker">/WEB-INF/pages/components/provinceOnlyDrop.ftl</result>  
             <result name="success" type="freemarker">/WEB-INF/pages/components/provinceOnlyDrop.ftl</result> 
         </action>  
+        
+        <!-- 充值渠道下拉菜单 -->  
+        <action name="channel_drop" class="cn.com.bhh.erp.component.ChannelDropAction">
+            <interceptor-ref name="component"/> 
+            <result name="input" type="freemarker">/WEB-INF/pages/components/channelDrop.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/components/channelDrop.ftl</result> 
+        </action>
 
+		  <!-- 充值来源下拉菜单 -->  
+       <!-- <action name="source_drop" class="cn.com.bhh.erp.component.SourceDropAction">
+            <interceptor-ref name="component"/> 
+            <result name="input" type="freemarker">/WEB-INF/pages/components/sourceDrop.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/components/sourceDrop.ftl</result> 
+        </action>-->
+        
         <!-- 公司类型下拉菜单 -->  
         <action name="companyType_drop" class="cn.com.bhh.erp.component.CompanyTypeDropAction">
             <interceptor-ref name="component"/> 
