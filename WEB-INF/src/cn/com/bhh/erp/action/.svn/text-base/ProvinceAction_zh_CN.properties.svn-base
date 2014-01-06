@@ -1,9 +1,0 @@
-province.selectedCountry=\u6240\u9009\u56fd\u5bb6
-province.listInfo=\u7701\u4efd\u4fe1\u606f\u5217\u8868
-province.create=\u65b0\u589e\u7701\u4efd\u4fe1\u606f
-province.modify=\u4fee\u6539\u7701\u4efd\u4fe1\u606f
-province.id=\u7701\u4efd\u4ee3\u7801
-province.name=\u7701\u4efd\u540d\u79f0
-province.countryId=\u56fd\u5bb6\u540d\u79f0
-province.countryName=\u6240\u5c5e\u56fd\u5bb6\u540d\u79f0
-province.exclusiveKey=\u6392\u4ed6\u503c
