@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+    <package name="country" extends="default"> 
+
+        <!-- 订购用户信息列表 -->  
+        <action name="BS002_10" class="cn.com.bhh.erp.action.CustomerAction" method="SearchCustomerList"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/customer/customer_list.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/customer/customer_list.ftl</result> 
+        </action>  
+
+        <!-- 增加订购用户页面 -->  
+        <action name="BS002_20" class="cn.com.bhh.erp.action.CustomerAction" method="createCustomerPre"> 
+            <result name="input" type="chain">BS002_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/customer/customer_create.ftl</result> 
+        </action>  
+
+        <!-- 增加订购用户操作 -->  
+        <action name="BS002_21" class="cn.com.bhh.erp.action.CustomerAction" method="createCustomer"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/customer/customer_create.ftl</result>  
+            <result name="success" type="redirectAction">BS002_10</result> 
+        </action>  
+
+        <!-- 修改订购用户页面 -->  
+        <action name="BS002_30" class="cn.com.bhh.erp.action.CountryAction" method="modifyCountryPre"> 
+            <result name="input" type="chain">BS002_10</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/country/country_modify.ftl</result> 
+        </action>  
+
+        <!-- 修改订购用户操作  -->  
+        <action name="BS002_31" class="cn.com.bhh.erp.action.CountryAction" method="modifyCountry"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/country/country_modify.ftl</result>  
+            <result name="success" type="redirectAction">BS002_10</result> 
+        </action>  
+
+        <!-- 删除订购用户操作  -->  
+        <action name="BS002_40" class="cn.com.bhh.erp.action.CountryAction" method="deleteCountry"> 
+            <result name="input" type="chain">BS002_10</result>  
+            <result name="success" type="redirectAction">BS002_10</result> 
+        </action> 
+        
+        <!-- 上账请求页面 -->  
+        <action name="BS002_50" class="cn.com.bhh.erp.action.CustomerAction" method="hhmtRequestPre"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/customer/hhmt_request.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/customer/hhmt_request.ftl</result> 
+        </action>
+        
+        <!-- 上账请求操作 -->  
+        <action name="BS002_51" class="cn.com.bhh.erp.action.CustomerAction" method="hhmtRequest"> 
+            <result name="input" type="freemarker">/WEB-INF/pages/customer/hhmt_request.ftl</result>  
+            <result name="success" type="freemarker">/WEB-INF/pages/customer/hhmt_request.ftl</result> 
+        </action>
+
+    </package> 
+</struts>

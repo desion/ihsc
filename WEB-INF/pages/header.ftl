@@ -112,7 +112,7 @@
                         </ul>
                     </li>
                  </#if>   
-                <#if loginUser.hasPermission("BS005_10") || 
+                <#if loginUser.hasPermission("BS002_10") || 
                     loginUser.hasPermission("BS005_70") || 
                     loginUser.hasPermission("BS001_10") || 
                     loginUser.hasPermission("BS002_10") ||
@@ -121,26 +121,26 @@
                     loginUser.hasPermission("BS009_10") ||
                     loginUser.hasPermission("BS012_10") >
                      
-                    <li><label><@s.text name="company_label" /></label>
+                    <li><label><@s.text name="customer_label" /></label>
                         <ul class="select-free">
                             <!--[if lte IE 6.5]><iframe></iframe><![endif]-->
-                        <#if loginUser.hasPermission("BS005_10")>
-                            <li><a href="/BS005_10"><@s.text name="all_company_list_label" /></a></li>
+                        <#if loginUser.hasPermission("BS002_10")>
+                            <li><a href="BS002_10"><@s.text name="customer_label" /></a></li>
                         </#if>
                         <#if loginUser.hasPermission("BS005_70")>
-                            <li><a href="/BS005_70"><@s.text name="company_query_label" /></a></li>
+                            <li><a href="/BS005_70"><@s.text name="account_change_label" /></a></li>
                         </#if>
                         <#if loginUser.hasPermission("BS001_10")>
-                            <li><a href="/BS001_10"><@s.text name="company_type_list_label" /></a></li>       
+                            <li><a href="/BS001_10"><@s.text name="hhmt_request_label" /></a></li>       
                         </#if>
                         <#if loginUser.hasPermission("BS002_10")>
-                            <li><a href="/BS002_10"><@s.text name="country_list_label" /></a></li>       
+                            <li><a href="/BS002_10"><@s.text name="hhmt_approvel_label" /></a></li>       
                         </#if>
                         <#if loginUser.hasPermission("BS003_10")>
-                            <li><a href="/BS003_10"><@s.text name="province_list_label" /></a></li>       
+                            <li><a href="/BS003_10"><@s.text name="discount_adjust_label" /></a></li>       
                         </#if>
                         <#if loginUser.hasPermission("BS004_10")>
-                            <li><a href="/BS004_10"><@s.text name="city_list_label" /></a></li>       
+                            <li><a href="/BS004_10"><@s.text name="topup_switch_label" /></a></li>       
                         </#if>
                         <#if loginUser.hasPermission("BS004_70")>
                             <li><a href="/BS004_70"><@s.text name="city_query_label" /></a></li>       
